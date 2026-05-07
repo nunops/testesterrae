@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jardins do Anjo — Terraǝ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F2EBDC;
+    --cream-soft: #EDE5D3;
+    --ink: #1F2820;
+    --ink-soft: #2D3A30;
+    --ink-deep: #161D17;
+    --terracotta: #A04F2C;
+    --terracotta-deep: #803D20;
+    --sage: #7B8467;
+    --sage-light: #9DA68A;
+    --brown: #5A4A3A;
+    --brown-light: #8A7866;
+    --rule: #C9BFA8;
+    --rule-dark: rgba(242, 235, 220, 0.15);
+    --paper: #F8F2E4;
+    --available: #7B8467;
+    --reserved: #A04F2C;
+    --sold: #2D3A30;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* ---------- NAV ---------- */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 40px;
+    border-bottom: 1px solid var(--rule);
+    position: sticky;
+    top: 0;
+    background: rgba(242, 235, 220, 0.92);
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+  .wordmark {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: 0.02em;
+    font-variation-settings: "SOFT" 50, "opsz" 144;
+  }
+  .nav-links { display: flex; gap: 32px; font-size: 14px; }
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--terracotta); }
+  .nav-phone {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--brown);
+  }
+  /* ---------- BREADCRUMB ---------- */
+  .breadcrumb {
+    padding: 28px 40px 0;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    font-family: 'JetBrains Mono', monospace;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .breadcrumb a { color: var(--brown-light); text-decoration: none; }
+  .breadcrumb span { margin: 0 8px; opacity: 0.5; }
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 32px 40px 0;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .hero-meta-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 28px;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-label::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+  .hero-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .live-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #7BBF6F;
+    box-shadow: 0 0 0 0 rgba(123, 191, 111, 0.7);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(123, 191, 111, 0.7); }
+    70% { box-shadow: 0 0 0 8px rgba(123, 191, 111, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(123, 191, 111, 0); }
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-variation-settings: "SOFT" 100, "opsz" 144;
+    font-size: clamp(56px, 9vw, 140px);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    margin-bottom: 24px;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+  .hero-tagline {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(20px, 2.2vw, 26px);
+    color: var(--brown);
+    max-width: 50ch;
+    margin-bottom: 48px;
+  }
+  .hero-image {
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=2000&q=85');
+    background-size: cover;
+    background-position: center;
+    border-radius: 2px;
+    position: relative;
+  }
+  .hero-image-cap {
+    position: absolute;
+    bottom: 20px;
+    left: 24px;
+    background: rgba(31, 40, 32, 0.85);
+    color: var(--cream);
+    padding: 10px 16px;
+    border-radius: 2px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
+  }
+  /* ---------- META STRIP ---------- */
+  .meta-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    margin: 60px 0 0;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .meta-cell {
+    padding: 28px 32px;
+    border-right: 1px solid var(--rule);
+  }
+  .meta-cell:last-child { border-right: none; }
+  .meta-key {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 8px;
+  }
+  .meta-val {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 26px;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .meta-val span {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 14px;
+    color: var(--brown-light);
+    margin-left: 6px;
+  }
+  /* ---------- SECTION ---------- */
+  section {
+    padding: 100px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  section.full {
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .section-label::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+  /* ---------- EDITORIAL ---------- */
+  .editorial {
+    display: grid;
+    grid-template-columns: 1fr 1.8fr;
+    gap: 80px;
+  }
+  .editorial-side h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 4vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+  }
+  .editorial-side h2 em { font-style: italic; color: var(--terracotta); }
+  .editorial-body p {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    color: var(--ink-soft);
+    max-width: 58ch;
+  }
+  .editorial-body p:first-child::first-letter {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    float: left;
+    font-size: 80px;
+    line-height: 0.85;
+    padding-right: 12px;
+    padding-top: 6px;
+    color: var(--terracotta);
+  }
+  .editorial-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+  }
+  .stat-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 40px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: var(--brown);
+    font-style: italic;
+  }
+  /* ---------- CONFIGURATOR ---------- */
+  .configurator {
+    background: var(--ink-deep);
+    color: var(--cream);
+    padding: 80px 40px;
+  }
+  .config-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .config-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 56px;
+    gap: 40px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--rule-dark);
+    padding-bottom: 32px;
+  }
+  .config-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(32px, 4vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    color: var(--cream);
+  }
+  .config-title em { font-style: italic; color: var(--terracotta); }
+  .config-section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.5;
+    margin-bottom: 16px;
+  }
+  /* Lote tabs */
+  .lote-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--rule-dark);
+    margin-bottom: 40px;
+  }
+  .lote-tab {
+    padding: 18px 28px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--cream);
+    opacity: 0.5;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .lote-tab.active {
+    opacity: 1;
+    border-bottom-color: var(--terracotta);
+  }
+  .lote-tab:hover { opacity: 1; }
+  .lote-tab small {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    opacity: 0.6;
+  }
+  .lote-tab .badge-soon {
+    background: var(--rule-dark);
+    color: var(--cream);
+    padding: 2px 8px;
+    border-radius: 100px;
+    font-size: 9px;
+    margin-left: 4px;
+  }
+  /* Building diagram + details */
+  .config-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .building {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 14px;
+    padding: 24px;
+    background: rgba(242, 235, 220, 0.03);
+    border: 1px solid var(--rule-dark);
+    border-radius: 4px;
+    position: relative;
+  }
+  .floor-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.5;
+    width: 60px;
+    text-align: right;
+    padding-top: 32px;
+  }
+  .floor {
+    display: grid;
+    grid-template-columns: 60px 1fr 1fr;
+    gap: 14px;
+    align-items: stretch;
+  }
+  .unit {
+    background: rgba(242, 235, 220, 0.04);
+    border: 1px solid var(--rule-dark);
+    border-radius: 3px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 110px;
+  }
+  .unit:hover {
+    background: rgba(242, 235, 220, 0.07);
+    transform: translateY(-2px);
+  }
+  .unit.active {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+  }
+  .unit.active .unit-num,
+  .unit.active .unit-type,
+  .unit.active .unit-area,
+  .unit.active .unit-status { color: var(--cream); opacity: 1; }
+  .unit-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .unit-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--cream);
+    opacity: 0.6;
+  }
+  .unit-status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 100px;
+  }
+  .status-available {
+    background: rgba(123, 132, 103, 0.25);
+    color: #B5C09A;
+  }
+  .status-reserved {
+    background: rgba(160, 79, 44, 0.3);
+    color: #E89B7A;
+  }
+  .status-sold {
+    background: rgba(242, 235, 220, 0.15);
+    color: var(--cream);
+    opacity: 0.5;
+  }
+  .unit-type {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 28px;
+    color: var(--cream);
+    line-height: 1;
+  }
+  .unit-area {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--cream);
+    opacity: 0.6;
+  }
+  /* Details panel */
+  .details {
+    padding: 8px 0;
+    position: sticky;
+    top: 100px;
+  }
+  .details-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.5;
+    margin-bottom: 12px;
+  }
+  .details-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--cream);
+    margin-bottom: 8px;
+    letter-spacing: -0.015em;
+  }
+  .details-name em { font-style: italic; color: var(--terracotta); }
+  .details-floor {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--cream);
+    opacity: 0.7;
+    margin-bottom: 32px;
+  }
+  .details-plan {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: rgba(242, 235, 220, 0.04);
+    border: 1px solid var(--rule-dark);
+    border-radius: 3px;
+    margin-bottom: 28px;
+    background-image: url('https://images.unsplash.com/photo-1574691250077-03a929faece5?w=900&q=80');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  .details-plan::after {
+    content: 'PLANTA · FRAÇÃO';
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--cream);
+    letter-spacing: 0.12em;
+    background: rgba(31, 40, 32, 0.85);
+    padding: 6px 10px;
+    border-radius: 2px;
+    backdrop-filter: blur(4px);
+  }
+  .details-specs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-bottom: 32px;
+    border-top: 1px solid var(--rule-dark);
+    border-bottom: 1px solid var(--rule-dark);
+  }
+  .spec {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule-dark);
+  }
+  .spec:nth-child(odd) { padding-right: 16px; }
+  .spec:nth-child(even) { padding-left: 16px; border-left: 1px solid var(--rule-dark); }
+  .spec:nth-last-child(-n+2) { border-bottom: none; }
+  .spec-key {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.5;
+    margin-bottom: 4px;
+  }
+  .spec-val {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--cream);
+  }
+  .price-block {
+    margin-bottom: 32px;
+  }
+  .price-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 64px;
+    line-height: 1;
+    color: var(--cream);
+    margin-bottom: 8px;
+  }
+  .price-monthly {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 16px;
+    color: var(--cream);
+    opacity: 0.65;
+  }
+  .details-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  /* Buttons (used everywhere) */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  .btn:hover { background: var(--ink); color: var(--cream); }
+  .btn-primary { background: var(--ink); color: var(--cream); }
+  .btn-primary:hover { background: var(--terracotta); border-color: var(--terracotta); }
+  /* Buttons in dark sections */
+  .configurator .btn {
+    border-color: var(--cream);
+    color: var(--cream);
+  }
+  .configurator .btn:hover { background: var(--cream); color: var(--ink); }
+  .configurator .btn-primary {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+    color: var(--cream);
+  }
+  .configurator .btn-primary:hover {
+    background: var(--terracotta-deep);
+    border-color: var(--terracotta-deep);
+  }
+  /* Legend */
+  .legend {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.7;
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  /* ---------- TABLE ---------- */
+  .all-units {
+    margin-top: 60px;
+    padding-top: 60px;
+    border-top: 1px solid var(--rule-dark);
+  }
+  .units-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 32px;
+  }
+  .units-table th {
+    text-align: left;
+    padding: 14px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.5;
+    font-weight: 500;
+    border-bottom: 1px solid var(--rule-dark);
+  }
+  .units-table td {
+    padding: 18px 16px;
+    border-bottom: 1px solid var(--rule-dark);
+    font-size: 15px;
+    color: var(--cream);
+  }
+  .units-table tr { transition: background 0.15s; }
+  .units-table tbody tr:hover { background: rgba(242, 235, 220, 0.03); cursor: pointer; }
+  .units-table .price { font-family: 'Fraunces', serif; font-size: 18px; }
+  .units-table .frac-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    opacity: 0.7;
+  }
+  .units-table .stat-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+    display: inline-block;
+  }
+  /* ---------- ACABAMENTOS ---------- */
+  .acabamentos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+  .acab-card {
+    background: var(--paper);
+    padding: 32px;
+    border-radius: 2px;
+    transition: transform 0.2s;
+  }
+  .acab-card:hover { transform: translateY(-4px); }
+  .acab-img {
+    width: 100%;
+    aspect-ratio: 16/10;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 24px;
+    border-radius: 2px;
+  }
+  .a1 { background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=80'); }
+  .a2 { background-image: url('https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=900&q=80'); }
+  .a3 { background-image: url('https://images.unsplash.com/photo-1620626011761-996317b8d101?w=900&q=80'); }
+  .a4 { background-image: url('https://images.unsplash.com/photo-1503328427499-d92d1ac3d174?w=900&q=80'); }
+  .a5 { background-image: url('https://images.unsplash.com/photo-1593696140826-c58b021acf8b?w=900&q=80'); }
+  .a6 { background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80'); }
+  .acab-brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 8px;
+  }
+  .acab-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+  .acab-desc {
+    font-size: 14px;
+    color: var(--brown);
+    line-height: 1.55;
+  }
+  /* ---------- DIARY ---------- */
+  .diary-section { background: var(--paper); }
+  .diary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 48px;
+  }
+  .diary-entry {
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .diary-entry:hover { transform: translateY(-3px); }
+  .diary-img {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 14px;
+    border-radius: 2px;
+  }
+  .d1 { background-image: url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=700&q=80'); }
+  .d2 { background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=700&q=80'); }
+  .d3 { background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=700&q=80'); }
+  .d4 { background-image: url('https://images.unsplash.com/photo-1599619351208-3e6c839d6828?w=700&q=80'); }
+  .diary-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--terracotta);
+    margin-bottom: 6px;
+  }
+  .diary-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.25;
+    color: var(--ink);
+  }
+  .diary-cta {
+    text-align: center;
+    margin-top: 48px;
+  }
+  /* ---------- CREDIT (ANA) ---------- */
+  .credit-block {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 80px 60px;
+    border-radius: 2px;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-top: 0;
+  }
+  .ana-photo {
+    width: 280px;
+    height: 340px;
+    background-image: url('https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80');
+    background-size: cover;
+    background-position: center;
+    border-radius: 2px;
+  }
+  .credit-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .credit-label::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+  .credit-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.1;
+    margin-bottom: 24px;
+    letter-spacing: -0.015em;
+  }
+  .credit-title em { font-style: italic; color: var(--terracotta); }
+  .credit-text {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    max-width: 56ch;
+    opacity: 0.85;
+  }
+  .credit-steps {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .credit-step {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .credit-step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--terracotta);
+  }
+  .credit-step-text {
+    font-size: 14px;
+    color: var(--cream);
+    opacity: 0.85;
+  }
+  /* ---------- PHASES ---------- */
+  .phases {
+    margin-top: 0;
+  }
+  .phase-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    margin-top: 56px;
+    border: 1px solid var(--rule);
+  }
+  .phase {
+    background: var(--cream);
+    padding: 48px 36px;
+    position: relative;
+  }
+  .phase.active { background: var(--paper); }
+  .phase-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--terracotta);
+    margin-bottom: 16px;
+  }
+  .phase-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 36px;
+    margin-bottom: 8px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .phase-when {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--brown);
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+  .phase-progress {
+    height: 4px;
+    background: var(--rule);
+    border-radius: 100px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .phase-progress-fill {
+    height: 100%;
+    background: var(--terracotta);
+    border-radius: 100px;
+  }
+  .phase-stat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--brown);
+  }
+  /* ---------- FAQ ---------- */
+  .faq-list { margin-top: 56px; }
+  .faq-item {
+    border-top: 1px solid var(--rule);
+    padding: 24px 0;
+    cursor: pointer;
+  }
+  .faq-item:last-child { border-bottom: 1px solid var(--rule); }
+  .faq-q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+  .faq-q::after {
+    content: '+';
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 24px;
+    color: var(--terracotta);
+    margin-left: 24px;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s;
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 60ch;
+  }
+  .faq-item.open .faq-a {
+    max-height: 200px;
+    margin-top: 16px;
+  }
+  /* ---------- FOOTER ---------- */
+  footer {
+    margin-top: 0;
+    padding: 60px 40px 40px;
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--rule-dark);
+  }
+  .footer-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 300;
+    margin-bottom: 16px;
+    font-variation-settings: "SOFT" 100;
+  }
+  .footer-tag {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 16px;
+    opacity: 0.7;
+    max-width: 32ch;
+    line-height: 1.5;
+  }
+  .footer-col h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0.6;
+    font-weight: 400;
+  }
+  .footer-col a {
+    display: block;
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 6px 0;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+  }
+  .footer-col a:hover { opacity: 1; }
+  .footer-bottom {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    opacity: 0.5;
+  }
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 1024px) {
+    .config-grid { grid-template-columns: 1fr; gap: 60px; }
+    .details { position: static; }
+    .editorial { grid-template-columns: 1fr; gap: 24px; }
+  }
+  @media (max-width: 720px) {
+    nav { padding: 18px 20px; }
+    .nav-phone { display: none; }
+    .nav-links { gap: 18px; font-size: 12px; }
+    .breadcrumb { padding: 20px 20px 0; }
+    .hero { padding: 24px 20px 0; }
+    .hero-title { font-size: 48px; }
+    .meta-strip { grid-template-columns: 1fr 1fr; }
+    .meta-cell { padding: 18px 16px; border-right: none; border-bottom: 1px solid var(--rule); }
+    .meta-cell:nth-child(2n) { border-right: none; }
+    .meta-cell:nth-last-child(-n+2) { border-bottom: none; }
+    section { padding: 60px 20px; }
+    .configurator { padding: 60px 20px; }
+    .lote-tabs { overflow-x: auto; }
+    .lote-tab { padding: 14px 18px; font-size: 12px; flex-shrink: 0; }
+    .floor { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .floor-label { display: none; }
+    .details-name { font-size: 40px; }
+    .price-num { font-size: 48px; }
+    .acabamentos-grid { grid-template-columns: 1fr; }
+    .diary-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .credit-block { grid-template-columns: 1fr; padding: 40px 24px; gap: 32px; }
+    .ana-photo { width: 100%; height: 300px; }
+    .phase-grid { grid-template-columns: 1fr; }
+    .units-table { font-size: 12px; }
+    .units-table th, .units-table td { padding: 10px 8px; }
+    .units-table .hide-sm { display: none; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .footer-bottom { flex-direction: column; gap: 8px; }
+    .credit-steps { flex-direction: column; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wordmark">Terraǝ</div>
+  <div class="nav-links">
+    <a href="#">Comprar</a>
+    <a href="#">Vender</a>
+    <a href="#">Investir</a>
+    <a href="#">Editorial</a>
+  </div>
+  <div class="nav-phone">+351 21 000 0000</div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="#">Comprar</a> <span>/</span> <a href="#">Empreendimentos</a> <span>/</span> Jardins do Anjo
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-meta-top">
+    <div class="hero-label">Empreendimento Terraǝ · Quinta do Anjo</div>
+    <div class="hero-status"><span class="live-dot"></span>Lote 1 · em comercialização</div>
+  </div>
+  <h1 class="hero-title">Jardins<br>do <em>Anjo</em></h1>
+  <p class="hero-tagline">Dezoito apartamentos a 30 minutos de Lisboa, no sopé da Arrábida. Faseados em três lotes, vendidos com tudo à vista.</p>
+  <div class="hero-image">
+    <div class="hero-image-cap">Render 3D · F. Simões Arquitectos</div>
+  </div>
+</header>
+
+<!-- ============ META STRIP ============ -->
+<div class="meta-strip">
+  <div class="meta-cell">
+    <div class="meta-key">Frações</div>
+    <div class="meta-val">18 <span>T2 e T3</span></div>
+  </div>
+  <div class="meta-cell">
+    <div class="meta-key">Localização</div>
+    <div class="meta-val">Quinta do Anjo</div>
+  </div>
+  <div class="meta-cell">
+    <div class="meta-key">Áreas</div>
+    <div class="meta-val">91–124 <span>m²</span></div>
+  </div>
+  <div class="meta-cell">
+    <div class="meta-key">Preços</div>
+    <div class="meta-val">desde 322.000 <span>€</span></div>
+  </div>
+  <div class="meta-cell">
+    <div class="meta-key">Conclusão</div>
+    <div class="meta-val">Q4 2026</div>
+  </div>
+</div>
+
+<!-- ============ EDITORIAL ============ -->
+<section>
+  <div class="editorial">
+    <div class="editorial-side">
+      <div class="section-label">A localização</div>
+      <h2>Quinta do Anjo é o que <em>Lisboa esqueceu</em> de continuar a ser.</h2>
+    </div>
+    <div class="editorial-body">
+      <p>Há uma diferença entre uma casa nova e um lugar com história. Quinta do Anjo tem as duas coisas. A vila tem o nome registado em documentos do século XV, vinha por todos os lados, a Serra da Arrábida atrás, e uma ligação a Lisboa que demora trinta minutos quando o trânsito coopera — quarenta e cinco quando não.</p>
+      <p>O que está a acontecer aqui é simples: famílias que cresceram em Lisboa estão a perceber que podem ter mais por menos, sem trocar a cidade por um subúrbio impessoal. Quinta do Anjo não é subúrbio. É vila. As pessoas conhecem-se. O moscatel é local. A padaria fecha ao domingo.</p>
+      <p>O Jardins do Anjo nasce nesta intersecção. Construído com acabamentos que se costumam reservar para Lisboa, num lugar onde a vida acontece à escala humana.</p>
+      <div class="editorial-stats">
+        <div>
+          <div class="stat-num">30 min</div>
+          <div class="stat-label">a Lisboa pela A2</div>
+        </div>
+        <div>
+          <div class="stat-num">12 min</div>
+          <div class="stat-label">à Arrábida</div>
+        </div>
+        <div>
+          <div class="stat-num">8 min</div>
+          <div class="stat-label">à estação de Pinhal Novo</div>
+        </div>
+        <div>
+          <div class="stat-num">45 min</div>
+          <div class="stat-label">a Comporta</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONFIGURATOR ============ -->
+<section class="configurator full" id="configurator">
+  <div class="config-inner">
+    <div class="config-head">
+      <div>
+        <div class="section-label" style="color: var(--terracotta);">— Escolha a sua fração</div>
+        <h2 class="config-title">Tudo à <em>vista.</em><br>Plantas, preços, disponibilidade <em>ao vivo.</em></h2>
+      </div>
+      <div>
+        <div class="config-section-label">Última atualização</div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px;">Há 6 minutos · EgoRealEstate</div>
+      </div>
+    </div>
+
+    <!-- Lote tabs -->
+    <div class="lote-tabs">
+      <button class="lote-tab active">
+        Lote 1 <small>· 6 frações · em comercialização</small>
+      </button>
+      <button class="lote-tab">
+        Lote 2 <small>· 6 frações · Junho 2026</small>
+        <span class="badge-soon">em breve</span>
+      </button>
+      <button class="lote-tab">
+        Lote 66 <small>· 6 frações · Outubro 2026</small>
+        <span class="badge-soon">em breve</span>
+      </button>
+    </div>
+
+    <!-- Building diagram + details -->
+    <div class="config-grid">
+      <div>
+        <div class="building" id="building">
+          <!-- Floor R/C -->
+          <div class="floor">
+            <div class="floor-label">R/C</div>
+            <div class="unit" data-id="1" data-type="T2D" data-name="A fração da figueira" data-floor="Rés-do-chão · poente" data-area="91,75" data-varandas="—" data-est="1" data-arrec="1" data-price="322.000 €" data-month="≈ 1.180 €" data-status="reserved">
+              <div class="unit-top">
+                <span class="unit-num">FR.01</span>
+                <span class="unit-status status-reserved">Reservada</span>
+              </div>
+              <div class="unit-type">T2</div>
+              <div class="unit-area">91,75 m²</div>
+            </div>
+            <div class="unit active" data-id="2" data-type="T3E" data-name="A fração maior do piso" data-floor="Rés-do-chão · nascente" data-area="124,30" data-varandas="—" data-est="1" data-arrec="1" data-price="435.500 €" data-month="≈ 1.595 €" data-status="available">
+              <div class="unit-top">
+                <span class="unit-num">FR.02</span>
+                <span class="unit-status status-available">Disponível</span>
+              </div>
+              <div class="unit-type">T3</div>
+              <div class="unit-area">124,30 m²</div>
+            </div>
+          </div>
+          <!-- Floor 1 -->
+          <div class="floor">
+            <div class="floor-label">1.º</div>
+            <div class="unit" data-id="3" data-type="T2E" data-name="A fração do meio" data-floor="1.º andar · nascente" data-area="102,30" data-varandas="9,1 m²" data-est="1" data-arrec="1" data-price="388.000 €" data-month="≈ 1.421 €" data-status="reserved">
+              <div class="unit-top">
+                <span class="unit-num">FR.03</span>
+                <span class="unit-status status-reserved">Reservada</span>
+              </div>
+              <div class="unit-type">T2</div>
+              <div class="unit-area">102,30 m² · varanda 9,1 m²</div>
+            </div>
+            <div class="unit" data-id="4" data-type="T3D" data-name="A fração do meio com vista" data-floor="1.º andar · poente" data-area="121,85" data-varandas="9,1 m²" data-est="2" data-arrec="1" data-price="470.000 €" data-month="≈ 1.722 €" data-status="available">
+              <div class="unit-top">
+                <span class="unit-num">FR.04</span>
+                <span class="unit-status status-available">Disponível</span>
+              </div>
+              <div class="unit-type">T3</div>
+              <div class="unit-area">121,85 m² · 2 estac.</div>
+            </div>
+          </div>
+          <!-- Floor 2 -->
+          <div class="floor">
+            <div class="floor-label">2.º</div>
+            <div class="unit" data-id="5" data-type="T2E" data-name="A fração do céu" data-floor="2.º andar · nascente" data-area="102,30" data-varandas="9,1 m²" data-est="1" data-arrec="1" data-price="395.000 €" data-month="≈ 1.447 €" data-status="reserved">
+              <div class="unit-top">
+                <span class="unit-num">FR.05</span>
+                <span class="unit-status status-reserved">Reservada</span>
+              </div>
+              <div class="unit-type">T2</div>
+              <div class="unit-area">102,30 m² · varanda 9,1 m²</div>
+            </div>
+            <div class="unit" data-id="6" data-type="T3D" data-name="A fração do último piso" data-floor="2.º andar · poente" data-area="121,85" data-varandas="9,1 m²" data-est="1" data-arrec="1" data-price="469.000 €" data-month="≈ 1.718 €" data-status="reserved">
+              <div class="unit-top">
+                <span class="unit-num">FR.06</span>
+                <span class="unit-status status-reserved">Reservada</span>
+              </div>
+              <div class="unit-type">T3</div>
+              <div class="unit-area">121,85 m² · varanda 9,1 m²</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="legend">
+          <div class="legend-item"><span class="legend-dot" style="background: var(--available);"></span>Disponível · 2</div>
+          <div class="legend-item"><span class="legend-dot" style="background: var(--reserved);"></span>Reservada · 4</div>
+          <div class="legend-item"><span class="legend-dot" style="background: rgba(242,235,220,0.3);"></span>Vendida · 0</div>
+        </div>
+      </div>
+
+      <!-- Details panel -->
+      <div class="details" id="details">
+        <div class="details-meta" id="d-meta">FR.02 · Tipo T3E</div>
+        <h3 class="details-name" id="d-name">A fração <em>maior do piso</em></h3>
+        <div class="details-floor" id="d-floor">Rés-do-chão · nascente</div>
+
+        <div class="details-plan"></div>
+
+        <div class="details-specs">
+          <div class="spec">
+            <div class="spec-key">Tipologia</div>
+            <div class="spec-val" id="d-type">T3</div>
+          </div>
+          <div class="spec">
+            <div class="spec-key">Área Bruta</div>
+            <div class="spec-val" id="d-area">124,30 m²</div>
+          </div>
+          <div class="spec">
+            <div class="spec-key">Varanda</div>
+            <div class="spec-val" id="d-varandas">—</div>
+          </div>
+          <div class="spec">
+            <div class="spec-key">Estacionamento</div>
+            <div class="spec-val" id="d-est">1</div>
+          </div>
+          <div class="spec">
+            <div class="spec-key">Arrecadação</div>
+            <div class="spec-val" id="d-arrec">1</div>
+          </div>
+          <div class="spec">
+            <div class="spec-key">Carregador EV</div>
+            <div class="spec-val">Incluído</div>
+          </div>
+        </div>
+
+        <div class="price-block">
+          <div class="price-num" id="d-price">435.500 €</div>
+          <div class="price-monthly" id="d-month">≈ 1.595 €/mês com 20% entrada e 30 anos</div>
+        </div>
+
+        <div class="details-actions">
+          <a href="#" class="btn btn-primary">Reservar esta fração</a>
+          <a href="#" class="btn">Marcar visita</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Full table -->
+    <div class="all-units">
+      <div class="config-section-label">Tabela completa · Lote 1</div>
+      <table class="units-table">
+        <thead>
+          <tr>
+            <th>Fração</th>
+            <th>Tipo</th>
+            <th class="hide-sm">Piso</th>
+            <th>Área</th>
+            <th class="hide-sm">Varanda</th>
+            <th class="hide-sm">Estac.</th>
+            <th>PVP</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="frac-num">FR.01</span></td><td>T2D</td><td class="hide-sm">R/C</td><td>91,75 m²</td><td class="hide-sm">—</td><td class="hide-sm">1</td><td class="price">322.000 €</td><td><span class="stat-tag status-reserved">Reservada</span></td></tr>
+          <tr><td><span class="frac-num">FR.02</span></td><td>T3E</td><td class="hide-sm">R/C</td><td>124,30 m²</td><td class="hide-sm">—</td><td class="hide-sm">1</td><td class="price">435.500 €</td><td><span class="stat-tag status-available">Disponível</span></td></tr>
+          <tr><td><span class="frac-num">FR.03</span></td><td>T2E</td><td class="hide-sm">1.º</td><td>102,30 m²</td><td class="hide-sm">9,1 m²</td><td class="hide-sm">1</td><td class="price">388.000 €</td><td><span class="stat-tag status-reserved">Reservada</span></td></tr>
+          <tr><td><span class="frac-num">FR.04</span></td><td>T3D</td><td class="hide-sm">1.º</td><td>121,85 m²</td><td class="hide-sm">9,1 m²</td><td class="hide-sm">2</td><td class="price">470.000 €</td><td><span class="stat-tag status-available">Disponível</span></td></tr>
+          <tr><td><span class="frac-num">FR.05</span></td><td>T2E</td><td class="hide-sm">2.º</td><td>102,30 m²</td><td class="hide-sm">9,1 m²</td><td class="hide-sm">1</td><td class="price">395.000 €</td><td><span class="stat-tag status-reserved">Reservada</span></td></tr>
+          <tr><td><span class="frac-num">FR.06</span></td><td>T3D</td><td class="hide-sm">2.º</td><td>121,85 m²</td><td class="hide-sm">9,1 m²</td><td class="hide-sm">1</td><td class="price">469.000 €</td><td><span class="stat-tag status-reserved">Reservada</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACABAMENTOS ============ -->
+<section>
+  <div class="section-label">— O que já vem incluído</div>
+  <h2 style="font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(36px, 4vw, 56px); line-height: 1.05; letter-spacing: -0.015em; max-width: 22ch;">Acabamentos que noutros lados são <em style="font-style: italic; color: var(--terracotta);">extras de catálogo</em>.</h2>
+  
+  <div class="acabamentos-grid">
+    <div class="acab-card">
+      <div class="acab-img a1"></div>
+      <div class="acab-brand">Bosch</div>
+      <h3 class="acab-title">Cozinha equipada de série</h3>
+      <p class="acab-desc">Placa, forno, exaustor, micro-ondas e máquina de lavar loiça. Bosch, em todas as frações, sem upgrades cobrados à parte.</p>
+    </div>
+    <div class="acab-card">
+      <div class="acab-img a2"></div>
+      <div class="acab-brand">Daikin</div>
+      <h3 class="acab-title">Climatização em todas as divisões</h3>
+      <p class="acab-desc">Ar condicionado de marca em todos os quartos e na sala. Conforto térmico tratado como infraestrutura, não como opção.</p>
+    </div>
+    <div class="acab-card">
+      <div class="acab-img a3"></div>
+      <div class="acab-brand">EV Ready</div>
+      <h3 class="acab-title">Carregador EV no estacionamento</h3>
+      <p class="acab-desc">Cada lugar de estacionamento tem ponto de carregamento elétrico instalado. A casa que comprar hoje funciona com o carro que vai ter amanhã.</p>
+    </div>
+    <div class="acab-card">
+      <div class="acab-img a4"></div>
+      <div class="acab-brand">Domótica</div>
+      <h3 class="acab-title">Estores elétricos em todas as janelas</h3>
+      <p class="acab-desc">Não como upgrade. Como standard. Fechar a casa de manhã deixa de ser uma rotina manual.</p>
+    </div>
+    <div class="acab-card">
+      <div class="acab-img a5"></div>
+      <div class="acab-brand">Design</div>
+      <h3 class="acab-title">Sanitários suspensos</h3>
+      <p class="acab-desc">Todas as casas de banho com sanitários suspensos contemporâneos. Limpeza mais fácil. Estética que envelhece bem.</p>
+    </div>
+    <div class="acab-card">
+      <div class="acab-img a6"></div>
+      <div class="acab-brand">Arrumação</div>
+      <h3 class="acab-title">Estacionamento + arrecadação</h3>
+      <p class="acab-desc">Todas as frações entregues com lugar de estacionamento e arrecadação dedicada. Sem "custo adicional opcional" no contrato.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIARY ============ -->
+<section class="diary-section full">
+  <div style="max-width: 1400px; margin: 0 auto; padding: 100px 40px;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px;">
+      <div>
+        <div class="section-label">— Diário de obra</div>
+        <h2 style="font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(36px, 4vw, 56px); line-height: 1.05; letter-spacing: -0.015em; max-width: 22ch;">A obra acontece <em style="font-style: italic; color: var(--terracotta);">à vista</em>.</h2>
+      </div>
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--brown);">Atualização semanal · Linha Gerais</div>
+    </div>
+    
+    <div class="diary-grid">
+      <div class="diary-entry">
+        <div class="diary-img d1"></div>
+        <div class="diary-date">SEM. 17 · ABR 2026</div>
+        <div class="diary-title">Estrutura concluída no piso 2</div>
+      </div>
+      <div class="diary-entry">
+        <div class="diary-img d2"></div>
+        <div class="diary-date">SEM. 16 · ABR 2026</div>
+        <div class="diary-title">Início das paredes interiores</div>
+      </div>
+      <div class="diary-entry">
+        <div class="diary-img d3"></div>
+        <div class="diary-date">SEM. 15 · ABR 2026</div>
+        <div class="diary-title">Caixilharias entregues no estaleiro</div>
+      </div>
+      <div class="diary-entry">
+        <div class="diary-img d4"></div>
+        <div class="diary-date">SEM. 14 · ABR 2026</div>
+        <div class="diary-title">Visita técnica do arquiteto</div>
+      </div>
+    </div>
+    
+    <div class="diary-cta">
+      <a href="#" class="btn">Ver diário completo · 47 atualizações</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CREDIT WITH ANA ============ -->
+<section class="full" style="padding: 0;">
+  <div style="max-width: 1400px; margin: 0 auto; padding: 0 40px;">
+    <div class="credit-block">
+      <div class="ana-photo"></div>
+      <div>
+        <div class="credit-label">A intermediação de crédito</div>
+        <h2 class="credit-title">A Ana <em>fala com os bancos</em>. Você só assina no fim.</h2>
+        <p class="credit-text">A maioria das mediadoras vende a casa e entrega o cliente ao banco. A Terraǝ não. A Ana — especialista de crédito interna — compara propostas entre bancos, negoceia spreads e acompanha o processo até à escritura. O comprador chega à reserva já com pré-aprovação na mão.</p>
+        <div class="credit-steps">
+          <div class="credit-step">
+            <span class="credit-step-num">01</span>
+            <span class="credit-step-text">Pré-aprovação antes da reserva</span>
+          </div>
+          <div class="credit-step">
+            <span class="credit-step-num">02</span>
+            <span class="credit-step-text">Comparação entre 5+ bancos</span>
+          </div>
+          <div class="credit-step">
+            <span class="credit-step-num">03</span>
+            <span class="credit-step-text">Acompanhamento até à escritura</span>
+          </div>
+        </div>
+        <a href="#" class="btn btn-primary">Falar com a Ana</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PHASES ============ -->
+<section class="phases">
+  <div class="section-label">— Faseamento</div>
+  <h2 style="font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(36px, 4vw, 56px); line-height: 1.05; letter-spacing: -0.015em; max-width: 22ch;">Três lotes. <em style="font-style: italic; color: var(--terracotta);">Um a um.</em></h2>
+  <p style="font-family: 'Fraunces', serif; font-style: italic; font-weight: 300; font-size: 18px; color: var(--brown); margin-top: 24px; max-width: 60ch;">Os 18 apartamentos não vão para o mercado todos ao mesmo tempo. Cada lote tem o seu momento — para quem entra cedo escolhe primeiro.</p>
+  
+  <div class="phase-grid">
+    <div class="phase active">
+      <div class="phase-num">FASE 01 · ATIVO</div>
+      <h3 class="phase-name">Lote 1</h3>
+      <p class="phase-when">Maio 2026 · em comercialização</p>
+      <div class="phase-progress">
+        <div class="phase-progress-fill" style="width: 67%;"></div>
+      </div>
+      <div class="phase-stat">4 de 6 reservadas · 2 disponíveis</div>
+    </div>
+    <div class="phase">
+      <div class="phase-num">FASE 02 · EM BREVE</div>
+      <h3 class="phase-name">Lote 2</h3>
+      <p class="phase-when">Junho/Julho 2026</p>
+      <div class="phase-progress">
+        <div class="phase-progress-fill" style="width: 0%;"></div>
+      </div>
+      <div class="phase-stat">Lista de espera · 12 inscritos</div>
+    </div>
+    <div class="phase">
+      <div class="phase-num">FASE 03 · EM BREVE</div>
+      <h3 class="phase-name">Lote 66</h3>
+      <p class="phase-when">Outubro 2026</p>
+      <div class="phase-progress">
+        <div class="phase-progress-fill" style="width: 0%;"></div>
+      </div>
+      <div class="phase-stat">Últimas 6 unidades do empreendimento</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section>
+  <div class="section-label">— Perguntas honestas</div>
+  <h2 style="font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(36px, 4vw, 56px); line-height: 1.05; letter-spacing: -0.015em; max-width: 22ch;">O que normalmente <em style="font-style: italic; color: var(--terracotta);">se pergunta sem perguntar</em>.</h2>
+  
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q">Em que estado está a obra hoje?</div>
+      <div class="faq-a">A estrutura está concluída até ao 2.º piso. Próxima fase: paredes interiores e caixilharias (Maio 2026). Conclusão prevista: Q4 2026. Atualizamos o diário de obra todas as semanas — pode acompanhar publicamente.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Posso visitar a obra antes de reservar?</div>
+      <div class="faq-a">Sim. Organizamos visitas guiadas ao estaleiro com o consultor e, sempre que possível, com o arquiteto. Marcação direta com a Maria Goreti ou contacto via formulário de visita.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Como é o processo de reserva?</div>
+      <div class="faq-a">1) Pré-aprovação de crédito com a Ana (sem custo). 2) Reserva da fração com sinal de 5%. 3) CPCV em 30 dias com 15%. 4) Escritura à conclusão da obra com os restantes 80%. Todo o processo legal acompanhado pela Mafalda Maldonado, da nossa equipa.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">O preço pode subir antes da escritura?</div>
+      <div class="faq-a">Não. Reservada a fração e assinado o CPCV, o preço fica congelado até à escritura. Os preços das frações que ainda estão disponíveis podem ser revistos no Lote 2 e Lote 66 — entrar cedo tem vantagem real.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Quem constrói? Quem garante a obra?</div>
+      <div class="faq-a">A obra é executada pela Linha Gerais (empreiteiro geral) com projeto de F. Simões Arquitectos. Todas as frações são entregues com garantia legal de 5 anos sobre estrutura e 2 anos sobre acabamentos. A Terraǝ acompanha o pós-venda.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Terraǝ</div>
+      <p class="footer-tag">Transformamos cada decisão imobiliária numa experiência de excelência. Mediação, crédito e investimento — em três áreas que se alimentam mutuamente.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Comprar</h4>
+      <a href="#">Empreendimentos</a>
+      <a href="#">Casas selecionadas</a>
+      <a href="#">Simulador de crédito</a>
+      <a href="#">Lista de espera VFX</a>
+    </div>
+    <div class="footer-col">
+      <h4>Vender</h4>
+      <a href="#">Avaliação em 24h</a>
+      <a href="#">Property Films</a>
+      <a href="#">Diagnóstico de Venda</a>
+    </div>
+    <div class="footer-col">
+      <h4>Investir</h4>
+      <a href="#">Estrutura SPV</a>
+      <a href="#">Próximos projetos</a>
+      <a href="#">Track record</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 Terraǝ · AMI 00000</div>
+    <div>Linda-a-Velha · Lisboa · Portugal</div>
+  </div>
+</footer>
+
+<script>
+  // Configurator interaction
+  const units = document.querySelectorAll('.unit');
+  const dEls = {
+    meta: document.getElementById('d-meta'),
+    name: document.getElementById('d-name'),
+    floor: document.getElementById('d-floor'),
+    type: document.getElementById('d-type'),
+    area: document.getElementById('d-area'),
+    varandas: document.getElementById('d-varandas'),
+    est: document.getElementById('d-est'),
+    arrec: document.getElementById('d-arrec'),
+    price: document.getElementById('d-price'),
+    month: document.getElementById('d-month'),
+  };
+
+  units.forEach(unit => {
+    unit.addEventListener('click', () => {
+      units.forEach(u => u.classList.remove('active'));
+      unit.classList.add('active');
+
+      const name = unit.dataset.name;
+      const [first, ...rest] = name.split(' ');
+      // simple emphasis on the last word(s)
+      const words = name.split(' ');
+      const head = words.slice(0, -2).join(' ');
+      const tail = words.slice(-2).join(' ');
+      const formattedName = `${head} <em>${tail}</em>`;
+
+      dEls.meta.textContent = `FR.0${unit.dataset.id} · Tipo ${unit.dataset.type}`;
+      dEls.name.innerHTML = formattedName;
+      dEls.floor.textContent = unit.dataset.floor;
+      dEls.type.textContent = unit.dataset.type.charAt(0) + unit.dataset.type.charAt(1);
+      dEls.area.textContent = unit.dataset.area + ' m²';
+      dEls.varandas.textContent = unit.dataset.varandas;
+      dEls.est.textContent = unit.dataset.est;
+      dEls.arrec.textContent = unit.dataset.arrec;
+      dEls.price.textContent = unit.dataset.price;
+      dEls.month.textContent = unit.dataset.month + '/mês com 20% entrada e 30 anos';
+    });
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => item.classList.toggle('open'));
+  });
+
+  // Lote tabs (visual only — Lote 2 and 66 not yet active)
+  document.querySelectorAll('.lote-tab').forEach((tab, i) => {
+    tab.addEventListener('click', () => {
+      if (i === 0) {
+        document.querySelectorAll('.lote-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
