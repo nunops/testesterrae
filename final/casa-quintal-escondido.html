@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A casa do quintal escondido — Terraǝ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F2EBDC;
+    --cream-soft: #EDE5D3;
+    --ink: #1F2820;
+    --ink-soft: #2D3A30;
+    --terracotta: #A04F2C;
+    --terracotta-deep: #803D20;
+    --sage: #7B8467;
+    --brown: #5A4A3A;
+    --brown-light: #8A7866;
+    --rule: #C9BFA8;
+    --paper: #F8F2E4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  /* ---------- TOP NAV ---------- */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 40px;
+    border-bottom: 1px solid var(--rule);
+    position: sticky;
+    top: 0;
+    background: var(--cream);
+    z-index: 100;
+    backdrop-filter: blur(8px);
+  }
+  .wordmark {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: 0.02em;
+    font-variation-settings: "SOFT" 50, "opsz" 144;
+  }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+  }
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--terracotta); }
+  .nav-phone {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--brown);
+  }
+  /* ---------- BREADCRUMB ---------- */
+  .breadcrumb {
+    padding: 28px 40px 0;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .breadcrumb a { color: var(--brown-light); text-decoration: none; }
+  .breadcrumb span { margin: 0 8px; opacity: 0.5; }
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 32px 40px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-label::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-variation-settings: "SOFT" 100, "opsz" 144;
+    font-size: clamp(48px, 7vw, 104px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+    max-width: 14ch;
+  }
+  .hero-title em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--terracotta);
+  }
+  .hero-intro {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(18px, 2vw, 22px);
+    line-height: 1.5;
+    color: var(--brown);
+    max-width: 48ch;
+    margin-bottom: 48px;
+  }
+  .hero-image-wrap {
+    position: relative;
+    margin-bottom: 32px;
+  }
+  .hero-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+    border-radius: 2px;
+  }
+  .play-overlay {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    background: rgba(31, 40, 32, 0.85);
+    color: var(--cream);
+    padding: 12px 20px;
+    border-radius: 100px;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .play-overlay:hover { background: rgba(31, 40, 32, 1); transform: translateY(-1px); }
+  .play-overlay::before {
+    content: '▶';
+    font-size: 10px;
+  }
+  /* ---------- META ROW ---------- */
+  .meta-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 20px 0;
+  }
+  .meta-item {
+    padding: 0 24px;
+    border-right: 1px solid var(--rule);
+  }
+  .meta-item:last-child { border-right: none; }
+  .meta-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 4px;
+  }
+  .meta-value {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--ink);
+  }
+  /* ---------- EDITORIAL SECTION ---------- */
+  section { padding: 80px 40px; max-width: 1400px; margin: 0 auto; }
+  .editorial {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    padding-top: 80px;
+  }
+  .editorial-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    position: sticky;
+    top: 100px;
+    align-self: start;
+  }
+  .editorial-body p {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 21px;
+    line-height: 1.55;
+    margin-bottom: 28px;
+    color: var(--ink-soft);
+    max-width: 56ch;
+  }
+  .editorial-body p:first-child::first-letter {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    float: left;
+    font-size: 88px;
+    line-height: 0.85;
+    padding-right: 12px;
+    padding-top: 6px;
+    color: var(--terracotta);
+  }
+  /* ---------- ICP / SPECIAL / KNOW BLOCKS ---------- */
+  .three-blocks {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    margin-top: 80px;
+  }
+  .block {
+    background: var(--cream);
+    padding: 48px 36px;
+  }
+  .block-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--terracotta);
+    margin-bottom: 16px;
+  }
+  .block-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+  .block ul { list-style: none; }
+  .block li {
+    font-size: 15px;
+    line-height: 1.6;
+    padding: 14px 0;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-soft);
+    display: flex;
+    gap: 12px;
+  }
+  .block li:first-child { border-top: none; padding-top: 0; }
+  .block li::before {
+    content: '—';
+    color: var(--terracotta);
+    flex-shrink: 0;
+  }
+  /* ---------- LIVE STATE ---------- */
+  .live-state {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 60px 40px;
+    margin-top: 80px;
+    border-radius: 2px;
+  }
+  .live-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .live-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--cream);
+    opacity: 0.7;
+  }
+  .live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #7BBF6F;
+    box-shadow: 0 0 0 0 rgba(123, 191, 111, 0.7);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(123, 191, 111, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(123, 191, 111, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(123, 191, 111, 0); }
+  }
+  .live-updated {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--cream);
+    opacity: 0.5;
+  }
+  .live-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+  .live-stat-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 56px;
+    line-height: 1;
+    margin-bottom: 8px;
+    color: var(--cream);
+  }
+  .live-stat-label {
+    font-size: 13px;
+    color: var(--cream);
+    opacity: 0.7;
+  }
+  /* ---------- HONESTY SECTION ---------- */
+  .honesty {
+    padding-top: 80px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+  }
+  .timeline {
+    position: relative;
+  }
+  .timeline-event {
+    display: flex;
+    gap: 24px;
+    padding: 24px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .timeline-event:first-child { border-top: none; }
+  .timeline-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--brown-light);
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+    width: 100px;
+    padding-top: 4px;
+  }
+  .timeline-content {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  .timeline-content strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  /* ---------- PHOTO ESSAY ---------- */
+  .photo-essay {
+    padding-top: 80px;
+  }
+  .essay-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 20px;
+  }
+  .essay-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 36px;
+    letter-spacing: -0.01em;
+  }
+  .essay-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+  }
+  .essay-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 16px;
+  }
+  .essay-photo {
+    background: var(--rule);
+    background-size: cover;
+    background-position: center;
+    border-radius: 2px;
+    aspect-ratio: 4 / 5;
+  }
+  .essay-photo.tall { aspect-ratio: 4 / 5; grid-column: span 5; }
+  .essay-photo.wide { aspect-ratio: 16 / 10; grid-column: span 7; }
+  .essay-photo.square { aspect-ratio: 1; grid-column: span 4; }
+  .essay-photo.full { aspect-ratio: 21 / 9; grid-column: span 12; margin-top: 16px; margin-bottom: 16px; }
+  .photo-1 { background-image: url('https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1200&q=80'); }
+  .photo-2 { background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&q=80'); }
+  .photo-3 { background-image: url('https://images.unsplash.com/photo-1556909114-44e3e9399a2b?w=1200&q=80'); }
+  .photo-4 { background-image: url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=1600&q=80'); }
+  .photo-5 { background-image: url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&q=80'); }
+  .photo-6 { background-image: url('https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=1200&q=80'); }
+  .photo-caption {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--brown-light);
+    letter-spacing: 0.05em;
+    margin-top: 8px;
+    grid-column: span 12;
+  }
+  /* ---------- CONSULTANT ---------- */
+  .consultant {
+    margin-top: 100px;
+    background: var(--paper);
+    padding: 60px 48px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+    align-items: center;
+    border-radius: 2px;
+  }
+  .consultant-photo {
+    width: 200px;
+    height: 240px;
+    background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80');
+    background-size: cover;
+    background-position: center;
+    border-radius: 2px;
+  }
+  .consultant-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 12px;
+  }
+  .consultant-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 36px;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+  .consultant-quote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    max-width: 50ch;
+  }
+  .consultant-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    background: transparent;
+    cursor: pointer;
+  }
+  .btn:hover {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .btn-primary:hover {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+    color: var(--cream);
+  }
+  /* ---------- SIMILAR ---------- */
+  .similar {
+    padding-top: 100px;
+  }
+  .similar-header {
+    margin-bottom: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 20px;
+  }
+  .similar-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 36px;
+    letter-spacing: -0.01em;
+  }
+  .similar-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .similar-card {
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .similar-card:hover { transform: translateY(-4px); }
+  .similar-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 16px;
+    border-radius: 2px;
+  }
+  .similar-img.s1 { background-image: url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=900&q=80'); }
+  .similar-img.s2 { background-image: url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=80'); }
+  .similar-img.s3 { background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&q=80'); }
+  .similar-loc {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 8px;
+  }
+  .similar-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 26px;
+    line-height: 1.15;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .similar-meta {
+    font-size: 14px;
+    color: var(--brown);
+    display: flex;
+    gap: 12px;
+  }
+  .similar-meta span:not(:last-child)::after {
+    content: '·';
+    margin-left: 12px;
+    color: var(--rule);
+  }
+  /* ---------- FOOTER ---------- */
+  footer {
+    margin-top: 120px;
+    padding: 60px 40px 40px;
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(242, 235, 220, 0.15);
+  }
+  .footer-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 300;
+    margin-bottom: 16px;
+    font-variation-settings: "SOFT" 100;
+  }
+  .footer-tag {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 16px;
+    opacity: 0.7;
+    max-width: 32ch;
+    line-height: 1.5;
+  }
+  .footer-col h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0.6;
+    font-weight: 400;
+  }
+  .footer-col a {
+    display: block;
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 6px 0;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+  }
+  .footer-col a:hover { opacity: 1; }
+  .footer-bottom {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    opacity: 0.5;
+  }
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px) {
+    nav { padding: 18px 20px; }
+    .nav-phone { display: none; }
+    .nav-links { gap: 20px; font-size: 12px; }
+    .breadcrumb { padding: 20px 20px 0; }
+    .hero { padding: 24px 20px 40px; }
+    .hero-title { font-size: 44px; }
+    section { padding: 60px 20px; }
+    .meta-row { grid-template-columns: 1fr 1fr; padding: 16px 0; }
+    .meta-item { padding: 12px 16px; border-right: none; border-bottom: 1px solid var(--rule); }
+    .meta-item:nth-child(2n) { border-right: none; }
+    .meta-item:nth-last-child(-n+2) { border-bottom: none; }
+    .editorial { grid-template-columns: 1fr; gap: 24px; padding-top: 40px; }
+    .editorial-label { position: static; }
+    .editorial-body p { font-size: 18px; }
+    .three-blocks { grid-template-columns: 1fr; }
+    .block { padding: 32px 24px; }
+    .live-state { padding: 40px 24px; }
+    .live-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+    .live-stat-num { font-size: 40px; }
+    .honesty { grid-template-columns: 1fr; gap: 32px; padding-top: 40px; }
+    .essay-grid { grid-template-columns: 1fr; }
+    .essay-photo.tall, .essay-photo.wide, .essay-photo.square, .essay-photo.full {
+      grid-column: span 1;
+      aspect-ratio: 4 / 3;
+    }
+    .consultant { grid-template-columns: 1fr; padding: 32px 24px; gap: 24px; }
+    .consultant-photo { width: 100%; height: 280px; }
+    .consultant-name { font-size: 28px; }
+    .similar-grid { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .footer-bottom { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wordmark">Terraǝ</div>
+  <div class="nav-links">
+    <a href="#">Comprar</a>
+    <a href="#">Vender</a>
+    <a href="#">Investir</a>
+    <a href="#">Editorial</a>
+  </div>
+  <div class="nav-phone">+351 21 000 0000</div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="#">Comprar</a> <span>/</span> <a href="#">Linda-a-Velha</a> <span>/</span> A casa do quintal escondido
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-label">Casa em Linda-a-Velha · Refª 0247</div>
+  <h1 class="hero-title">A casa do <em>quintal escondido</em></h1>
+  <p class="hero-intro">Um T3 que escondeu um pátio à sombra de uma figueira durante quarenta anos. Agora abre-se a quem souber estar de portas abertas.</p>
+  
+  <div class="hero-image-wrap">
+    <div class="hero-image"></div>
+    <div class="play-overlay">Property Film · 2:14</div>
+  </div>
+  
+  <div class="meta-row">
+    <div class="meta-item">
+      <div class="meta-label">Preço</div>
+      <div class="meta-value">320.000 €</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Tipologia</div>
+      <div class="meta-value">T3</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Área Bruta</div>
+      <div class="meta-value">124 m²</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Ano</div>
+      <div class="meta-value">1978</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Localização</div>
+      <div class="meta-value">Linda-a-Velha</div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ EDITORIAL ============ -->
+<section>
+  <div class="editorial">
+    <div class="editorial-label">— A história</div>
+    <div class="editorial-body">
+      <p>A casa pertence à mesma família desde 1978. Foi a primeira casa do pai e da mãe, depois do casamento, e foi onde os três filhos cresceram. Os pais vão agora para uma casa térrea, mais perto da filha mais velha. A casa fica disponível porque ninguém quer vendê-la com pressa — querem que vá para alguém que perceba o que ela é.</p>
+      <p>O que ela é, é o seguinte: um T3 de 124 m² no terceiro andar de um prédio sereno, com vista de cumeada para os telhados de Linda-a-Velha. A particularidade está atrás. Há um pátio interior de oito metros, com paredes brancas e uma figueira plantada por engano há trinta anos. Não consta na ficha técnica. Não aparece nas fotos do Idealista. Não existia para quem nunca lá entrou.</p>
+      <p>A figueira dá fruta em Agosto. A varanda da cozinha cai sobre ela. É possível pegar nos figos sem sair de casa.</p>
+    </div>
+  </div>
+
+  <!-- ============ THREE BLOCKS ============ -->
+  <div class="three-blocks">
+    <div class="block">
+      <div class="block-num">01 · Para quem é</div>
+      <h3 class="block-title">Esta casa procura uma família que coma de portas abertas.</h3>
+      <ul>
+        <li>Quem queira ficar em Linda-a-Velha sem entrar no preço de Lisboa</li>
+        <li>Famílias com filhos pequenos — o pátio é território deles</li>
+        <li>Quem cozinha. Sério. A cozinha é o coração desta casa</li>
+        <li>Quem aceite que uma casa de 1978 tem 1978 em si</li>
+      </ul>
+    </div>
+    <div class="block">
+      <div class="block-num">02 · O que tem de especial</div>
+      <h3 class="block-title">Três coisas que não aparecem na ficha técnica.</h3>
+      <ul>
+        <li>O pátio interior — 8 m de comprimento, exposição sul, pertence só a esta fração</li>
+        <li>O soalho original em pinho de Riga, restaurado em 2019 pelo dono atual</li>
+        <li>Marquise envidraçada que duplica funcionalmente a sala em dias frios</li>
+        <li>Arrumação genuína: três quartos a sério, todos com armário embutido</li>
+      </ul>
+    </div>
+    <div class="block">
+      <div class="block-num">03 · O que precisas de saber</div>
+      <h3 class="block-title">Aquilo que dizemos antes da visita, não depois.</h3>
+      <ul>
+        <li>Cozinha de 2003. Funciona, mas o próximo dono provavelmente vai querer renovar</li>
+        <li>Terceiro andar sem elevador. Há 47 degraus. Contámos</li>
+        <li>Casa de banho social pequena — 3,2 m². Não há solução fácil</li>
+        <li>Janelas a renovar nos próximos 5 anos. Orçamento estimado: 6.000 €</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============ LIVE STATE ============ -->
+  <div class="live-state">
+    <div class="live-header">
+      <div class="live-label"><span class="live-dot"></span>Estado ao vivo · EgoRealEstate</div>
+      <div class="live-updated">Atualizado há 4 minutos</div>
+    </div>
+    <div class="live-grid">
+      <div>
+        <div class="live-stat-num">18</div>
+        <div class="live-stat-label">dias no mercado</div>
+      </div>
+      <div>
+        <div class="live-stat-num">8</div>
+        <div class="live-stat-label">visitas marcadas esta semana</div>
+      </div>
+      <div>
+        <div class="live-stat-num">1</div>
+        <div class="live-stat-label">proposta em análise</div>
+      </div>
+      <div>
+        <div class="live-stat-num">0</div>
+        <div class="live-stat-label">ajustes de preço</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ HONESTY / TIMELINE ============ -->
+  <div class="honesty">
+    <div class="editorial-label">— Histórico de preço</div>
+    <div class="timeline">
+      <div class="timeline-event">
+        <div class="timeline-date">12 ABR 2026</div>
+        <div class="timeline-content">A casa entra no mercado por <strong>320.000 €</strong>. Avaliação interna situou o intervalo razoável entre 305.000 € e 335.000 €.</div>
+      </div>
+      <div class="timeline-event">
+        <div class="timeline-date">15 ABR 2026</div>
+        <div class="timeline-content">Property Film publicado. Primeiras visitas agendadas em 48h.</div>
+      </div>
+      <div class="timeline-event">
+        <div class="timeline-date">28 ABR 2026</div>
+        <div class="timeline-content"><strong>Sem ajustes.</strong> O preço mantém-se. O ritmo de procura justifica a posição.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PHOTO ESSAY ============ -->
+  <div class="photo-essay">
+    <div class="essay-header">
+      <h2 class="essay-title">A casa por dentro</h2>
+      <div class="essay-meta">12 imagens · ensaio fotográfico</div>
+    </div>
+    <div class="essay-grid">
+      <div class="essay-photo wide photo-1"></div>
+      <div class="essay-photo tall photo-2"></div>
+      <div class="essay-photo full photo-4"></div>
+      <div class="essay-photo square photo-3"></div>
+      <div class="essay-photo square photo-5"></div>
+      <div class="essay-photo square photo-6"></div>
+      <div class="photo-caption">Fotografia: Prologue · Abril 2026</div>
+    </div>
+  </div>
+
+  <!-- ============ CONSULTANT ============ -->
+  <div class="consultant">
+    <div class="consultant-photo"></div>
+    <div>
+      <div class="consultant-label">A consultora desta casa</div>
+      <h3 class="consultant-name">Maria Goreti</h3>
+      <p class="consultant-quote">"Conheci esta família ainda os filhos eram pequenos. Saber acompanhá-los na saída desta casa é uma responsabilidade que levo a sério. Quem comprar daqui tem de perceber o que está a herdar."</p>
+      <div class="consultant-actions">
+        <a href="#" class="btn btn-primary">Marcar visita</a>
+        <a href="#" class="btn">Falar por WhatsApp</a>
+        <a href="#" class="btn">Pré-aprovação de crédito</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SIMILAR ============ -->
+  <div class="similar">
+    <div class="similar-header">
+      <h2 class="similar-title">Casas com o mesmo espírito</h2>
+      <a href="#" class="essay-meta" style="color: var(--terracotta);">Ver todas →</a>
+    </div>
+    <div class="similar-grid">
+      <div class="similar-card">
+        <div class="similar-img s1"></div>
+        <div class="similar-loc">Algés · T2</div>
+        <div class="similar-name">A casa da varanda comprida</div>
+        <div class="similar-meta"><span>295.000 €</span><span>96 m²</span><span>1972</span></div>
+      </div>
+      <div class="similar-card">
+        <div class="similar-img s2"></div>
+        <div class="similar-loc">Carnaxide · T3</div>
+        <div class="similar-name">A casa que ninguém quis renovar</div>
+        <div class="similar-meta"><span>275.000 €</span><span>118 m²</span><span>1981</span></div>
+      </div>
+      <div class="similar-card">
+        <div class="similar-img s3"></div>
+        <div class="similar-loc">Oeiras · T3</div>
+        <div class="similar-name">A casa do penúltimo andar</div>
+        <div class="similar-meta"><span>365.000 €</span><span>132 m²</span><span>1985</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Terraǝ</div>
+      <p class="footer-tag">Transformamos cada decisão imobiliária numa experiência de excelência. Mediação, crédito e investimento — em três áreas que se alimentam mutuamente.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Comprar</h4>
+      <a href="#">Empreendimentos</a>
+      <a href="#">Casas selecionadas</a>
+      <a href="#">Simulador de crédito</a>
+      <a href="#">Lista de espera VFX</a>
+    </div>
+    <div class="footer-col">
+      <h4>Vender</h4>
+      <a href="#">Avaliação em 24h</a>
+      <a href="#">Property Films</a>
+      <a href="#">Diagnóstico de Venda</a>
+    </div>
+    <div class="footer-col">
+      <h4>Investir</h4>
+      <a href="#">Estrutura SPV</a>
+      <a href="#">Próximos projetos</a>
+      <a href="#">Track record</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 Terraǝ · AMI 00000</div>
+    <div>Linda-a-Velha · Lisboa · Portugal</div>
+  </div>
+</footer>
+
+</body>
+</html>
