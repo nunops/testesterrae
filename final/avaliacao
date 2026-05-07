@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avaliação em 24h — Terraǝ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F2EBDC;
+    --cream-soft: #EDE5D3;
+    --ink: #1F2820;
+    --ink-soft: #2D3A30;
+    --ink-deep: #161D17;
+    --terracotta: #A04F2C;
+    --terracotta-deep: #803D20;
+    --sage: #7B8467;
+    --sage-light: #9DA68A;
+    --brown: #5A4A3A;
+    --brown-light: #8A7866;
+    --rule: #C9BFA8;
+    --rule-soft: #D9D0BA;
+    --rule-dark: rgba(242, 235, 220, 0.15);
+    --paper: #F8F2E4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  /* ---------- NAV ---------- */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 40px;
+    border-bottom: 1px solid var(--rule);
+    position: sticky;
+    top: 0;
+    background: rgba(242, 235, 220, 0.92);
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+  .wordmark {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: 0.02em;
+    font-variation-settings: "SOFT" 50, "opsz" 144;
+  }
+  .nav-links { display: flex; gap: 32px; font-size: 14px; }
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--terracotta); }
+  .nav-links a.active { color: var(--terracotta); }
+  .nav-phone {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--brown);
+  }
+  /* ---------- BREADCRUMB ---------- */
+  .breadcrumb {
+    padding: 28px 40px 0;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    font-family: 'JetBrains Mono', monospace;
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+  .breadcrumb a { color: var(--brown-light); text-decoration: none; }
+  .breadcrumb span { margin: 0 8px; opacity: 0.5; }
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 60px 40px 100px;
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+  .hero-stamp {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 32px;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero-stamp::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 80px;
+    align-items: end;
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-variation-settings: "SOFT" 100, "opsz" 144;
+    font-size: clamp(48px, 7vw, 110px);
+    line-height: 0.96;
+    letter-spacing: -0.025em;
+    margin-bottom: 36px;
+  }
+  .hero-title em { font-style: italic; color: var(--terracotta); }
+  .hero-deck {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(18px, 1.8vw, 22px);
+    line-height: 1.5;
+    color: var(--brown);
+    max-width: 50ch;
+    margin-bottom: 0;
+  }
+  .hero-stat {
+    border-left: 1px solid var(--rule);
+    padding-left: 32px;
+  }
+  .hero-stat-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 96px;
+    line-height: 0.9;
+    letter-spacing: -0.025em;
+    color: var(--terracotta);
+    margin-bottom: 16px;
+  }
+  .hero-stat-num small {
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--brown-light);
+    letter-spacing: 0;
+    margin-left: 6px;
+  }
+  .hero-stat-label {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 17px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    max-width: 30ch;
+  }
+  /* ---------- SECTION SHARED ---------- */
+  section {
+    padding: 100px 40px;
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+  section.full {
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .section-label::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 72px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    max-width: 18ch;
+  }
+  .section-title em { font-style: italic; color: var(--terracotta); }
+  .section-deck {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 19px;
+    color: var(--brown);
+    max-width: 60ch;
+    margin-bottom: 56px;
+  }
+  /* ---------- COMPARISON TABLE ---------- */
+  .comparison {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 100px 40px;
+  }
+  .comparison-inner {
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1.3fr;
+    gap: 0;
+    margin-top: 48px;
+    border-top: 1px solid var(--rule-dark);
+    border-bottom: 1px solid var(--rule-dark);
+  }
+  .comparison-cell {
+    padding: 24px 24px;
+    border-right: 1px solid var(--rule-dark);
+    border-bottom: 1px solid var(--rule-dark);
+    font-size: 14px;
+  }
+  .comparison-cell:nth-child(4n) { border-right: none; }
+  .comparison-cell:nth-last-child(-n+4) { border-bottom: none; }
+  .comparison-cell.head {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.5;
+    padding: 16px 24px;
+  }
+  .comparison-cell.row-label {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 17px;
+    color: var(--cream);
+    background: rgba(242, 235, 220, 0.03);
+  }
+  .comparison-cell.terrae {
+    background: rgba(160, 79, 44, 0.12);
+    color: var(--cream);
+  }
+  .comparison-cell.head.terrae {
+    background: var(--terracotta);
+    color: var(--cream);
+    opacity: 1;
+  }
+  .comparison-cell.muted {
+    color: var(--cream);
+    opacity: 0.65;
+  }
+  .check { color: #6FA85C; font-weight: 600; margin-right: 4px; }
+  .cross { color: #C97D5E; font-weight: 600; margin-right: 4px; opacity: 0.8; }
+  /* ---------- HOW IT WORKS ---------- */
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-top: 56px;
+  }
+  .step {
+    background: var(--cream);
+    padding: 48px 40px;
+    position: relative;
+  }
+  .step-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--terracotta);
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+  .step-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brown);
+    margin-bottom: 12px;
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--paper);
+    border-radius: 100px;
+  }
+  .step-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+  .step-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin-bottom: 24px;
+  }
+  .step-list {
+    list-style: none;
+    border-top: 1px solid var(--rule);
+    padding-top: 16px;
+  }
+  .step-list li {
+    font-size: 13px;
+    color: var(--brown);
+    padding: 6px 0;
+    display: flex;
+    gap: 10px;
+  }
+  .step-list li::before {
+    content: '—';
+    color: var(--terracotta);
+  }
+  /* ---------- SAMPLE REPORT ---------- */
+  .report-section { background: var(--paper); }
+  .report-mockup {
+    background: var(--cream);
+    padding: 56px 64px;
+    border: 1px solid var(--rule);
+    margin-top: 48px;
+    box-shadow: 0 30px 60px -30px rgba(31, 40, 32, 0.15);
+    border-radius: 2px;
+  }
+  .report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 24px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .report-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 8px;
+  }
+  .report-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .report-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    background: var(--paper);
+    padding: 6px 12px;
+    border-radius: 100px;
+  }
+  /* Range / scenarios */
+  .scenarios {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+  .scenario {
+    padding: 24px;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    position: relative;
+  }
+  .scenario.recommended {
+    border: 2px solid var(--terracotta);
+    background: rgba(160, 79, 44, 0.04);
+  }
+  .scenario.recommended::before {
+    content: '★ Recomendado';
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    background: var(--terracotta);
+    color: var(--cream);
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .scenario-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 8px;
+  }
+  .scenario-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 17px;
+    margin-bottom: 16px;
+    color: var(--ink);
+  }
+  .scenario-price {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 38px;
+    line-height: 1;
+    margin-bottom: 6px;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+  }
+  .scenario-time {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--brown);
+    margin-bottom: 16px;
+  }
+  .scenario-bar {
+    height: 4px;
+    background: var(--rule-soft);
+    border-radius: 100px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .scenario-bar-fill {
+    height: 100%;
+    background: var(--terracotta);
+    border-radius: 100px;
+  }
+  .scenario-prob {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--brown);
+    letter-spacing: 0.04em;
+  }
+  /* Comparables */
+  .report-section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 18px;
+    margin-bottom: 16px;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .report-section-title::before {
+    content: '';
+    width: 16px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+  .comp-table { width: 100%; border-collapse: collapse; margin-bottom: 32px; }
+  .comp-table th {
+    text-align: left;
+    padding: 10px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    border-bottom: 1px solid var(--rule);
+    font-weight: 500;
+  }
+  .comp-table th.num, .comp-table td.num { text-align: right; }
+  .comp-table td {
+    padding: 12px 12px;
+    border-bottom: 1px solid var(--rule-soft);
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .comp-table .addr {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    color: var(--ink);
+    font-size: 14px;
+  }
+  .comp-table .price {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  /* Recommendations */
+  .recommendations {
+    background: var(--paper);
+    padding: 24px 28px;
+    border-radius: 2px;
+    border-left: 3px solid var(--terracotta);
+    margin-bottom: 24px;
+  }
+  .recommendations ul { list-style: none; }
+  .recommendations li {
+    padding: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .recommendations li:last-child { border-bottom: none; }
+  .recommendations li .impact {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--terracotta);
+    flex-shrink: 0;
+    font-weight: 500;
+  }
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 24px;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 2px;
+    font-family: 'Instrument Sans', sans-serif;
+  }
+  .btn::after {
+    content: '→';
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+  }
+  .btn:hover { background: var(--ink); color: var(--cream); }
+  .btn-primary { background: var(--ink); color: var(--cream); }
+  .btn-primary:hover { background: var(--terracotta); border-color: var(--terracotta); }
+  .btn-large { padding: 18px 32px; font-size: 14px; }
+  .dark .btn { border-color: var(--cream); color: var(--cream); }
+  .dark .btn:hover { background: var(--cream); color: var(--ink); }
+  .dark .btn-primary { background: var(--terracotta); border-color: var(--terracotta); }
+  /* ---------- FORM ---------- */
+  .form-section {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 120px 40px;
+  }
+  .form-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .form-head {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .form-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .form-title em { font-style: italic; color: var(--terracotta); }
+  .form-deck {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--cream);
+    opacity: 0.75;
+    max-width: 50ch;
+    margin: 0 auto;
+  }
+  .stepper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    position: relative;
+  }
+  .stepper::before {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    right: 14px;
+    height: 1px;
+    background: var(--rule-dark);
+    z-index: 0;
+  }
+  .step-dot {
+    position: relative;
+    z-index: 1;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--ink);
+    border: 1px solid var(--rule-dark);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--cream);
+    opacity: 0.5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .step-dot.active {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+    opacity: 1;
+  }
+  .step-dot.done {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+    opacity: 1;
+  }
+  .step-dot.done::after { content: '✓'; }
+  .step-dot.done span { display: none; }
+  .form-card {
+    background: rgba(242, 235, 220, 0.03);
+    border: 1px solid var(--rule-dark);
+    padding: 48px 56px;
+    border-radius: 3px;
+  }
+  .form-step-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 12px;
+  }
+  .form-step-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 1.15;
+    margin-bottom: 32px;
+    letter-spacing: -0.01em;
+  }
+  .form-step-title em { font-style: italic; color: var(--terracotta); }
+  .field { margin-bottom: 24px; }
+  .field label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.7;
+    margin-bottom: 8px;
+  }
+  .field input, .field select {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(242, 235, 220, 0.05);
+    border: 1px solid var(--rule-dark);
+    color: var(--cream);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 15px;
+    border-radius: 2px;
+  }
+  .field input:focus, .field select:focus {
+    outline: none;
+    border-color: var(--terracotta);
+    background: rgba(160, 79, 44, 0.08);
+  }
+  .field input::placeholder { color: rgba(242, 235, 220, 0.4); }
+  .row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  /* Type chips */
+  .chips {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .chip {
+    padding: 12px 20px;
+    border: 1px solid var(--rule-dark);
+    background: rgba(242, 235, 220, 0.03);
+    color: var(--cream);
+    font-size: 14px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Instrument Sans', sans-serif;
+  }
+  .chip:hover { border-color: var(--terracotta); }
+  .chip.selected {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+  }
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32px;
+    gap: 12px;
+  }
+  .btn-back {
+    background: transparent;
+    border: 1px solid var(--rule-dark);
+    color: var(--cream);
+  }
+  .btn-back::after { content: '←'; order: -1; }
+  .btn-back:hover { background: rgba(242, 235, 220, 0.05); border-color: var(--cream); }
+  /* Privacy note */
+  .privacy {
+    text-align: center;
+    margin-top: 32px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--cream);
+    opacity: 0.5;
+    letter-spacing: 0.05em;
+  }
+  /* ---------- TESTIMONIAL ---------- */
+  .testimonial {
+    padding: 120px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .test-image {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background-image: url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=1200&q=85');
+    background-size: cover;
+    background-position: center;
+    border-radius: 2px;
+  }
+  .test-quote-mark {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 80px;
+    color: var(--terracotta);
+    line-height: 0.5;
+    margin-bottom: 16px;
+  }
+  .test-quote {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(22px, 2.6vw, 32px);
+    line-height: 1.35;
+    color: var(--ink);
+    margin-bottom: 32px;
+    letter-spacing: -0.005em;
+  }
+  .test-quote em { color: var(--terracotta); font-style: italic; }
+  .test-attrib {
+    border-top: 1px solid var(--rule);
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .test-name {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    margin-bottom: 4px;
+  }
+  .test-where {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+  }
+  .test-result {
+    text-align: right;
+  }
+  .test-result-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 1;
+    color: var(--terracotta);
+    margin-bottom: 4px;
+    letter-spacing: -0.015em;
+  }
+  .test-result-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brown);
+  }
+  /* ---------- FAQ ---------- */
+  .faq-list { margin-top: 48px; max-width: 900px; }
+  .faq-item {
+    border-top: 1px solid var(--rule);
+    padding: 20px 0;
+    cursor: pointer;
+  }
+  .faq-item:last-child { border-bottom: 1px solid var(--rule); }
+  .faq-q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 1.3;
+    color: var(--ink);
+    gap: 16px;
+  }
+  .faq-q::after {
+    content: '+';
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 24px;
+    color: var(--terracotta);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s;
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.65;
+    max-width: 60ch;
+  }
+  .faq-item.open .faq-a {
+    max-height: 300px;
+    margin-top: 14px;
+  }
+  /* ---------- FOOTER ---------- */
+  footer {
+    padding: 80px 40px 40px;
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .footer-inner {
+    max-width: 1500px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--rule-dark);
+  }
+  .footer-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 300;
+    margin-bottom: 16px;
+    font-variation-settings: "SOFT" 100;
+  }
+  .footer-tag {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 17px;
+    opacity: 0.75;
+    max-width: 36ch;
+    line-height: 1.5;
+  }
+  .footer-col h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0.6;
+    font-weight: 400;
+  }
+  .footer-col a {
+    display: block;
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 6px 0;
+    opacity: 0.85;
+  }
+  .footer-bottom {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    opacity: 0.5;
+  }
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 1024px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    .hero-stat { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 32px; }
+    .comparison-grid { grid-template-columns: 1.4fr 1fr; }
+    .comparison-cell { font-size: 13px; padding: 16px; }
+    .how-grid { grid-template-columns: 1fr; }
+    .scenarios { grid-template-columns: 1fr; }
+    .testimonial-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+  @media (max-width: 720px) {
+    nav { padding: 18px 20px; }
+    .nav-phone { display: none; }
+    .nav-links { gap: 18px; font-size: 12px; }
+    .breadcrumb { padding: 20px 20px 0; }
+    .hero { padding: 40px 20px 60px; }
+    section { padding: 60px 20px; }
+    .comparison, .form-section { padding: 60px 20px; }
+    .testimonial { padding: 60px 20px; }
+    .comparison-grid { grid-template-columns: 1fr; }
+    .comparison-cell { border-right: none; padding: 14px 16px; }
+    .step { padding: 32px 24px; }
+    .report-mockup { padding: 32px 24px; }
+    .form-card { padding: 28px 24px; }
+    .form-actions { flex-direction: column-reverse; }
+    .form-actions .btn { width: 100%; justify-content: center; }
+    .row-2 { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .footer-bottom { flex-direction: column; gap: 8px; }
+    .comp-table .hide-sm { display: none; }
+    .test-attrib { flex-direction: column; align-items: flex-start; }
+    .test-result { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wordmark">Terraǝ</div>
+  <div class="nav-links">
+    <a href="#">Comprar</a>
+    <a href="#" class="active">Vender</a>
+    <a href="#">Investir</a>
+    <a href="#">Editorial</a>
+  </div>
+  <div class="nav-phone">+351 21 000 0000</div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="#">Vender</a> <span>/</span> Avaliação em 24h
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-stamp">Avaliação Terraǝ · Resposta em 24 horas</div>
+  
+  <div class="hero-grid">
+    <div>
+      <h1 class="hero-title">Quanto vale a tua casa, hoje, no <em>mercado real?</em></h1>
+      <p class="hero-deck">Há três respostas para esta pergunta — e cada uma resolve um problema diferente. Damos-te todas as três, com os comparáveis em cima da mesa.</p>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">3<small>cenários</small></div>
+      <p class="hero-stat-label">Não te damos um número. Damos-te o intervalo real, o tempo médio de venda em cada cenário, e a recomendação de qual deles serve o teu objectivo.</p>
+    </div>
+  </div>
+</header>
+
+<!-- ============ COMPARISON ============ -->
+<section class="comparison full dark">
+  <div class="comparison-inner">
+    <div class="section-label" style="color: var(--terracotta);">— Porque três avaliações dão sempre três valores</div>
+    <h2 class="section-title" style="color: var(--cream);">Nem todas as <em>avaliações</em><br>servem o mesmo objectivo.</h2>
+    <p class="section-deck" style="color: var(--cream); opacity: 0.75;">Os portais querem-te no site. As mediadoras querem a angariação. A Terraǝ quer a venda — e isso muda tudo o que vais ler a seguir.</p>
+    
+    <div class="comparison-grid">
+      <div class="comparison-cell head"></div>
+      <div class="comparison-cell head">Portal automático</div>
+      <div class="comparison-cell head">Mediadora típica</div>
+      <div class="comparison-cell head terrae">Terraǝ</div>
+      
+      <div class="comparison-cell row-label">Quem faz</div>
+      <div class="comparison-cell muted">Algoritmo, sem ver a casa</div>
+      <div class="comparison-cell muted">Comercial em 30 minutos</div>
+      <div class="comparison-cell terrae">Algoritmo + consultor + mercado real</div>
+      
+      <div class="comparison-cell row-label">Tempo</div>
+      <div class="comparison-cell muted">Imediato</div>
+      <div class="comparison-cell muted">3–5 dias</div>
+      <div class="comparison-cell terrae"><span class="check">✓</span> 24h, garantidas</div>
+      
+      <div class="comparison-cell row-label">O que entregam</div>
+      <div class="comparison-cell muted">Um número (com erro de ±18%)</div>
+      <div class="comparison-cell muted">Um número, normalmente inflado</div>
+      <div class="comparison-cell terrae">3 cenários + 8 comparáveis + estratégia</div>
+      
+      <div class="comparison-cell row-label">Tempo médio de venda</div>
+      <div class="comparison-cell muted"><span class="cross">✕</span> Não calcula</div>
+      <div class="comparison-cell muted"><span class="cross">✕</span> Raramente</div>
+      <div class="comparison-cell terrae"><span class="check">✓</span> Para cada cenário</div>
+      
+      <div class="comparison-cell row-label">Recomendações</div>
+      <div class="comparison-cell muted"><span class="cross">✕</span> Nenhumas</div>
+      <div class="comparison-cell muted">Genéricas</div>
+      <div class="comparison-cell terrae"><span class="check">✓</span> Ranqueadas por impacto</div>
+      
+      <div class="comparison-cell row-label">Compromisso comercial</div>
+      <div class="comparison-cell muted">Captura de email</div>
+      <div class="comparison-cell muted">Pressão para angariação</div>
+      <div class="comparison-cell terrae"><span class="check">✓</span> Zero — usas como quiseres</div>
+      
+      <div class="comparison-cell row-label">Custo</div>
+      <div class="comparison-cell muted">Grátis</div>
+      <div class="comparison-cell muted">Grátis</div>
+      <div class="comparison-cell terrae"><span class="check">✓</span> Grátis</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section>
+  <div class="section-label">— Como funciona</div>
+  <h2 class="section-title">Três passos. <em>Vinte e quatro</em> horas.</h2>
+  <p class="section-deck">Um processo desenhado para te dar uma decisão informada, não uma cotação rápida.</p>
+  
+  <div class="how-grid">
+    <div class="step">
+      <div class="step-num">01</div>
+      <span class="step-time">10 minutos</span>
+      <h3 class="step-title">Partilhas a tua casa</h3>
+      <p class="step-desc">Localização, tipologia, área, estado, características relevantes. Tudo num formulário simples — sem fotos obrigatórias, sem documentos.</p>
+      <ul class="step-list">
+        <li>Morada exacta (não publicada)</li>
+        <li>Características distintivas (varanda, garagem, vista)</li>
+        <li>Estado de conservação geral</li>
+      </ul>
+    </div>
+    
+    <div class="step">
+      <div class="step-num">02</div>
+      <span class="step-time">Em 24 horas</span>
+      <h3 class="step-title">Análise + comparáveis</h3>
+      <p class="step-desc">Um consultor cruza a tua casa com 8 a 12 transações reais nos últimos 6 meses na zona, ajusta por área e estado, e desenha os três cenários de preço.</p>
+      <ul class="step-list">
+        <li>Dados de IMT, Casafari e CRM Terraǝ</li>
+        <li>Comparáveis ajustados por superfície e estado</li>
+        <li>Tempo médio de venda real para a zona</li>
+      </ul>
+    </div>
+    
+    <div class="step">
+      <div class="step-num">03</div>
+      <span class="step-time">60 minutos · opcional</span>
+      <h3 class="step-title">Reunião + relatório</h3>
+      <p class="step-desc">Marcamos uma conversa — presencial, vídeo ou telefone. Recebes o relatório completo em PDF e discutimos a estratégia que melhor serve o teu objectivo.</p>
+      <ul class="step-list">
+        <li>Relatório de 8 páginas em PDF</li>
+        <li>Recomendações de preparação ranqueadas</li>
+        <li>Sem compromisso de angariação</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SAMPLE REPORT ============ -->
+<section class="report-section full">
+  <div style="max-width: 1300px; margin: 0 auto; padding: 100px 40px;">
+    <div class="section-label">— O que vais receber</div>
+    <h2 class="section-title">Um relatório que cabe em <em>oito páginas</em>.</h2>
+    <p class="section-deck">Não é um número solto num email. É um documento de trabalho — para tomares uma decisão, ou para servires de base à conversa com qualquer outro mediador.</p>
+    
+    <!-- Sample report mockup -->
+    <div class="report-mockup">
+      <div class="report-header">
+        <div>
+          <div class="report-id">Relatório Nº 247 · 28 ABR 2026 · Linda-a-Velha</div>
+          <h3 class="report-title">Apartamento T3 · Rua das Camélias</h3>
+        </div>
+        <div class="report-tag">Exemplo · Anonimizado</div>
+      </div>
+      
+      <!-- Scenarios -->
+      <h4 class="report-section-title">Os três cenários de preço</h4>
+      <div class="scenarios">
+        <div class="scenario">
+          <div class="scenario-label">Cenário 1 · Rápido</div>
+          <div class="scenario-name">Vender em 60 dias</div>
+          <div class="scenario-price">295.000 €</div>
+          <div class="scenario-time">Tempo médio estimado: <strong>45–60 dias</strong></div>
+          <div class="scenario-bar"><div class="scenario-bar-fill" style="width: 92%;"></div></div>
+          <div class="scenario-prob">Probabilidade de venda: 92%</div>
+        </div>
+        <div class="scenario recommended">
+          <div class="scenario-label">Cenário 2 · Equilibrado</div>
+          <div class="scenario-name">Vender bem, sem pressa</div>
+          <div class="scenario-price">315.000 €</div>
+          <div class="scenario-time">Tempo médio estimado: <strong>75–90 dias</strong></div>
+          <div class="scenario-bar"><div class="scenario-bar-fill" style="width: 78%;"></div></div>
+          <div class="scenario-prob">Probabilidade de venda: 78%</div>
+        </div>
+        <div class="scenario">
+          <div class="scenario-label">Cenário 3 · Aspiracional</div>
+          <div class="scenario-name">Topo de mercado</div>
+          <div class="scenario-price">335.000 €</div>
+          <div class="scenario-time">Tempo médio estimado: <strong>120–180 dias</strong></div>
+          <div class="scenario-bar"><div class="scenario-bar-fill" style="width: 42%;"></div></div>
+          <div class="scenario-prob">Probabilidade de venda: 42%</div>
+        </div>
+      </div>
+      
+      <!-- Comparables -->
+      <h4 class="report-section-title">Os comparáveis que sustentam o intervalo</h4>
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Endereço</th>
+            <th class="hide-sm">Tipo</th>
+            <th class="num">Área</th>
+            <th class="num hide-sm">Vendido</th>
+            <th class="num">PVP</th>
+            <th class="num hide-sm">€/m²</th>
+            <th class="num">Dias</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="addr">R. das Margaridas</td><td class="hide-sm">T3</td><td class="num">118 m²</td><td class="num hide-sm">Mar 2026</td><td class="num price">298.000 €</td><td class="num hide-sm">2.525</td><td class="num">52</td></tr>
+          <tr><td class="addr">Av. dos Bombeiros</td><td class="hide-sm">T3</td><td class="num">122 m²</td><td class="num hide-sm">Fev 2026</td><td class="num price">312.500 €</td><td class="num hide-sm">2.561</td><td class="num">68</td></tr>
+          <tr><td class="addr">R. do Outeiro</td><td class="hide-sm">T3</td><td class="num">115 m²</td><td class="num hide-sm">Jan 2026</td><td class="num price">325.000 €</td><td class="num hide-sm">2.826</td><td class="num">94</td></tr>
+          <tr><td class="addr">R. das Tílias</td><td class="hide-sm">T3</td><td class="num">120 m²</td><td class="num hide-sm">Dez 2025</td><td class="num price">305.000 €</td><td class="num hide-sm">2.541</td><td class="num">73</td></tr>
+          <tr><td class="addr">Largo da Igreja</td><td class="hide-sm">T3</td><td class="num">126 m²</td><td class="num hide-sm">Nov 2025</td><td class="num price">340.000 €</td><td class="num hide-sm">2.698</td><td class="num">142</td></tr>
+        </tbody>
+      </table>
+      
+      <!-- Recommendations -->
+      <h4 class="report-section-title">Cinco intervenções com retorno mensurável</h4>
+      <div class="recommendations">
+        <ul>
+          <li><span>Pintura completa em tons neutros</span><span class="impact">+8.000 € · invest. ~2.500 €</span></li>
+          <li><span>Substituição da iluminação principal</span><span class="impact">+3.500 € · invest. ~600 €</span></li>
+          <li><span>Reparação de fissuras na varanda</span><span class="impact">+5.000 € · invest. ~800 €</span></li>
+          <li><span>Property Film + sessão de fotografia profissional</span><span class="impact">−18 dias no mercado</span></li>
+          <li><span>Home staging ligeiro (3 divisões principais)</span><span class="impact">+6.000 € · invest. ~1.200 €</span></li>
+        </ul>
+      </div>
+      
+      <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 14px; color: var(--brown); border-top: 1px solid var(--rule); padding-top: 16px; margin-top: 16px;">Relatório completo inclui ainda: análise de absorção da zona, perfil do comprador-tipo, cronograma sugerido de venda, e checklist legal pré-CPCV.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIAL ============ -->
+<section class="testimonial">
+  <div class="testimonial-grid">
+    <div class="test-image"></div>
+    <div>
+      <div class="section-label">— Caso real</div>
+      <div class="test-quote-mark">"</div>
+      <p class="test-quote">Pediram-me <em>358.000 €</em> noutra mediadora. Vendi por 332.000 € em sete semanas. A diferença foi não ter ficado seis meses no mercado a queimar a casa.</p>
+      <div class="test-attrib">
+        <div>
+          <div class="test-name">Margarida Silveira</div>
+          <div class="test-where">T3 · Carnaxide · Janeiro 2026</div>
+        </div>
+        <div class="test-result">
+          <div class="test-result-num">49 dias</div>
+          <div class="test-result-label">do anúncio à escritura</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FORM ============ -->
+<section class="form-section full dark" id="form">
+  <div class="form-inner">
+    <div class="form-head">
+      <div class="section-label" style="justify-content: center; color: var(--terracotta);">— Começar agora</div>
+      <h2 class="form-title">A tua avaliação<br>em <em>quatro passos</em>.</h2>
+      <p class="form-deck">Leva cerca de quatro minutos. Recebes confirmação imediata e o relatório em 24 horas.</p>
+    </div>
+    
+    <!-- Stepper -->
+    <div class="stepper">
+      <div class="step-dot done"><span>1</span></div>
+      <div class="step-dot active"><span>2</span></div>
+      <div class="step-dot"><span>3</span></div>
+      <div class="step-dot"><span>4</span></div>
+    </div>
+    
+    <!-- Form card (showing step 2 as example) -->
+    <div class="form-card">
+      <div class="form-step-label">Passo 2 de 4</div>
+      <h3 class="form-step-title">Conta-nos sobre a <em>casa</em>.</h3>
+      
+      <div class="field">
+        <label>Tipologia</label>
+        <div class="chips">
+          <div class="chip">T0</div>
+          <div class="chip">T1</div>
+          <div class="chip">T2</div>
+          <div class="chip selected">T3</div>
+          <div class="chip">T4</div>
+          <div class="chip">T5+</div>
+          <div class="chip">Moradia</div>
+        </div>
+      </div>
+      
+      <div class="row-2">
+        <div class="field">
+          <label>Área bruta privativa (m²)</label>
+          <input type="number" placeholder="Ex.: 118" value="120">
+        </div>
+        <div class="field">
+          <label>Ano de construção</label>
+          <input type="number" placeholder="Ex.: 2005" value="2003">
+        </div>
+      </div>
+      
+      <div class="field">
+        <label>Estado de conservação</label>
+        <select>
+          <option>Excelente — pronto a habitar</option>
+          <option selected>Bom — pequenas melhorias possíveis</option>
+          <option>Razoável — necessita renovação</option>
+          <option>Para recuperar</option>
+        </select>
+      </div>
+      
+      <div class="field">
+        <label>Características relevantes (selecciona todas)</label>
+        <div class="chips">
+          <div class="chip selected">Varanda</div>
+          <div class="chip selected">Estacionamento</div>
+          <div class="chip">Arrecadação</div>
+          <div class="chip selected">Vista desafogada</div>
+          <div class="chip">Elevador</div>
+          <div class="chip">Piscina</div>
+          <div class="chip">Jardim privado</div>
+        </div>
+      </div>
+      
+      <div class="form-actions">
+        <a href="#" class="btn btn-back">Voltar</a>
+        <a href="#" class="btn btn-primary">Continuar</a>
+      </div>
+    </div>
+    
+    <p class="privacy">🔒 Dados protegidos · A tua morada nunca é publicada · Cancelas quando quiseres</p>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section>
+  <div class="section-label">— Perguntas honestas</div>
+  <h2 class="section-title">O que normalmente <em>se pergunta sem perguntar</em>.</h2>
+  
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q">A avaliação é mesmo grátis? Onde está a vossa margem?</div>
+      <div class="faq-a">É grátis e não depende de angariação. A nossa lógica: se o relatório for bom, alguns vendedores vão querer trabalhar connosco. Se não quiserem, ficam com um documento útil — e nós ficamos com a reputação. Não é caridade, é estratégia de longo prazo.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Qual é a diferença para a avaliação do Idealista ou Casa Sapo?</div>
+      <div class="faq-a">As avaliações automáticas dos portais usam apenas os anúncios públicos — não os preços de fecho. Resultado: erro médio de ±15-20% e zero contexto. Nós usamos preços de IMT (transações reais), feeds de Casafari e o nosso próprio CRM. Mais importante: damos-te três cenários, não um número solto.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Sou obrigado a usar a Terraǝ depois?</div>
+      <div class="faq-a">Não. O relatório é teu. Podes usá-lo para te decidires, para confrontares outras avaliações, ou para sustentares conversas com mediadores. Se quiseres trabalhar connosco depois, é um próximo passo — não é parte deste.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Como tratam os dados da minha casa?</div>
+      <div class="faq-a">A morada exacta nunca é publicada nem partilhada. Os dados ficam guardados no nosso CRM (EgoRealEstate, hospedado em servidores europeus). Se quiseres apagar tudo, basta um email — fazemos no próprio dia.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">E se a minha casa for atípica? Moradia única, prédio histórico, etc.</div>
+      <div class="faq-a">Casas atípicas requerem trabalho adicional — possivelmente uma visita presencial. Nestes casos, o consultor entra em contacto antes das 24h para acordar o método. Continua a ser sem custo, mas pode demorar mais 24 a 48h.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Os vossos preços tendem a ser altos ou baixos?</div>
+      <div class="faq-a">Tendem a ser realistas — o que muitas vezes é mais baixo que outras mediadoras te vão dizer. A explicação é simples: ganhamos quando a casa vende, não quando é angariada. Sobreestimar custa-nos a nós tanto como a ti.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="full" style="padding: 0;">
+  <div style="background: var(--paper); padding: 120px 40px; text-align: center;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <h2 style="font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(36px, 5vw, 64px); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 24px;">Quanto vale, <em style="font-style: italic; color: var(--terracotta);">na verdade</em>?</h2>
+      <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 19px; color: var(--brown); margin-bottom: 40px; max-width: 50ch; margin-left: auto; margin-right: auto;">Quatro minutos para preencher. Vinte e quatro horas para receber. Zero compromisso depois.</p>
+      <a href="#form" class="btn btn-primary btn-large">Começar a minha avaliação</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Terraǝ</div>
+      <p class="footer-tag">Transformamos cada decisão imobiliária numa experiência de excelência. Mediação, crédito e investimento — em três áreas que se alimentam mutuamente.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Comprar</h4>
+      <a href="#">Empreendimentos</a>
+      <a href="#">Casas selecionadas</a>
+      <a href="#">Simulador de crédito</a>
+      <a href="#">Lista de espera VFX</a>
+    </div>
+    <div class="footer-col">
+      <h4>Vender</h4>
+      <a href="#">Avaliação em 24h</a>
+      <a href="#">Property Films</a>
+      <a href="#">Diagnóstico de Venda</a>
+    </div>
+    <div class="footer-col">
+      <h4>Investir</h4>
+      <a href="#">Estrutura SPV</a>
+      <a href="#">Próximos projetos</a>
+      <a href="#">Track record</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 Terraǝ · AMI 00000</div>
+    <div>Linda-a-Velha · Lisboa · Portugal</div>
+  </div>
+</footer>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => item.classList.toggle('open'));
+  });
+  
+  // Chips toggle (visual only)
+  document.querySelectorAll('.chips').forEach(group => {
+    const isMulti = group.parentElement.querySelector('label')?.textContent.includes('Características');
+    group.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        if (!isMulti) {
+          group.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+        }
+        chip.classList.toggle('selected');
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
