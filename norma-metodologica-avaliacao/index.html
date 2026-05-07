@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Metodologia — Terrae</title>
+<meta name="description" content="A metodologia de avaliação de imóveis aplicada pela Terrae, alinhada com as European Valuation Standards 2025, as International Valuation Standards e o RICS Red Book Global." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ink: #0F1410;
+  --ink-soft: #2A2D28;
+  --paper: #F5F2EA;
+  --paper-warm: #FAF8F2;
+  --paper-shade: #EDE8DA;
+  --terra: #2B3A2F;
+  --terra-deep: #1A2620;
+  --terra-soft: #4A5D4F;
+  --ochre: #B8865A;
+  --rule: #D4D0C0;
+  --rule-soft: #E8E2D0;
+  --muted: #6B6B65;
+  --muted-soft: #8A8B85;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--paper);
+  font-feature-settings: "kern" 1, "liga" 1, "onum" 1;
+}
+
+/* ============== TIPOGRAFIA ============== */
+
+.display {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 144;
+}
+
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terra);
+}
+
+.serif-italic {
+  font-family: 'Newsreader', Georgia, serif;
+  font-style: italic;
+}
+
+/* ============== NAVEGAÇÃO ============== */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(245, 242, 234, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 14px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  text-decoration: none;
+  font-variation-settings: "opsz" 144;
+}
+
+.brand-mark {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--terra);
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+  margin-bottom: 2px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.nav-links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--terra); }
+
+.nav-links a.active {
+  color: var(--terra);
+  position: relative;
+}
+
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  bottom: -22px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--terra);
+}
+
+@media (max-width: 768px) {
+  .nav-inner { padding: 12px 20px; }
+  .brand { font-size: 18px; }
+  .nav-links { gap: 16px; }
+  .nav-links a { font-size: 10px; }
+  .nav-links a:not(.active) { display: none; }
+}
+
+/* ============== HERO ============== */
+
+.hero {
+  padding: 160px 32px 100px;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+}
+
+.hero-eyebrow {
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.hero-eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: var(--terra);
+}
+
+.hero-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(48px, 7vw, 92px);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+  margin-bottom: 0;
+}
+
+.hero-title em {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+  color: var(--terra);
+}
+
+.hero-lede {
+  font-family: 'Newsreader', serif;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 460px;
+}
+
+.hero-lede em {
+  font-style: italic;
+  color: var(--terra);
+}
+
+.hero-meta {
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 36px;
+}
+
+.hero-meta-item {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.hero-meta-item strong {
+  display: block;
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 4px;
+}
+
+@media (max-width: 900px) {
+  .hero { padding: 120px 20px 60px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero-lede { font-size: 17px; max-width: 100%; }
+}
+
+/* ============== SECÇÕES ============== */
+
+.section {
+  padding: 100px 32px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.section-header {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 60px;
+  margin-bottom: 72px;
+  align-items: start;
+}
+
+.section-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--terra);
+  padding-top: 12px;
+  border-top: 1px solid var(--terra);
+}
+
+.section-num em {
+  display: block;
+  font-style: normal;
+  font-size: 11px;
+  margin-top: 8px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+.section-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 350;
+  font-size: clamp(34px, 4.5vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 24px;
+  font-variation-settings: "opsz" 144;
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--terra);
+}
+
+.section-intro {
+  font-family: 'Newsreader', serif;
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 640px;
+}
+
+@media (max-width: 768px) {
+  .section { padding: 60px 20px; }
+  .section-header { grid-template-columns: 1fr; gap: 16px; margin-bottom: 40px; }
+  .section-num { padding-top: 10px; }
+  .section-intro { font-size: 17px; }
+}
+
+/* ============== SECÇÃO O PROBLEMA ============== */
+
+.problem {
+  background: var(--paper-warm);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 100px 32px;
+}
+
+.problem-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.problem-quote {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(28px, 3.6vw, 44px);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  font-variation-settings: "opsz" 144;
+}
+
+.problem-quote em {
+  font-style: italic;
+  color: var(--terra);
+}
+
+.problem-attr {
+  text-align: center;
+  margin-top: 36px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+@media (max-width: 768px) {
+  .problem { padding: 60px 20px; }
+}
+
+/* ============== STANDARDS CARDS ============== */
+
+.standards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.standard {
+  background: var(--paper-warm);
+  border: 1px solid var(--rule);
+  padding: 36px 32px 40px;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.standard:hover {
+  border-color: var(--terra);
+  transform: translateY(-2px);
+}
+
+.standard-num {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 64px;
+  color: var(--rule-soft);
+  line-height: 1;
+}
+
+.standard-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 16px;
+  display: inline-block;
+  padding: 4px 10px;
+  background: var(--paper-shade);
+  border-radius: 2px;
+}
+
+.standard-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 8px;
+  letter-spacing: -0.015em;
+  font-variation-settings: "opsz" 144;
+}
+
+.standard-publisher {
+  font-family: 'Newsreader', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.standard-rule {
+  height: 1px;
+  background: var(--rule);
+  margin: 24px 0;
+}
+
+.standard-body {
+  font-family: 'Newsreader', serif;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+
+.standard-effective {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule-soft);
+}
+
+.standard-effective strong { color: var(--terra); font-weight: 500; }
+
+@media (max-width: 900px) {
+  .standards-grid { grid-template-columns: 1fr; gap: 20px; }
+}
+
+/* ============== MÉTODOS ============== */
+
+.methods {
+  background: var(--paper-warm);
+  border-top: 1px solid var(--rule);
+  padding: 100px 0;
+  margin: 0;
+}
+
+.methods-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.method {
+  display: grid;
+  grid-template-columns: 80px 1fr 320px;
+  gap: 60px;
+  padding: 56px 0;
+  border-top: 1px solid var(--rule);
+  align-items: start;
+}
+
+.method:last-child { border-bottom: 1px solid var(--rule); }
+
+.method-num {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 56px;
+  color: var(--terra);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 144;
+}
+
+.method-content h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 4px;
+  letter-spacing: -0.015em;
+  font-variation-settings: "opsz" 144;
+}
+
+.method-en {
+  font-family: 'Newsreader', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.method-question {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 1.4;
+  color: var(--terra);
+  margin-bottom: 20px;
+  padding-left: 20px;
+  border-left: 2px solid var(--terra);
+  font-variation-settings: "opsz" 144;
+}
+
+.method-body {
+  font-family: 'Newsreader', serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+}
+
+.method-citation {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-transform: uppercase;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule-soft);
+}
+
+.method-weight {
+  background: var(--paper);
+  padding: 24px;
+  border: 1px solid var(--rule);
+}
+
+.method-weight-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 16px;
+}
+
+.weight-bar {
+  display: grid;
+  grid-template-columns: 100px 1fr 50px;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.weight-label {
+  font-family: 'Newsreader', serif;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+.weight-track {
+  height: 6px;
+  background: var(--rule-soft);
+  position: relative;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.weight-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: var(--terra);
+  border-radius: 3px;
+}
+
+.weight-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--terra);
+  font-weight: 500;
+  text-align: right;
+}
+
+@media (max-width: 900px) {
+  .methods { padding: 60px 0; }
+  .methods-inner { padding: 0 20px; }
+  .method { grid-template-columns: 1fr; gap: 20px; padding: 40px 0; }
+  .method-num { font-size: 40px; }
+  .method-content h3 { font-size: 26px; }
+  .method-question { font-size: 18px; }
+}
+
+/* ============== RECONCILIAÇÃO ============== */
+
+.reconcile {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.reconcile-text {
+  font-family: 'Newsreader', serif;
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+.reconcile-text p { margin-bottom: 20px; }
+.reconcile-text p:last-child { margin-bottom: 0; }
+
+.reconcile-text strong {
+  color: var(--terra);
+  font-weight: 500;
+}
+
+.confidence {
+  background: var(--paper-warm);
+  padding: 36px;
+  border: 1px solid var(--rule);
+}
+
+.confidence-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--ink);
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.confidence-sub {
+  font-family: 'Newsreader', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+.confidence-band {
+  padding: 18px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.confidence-band:last-child { border-bottom: 1px solid var(--rule); }
+
+.confidence-band-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.confidence-level {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.confidence-range {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--terra);
+}
+
+.confidence-cond {
+  font-family: 'Newsreader', serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .reconcile { grid-template-columns: 1fr; gap: 40px; }
+  .confidence { padding: 28px; }
+}
+
+/* ============== HIERARQUIA DE FONTES ============== */
+
+.sources-table {
+  margin-top: 40px;
+  border-top: 1px solid var(--rule);
+}
+
+.source-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 2fr;
+  gap: 32px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+
+.source-tier {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 28px;
+  color: var(--terra);
+  font-variation-settings: "opsz" 144;
+}
+
+.source-type {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 17px;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.source-examples {
+  font-family: 'Newsreader', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .source-row { grid-template-columns: 50px 1fr; gap: 16px; padding: 18px 0; }
+  .source-tier { font-size: 22px; }
+  .source-examples { grid-column: 2; font-size: 14px; }
+}
+
+/* ============== TRANSPARÊNCIA / SCOPE ============== */
+
+.transparency {
+  background: var(--terra);
+  color: var(--paper);
+  padding: 100px 32px;
+  margin-top: 0;
+}
+
+.transparency-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.transparency .eyebrow {
+  color: var(--paper-shade);
+}
+
+.transparency-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 350;
+  font-size: clamp(32px, 4.2vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: var(--paper);
+  margin: 24px 0 48px;
+  font-variation-settings: "opsz" 144;
+  max-width: 900px;
+}
+
+.transparency-title em {
+  font-style: italic;
+  color: var(--paper-shade);
+  opacity: 0.7;
+}
+
+.transparency-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin-top: 48px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(245, 242, 234, 0.2);
+}
+
+.transparency-col h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--paper-shade);
+  margin-bottom: 18px;
+  opacity: 0.8;
+}
+
+.transparency-col p {
+  font-family: 'Newsreader', serif;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--paper);
+}
+
+.transparency-col strong {
+  color: var(--paper);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .transparency { padding: 60px 20px; }
+  .transparency-grid { grid-template-columns: 1fr; gap: 32px; }
+}
+
+/* ============== RELATÓRIO ESTRUTURA ============== */
+
+.report-structure {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  margin-top: 40px;
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+}
+
+.report-item {
+  padding: 28px 32px;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper-warm);
+}
+
+.report-item-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--terra);
+  margin-bottom: 8px;
+}
+
+.report-item h4 {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--ink);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.report-item p {
+  font-family: 'Newsreader', serif;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+@media (max-width: 768px) {
+  .report-structure { grid-template-columns: 1fr; }
+}
+
+/* ============== DOWNLOAD CTA ============== */
+
+.cta {
+  background: var(--paper-warm);
+  border-top: 1px solid var(--rule);
+  padding: 100px 32px;
+}
+
+.cta-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.cta-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 350;
+  font-size: clamp(28px, 3.6vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 20px;
+  font-variation-settings: "opsz" 144;
+}
+
+.cta-title em {
+  font-style: italic;
+  color: var(--terra);
+}
+
+.cta-desc {
+  font-family: 'Newsreader', serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.download-card {
+  background: var(--paper);
+  padding: 36px;
+  border: 1px solid var(--terra);
+  position: relative;
+}
+
+.download-card-badge {
+  position: absolute;
+  top: -12px;
+  left: 24px;
+  background: var(--terra);
+  color: var(--paper);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  font-weight: 500;
+}
+
+.download-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-top: 16px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.download-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 6px;
+  letter-spacing: -0.015em;
+}
+
+.download-sub {
+  font-family: 'Newsreader', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+.download-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 24px;
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: all 0.25s;
+}
+
+.download-button:hover {
+  background: var(--terra);
+  transform: translateY(-1px);
+}
+
+.download-button svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.25s;
+}
+
+.download-button:hover svg { transform: translateY(2px); }
+
+.download-stats {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule-soft);
+  display: flex;
+  gap: 28px;
+}
+
+.stat {
+  font-family: 'Newsreader', serif;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.stat strong {
+  display: block;
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--terra);
+  font-style: italic;
+}
+
+@media (max-width: 900px) {
+  .cta { padding: 60px 20px; }
+  .cta-inner { grid-template-columns: 1fr; gap: 40px; }
+  .download-card { padding: 28px; }
+}
+
+/* ============== FOOTER ============== */
+
+.footer {
+  background: var(--ink);
+  color: var(--paper-shade);
+  padding: 60px 32px 36px;
+}
+
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 60px;
+}
+
+.footer-brand {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 32px;
+  color: var(--paper);
+  letter-spacing: 0.02em;
+  margin-bottom: 16px;
+  font-variation-settings: "opsz" 144;
+}
+
+.footer-tag {
+  font-family: 'Newsreader', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--muted-soft);
+  max-width: 360px;
+  line-height: 1.55;
+}
+
+.footer h5 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--paper);
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+
+.footer ul { list-style: none; }
+
+.footer li {
+  font-family: 'Newsreader', serif;
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--muted-soft);
+}
+
+.footer-bottom {
+  max-width: 1280px;
+  margin: 60px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid rgba(245, 242, 234, 0.1);
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--muted-soft);
+}
+
+@media (max-width: 768px) {
+  .footer { padding: 40px 20px 28px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; gap: 12px; }
+}
+
+/* ============== ANIMAÇÕES ============== */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in.delay-1 { transition-delay: 0.1s; }
+.fade-in.delay-2 { transition-delay: 0.2s; }
+.fade-in.delay-3 { transition-delay: 0.3s; }
+
+</style>
+</head>
+<body>
+
+<!-- ============== NAVEGAÇÃO ============== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="brand"><span class="brand-mark"></span>Terrae</a>
+    <div class="nav-links">
+      <a href="/">Início</a>
+      <a href="/serviços">Serviços</a>
+      <a href="#" class="active">Metodologia</a>
+      <a href="/equipa">Equipa</a>
+      <a href="/contacto">Contacto</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============== HERO ============== -->
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow eyebrow">Norma Metodológica · Versão 1.0</div>
+      <h1 class="hero-title fade-in">
+        O valor de um<br>imóvel <em>defende-se</em><br>com método.
+      </h1>
+    </div>
+    <div class="fade-in delay-2">
+      <p class="hero-lede">
+        Toda a estimativa de valor que produzimos é construída sobre os mesmos standards técnicos que regem a prática dos peritos certificados em Portugal e na União Europeia.
+      </p>
+      <p class="hero-lede" style="margin-top: 16px;">
+        Esta página explica <em>como</em>.
+      </p>
+
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <strong>Aderência</strong>
+          EVS 2025 · IVS 2025<br>
+          RICS Red Book 2025
+        </div>
+        <div class="hero-meta-item">
+          <strong>Quadro Nacional</strong>
+          Lei 153/2015<br>
+          Reg. CMVM 7/2023
+        </div>
+        <div class="hero-meta-item">
+          <strong>Última revisão</strong>
+          Maio 2026
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== O PROBLEMA ============== -->
+<section class="problem">
+  <div class="problem-inner">
+    <p class="problem-quote fade-in">
+      A maioria das estimativas de valor produzidas no mercado imobiliário português não tem método explícito, não tem fontes documentadas, e <em>não tem capacidade de auditoria</em>.
+    </p>
+    <p class="problem-attr fade-in delay-1">— A premissa que justifica esta Norma</p>
+  </div>
+</section>
+
+<!-- ============== TRÊS STANDARDS ============== -->
+<section class="section" id="standards">
+  <div class="section-header">
+    <div class="section-num">
+      § 01
+      <em>Standards técnicos</em>
+    </div>
+    <div>
+      <h2 class="section-title fade-in">Três normas internacionais.<br><em>Uma metodologia coerente.</em></h2>
+      <p class="section-intro fade-in delay-1">
+        A avaliação imobiliária profissional rege-se, a nível europeu e global, por três corpos normativos que convergem nos seus princípios fundamentais. A Terrae adopta voluntariamente os três como referência da sua prática.
+      </p>
+    </div>
+  </div>
+
+  <div class="standards-grid">
+
+    <article class="standard fade-in">
+      <div class="standard-num">i</div>
+      <span class="standard-tag">Espinha dorsal</span>
+      <h3 class="standard-name">European Valuation Standards</h3>
+      <p class="standard-publisher">TEGoVA — The European Group of Valuers' Associations</p>
+      <div class="standard-rule"></div>
+      <p class="standard-body">
+        O "Blue Book" europeu. Reconhecido pelo Banco Central Europeu, ancorado no quadro jurídico da União Europeia. Define com clareza os três métodos de avaliação e a obrigatoriedade de reconciliação. É a referência metodológica primária da Terrae.
+      </p>
+      <p class="standard-effective">
+        <strong>EVS 2025</strong> · 10ª edição<br>Efectiva desde 1 Janeiro 2025
+      </p>
+    </article>
+
+    <article class="standard fade-in delay-1">
+      <div class="standard-num">ii</div>
+      <span class="standard-tag">Princípios universais</span>
+      <h3 class="standard-name">International Valuation Standards</h3>
+      <p class="standard-publisher">IVSC — International Valuation Standards Council</p>
+      <div class="standard-rule"></div>
+      <p class="standard-body">
+        A referência global de avaliação, adoptada por cerca de cem organizações profissionais em todo o mundo. Funciona como o quadro universal de princípios sobre o qual as EVS e o RICS Red Book se constroem. Define bases de valor, abordagens, dados e reporting.
+      </p>
+      <p class="standard-effective">
+        <strong>IVS 2025</strong><br>Efectivas a 31 Janeiro 2025
+      </p>
+    </article>
+
+    <article class="standard fade-in delay-2">
+      <div class="standard-num">iii</div>
+      <span class="standard-tag">Padrão premium</span>
+      <h3 class="standard-name">RICS Valuation Global Standards</h3>
+      <p class="standard-publisher">Royal Institution of Chartered Surveyors</p>
+      <div class="standard-rule"></div>
+      <p class="standard-body">
+        Conhecido como Red Book. Reconhecido como o standard mais exigente em matéria de processo, governance e ética da avaliação, sobretudo em contexto institucional, transacções cross-border e segmentos premium. Aplicado pela Terrae nos princípios profissionais e nos requisitos de reporting.
+      </p>
+      <p class="standard-effective">
+        <strong>Red Book 2025</strong><br>Efectivo a 31 Janeiro 2025
+      </p>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============== TRÊS MÉTODOS ============== -->
+<section class="methods" id="metodos">
+  <div class="methods-inner">
+    <div class="section-header">
+      <div class="section-num">
+        § 02
+        <em>Os três métodos</em>
+      </div>
+      <div>
+        <h2 class="section-title fade-in">Cada método responde a uma <em>pergunta diferente</em>.</h2>
+        <p class="section-intro fade-in delay-1">
+          Os standards internacionais reconhecem três métodos de avaliação. A Terrae aplica os três sempre que a evidência o permita — porque a triangulação dos resultados é a melhor protecção contra o erro.
+        </p>
+      </div>
+    </div>
+
+    <article class="method fade-in">
+      <div class="method-num">i</div>
+      <div class="method-content">
+        <h3>Método Comparativo</h3>
+        <p class="method-en">Market Approach</p>
+        <p class="method-question">Por quanto é que imóveis parecidos se venderam?</p>
+        <p class="method-body">
+          A premissa é simples e poderosa: se um imóvel substancialmente semelhante foi efectivamente transaccionado por um determinado preço numa data próxima, esse preço é a melhor evidência disponível do valor de mercado. O método identifica comparáveis, ajusta-os por diferenças concretas (área, estado, andar, exposição, certificação energética) e calcula o valor unitário implícito.
+        </p>
+        <p class="method-citation">IVS 103 §20 · EVS Methodology · RICS VPS 3</p>
+      </div>
+      <div class="method-weight">
+        <div class="method-weight-label">Peso típico — apartamento residencial</div>
+        <div class="weight-bar">
+          <div class="weight-label">Comparativo</div>
+          <div class="weight-track"><div class="weight-fill" style="width: 65%;"></div></div>
+          <div class="weight-value">65%</div>
+        </div>
+        <div class="weight-bar">
+          <div class="weight-label">Rendimento</div>
+          <div class="weight-track"><div class="weight-fill" style="width: 25%; opacity: 0.5;"></div></div>
+          <div class="weight-value">25%</div>
+        </div>
+        <div class="weight-bar">
+          <div class="weight-label">Custo</div>
+          <div class="weight-track"><div class="weight-fill" style="width: 10%; opacity: 0.3;"></div></div>
+          <div class="weight-value">10%</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="method fade-in">
+      <div class="method-num">ii</div>
+      <div class="method-content">
+        <h3>Método do Rendimento</h3>
+        <p class="method-en">Income Approach</p>
+        <p class="method-question">Quanto pagaria um investidor racional pelo rendimento que isto gera?</p>
+        <p class="method-body">
+          Estima o valor a partir da expectativa de rendimento futuro. A premissa é económica: ninguém racional paga mais por um activo do que o valor presente dos rendimentos que esse activo produzirá. Aplica-se em duas variantes — capitalização directa (renda anualizada dividida por yield) e DCF (projecção plurianual descontada). Funciona como validação económica de fundo, mesmo para imóveis não destinados a arrendamento.
+        </p>
+        <p class="method-citation">IVS 103 §30 · EVS Methodology · RICS VPS 3</p>
+      </div>
+      <div class="method-weight">
+        <div class="method-weight-label">Peso típico — imóvel de investimento</div>
+        <div class="weight-bar">
+          <div class="weight-label">Rendimento</div>
+          <div class="weight-track"><div class="weight-fill" style="width: 60%;"></div></div>
+          <div class="weight-value">60%</div>
+        </div>
+        <div class="weight-bar">
+          <div class="weight-label">Comparativo</div>
+          <div class="weight-track"><div class="weight-fill" style="width: 30%; opacity: 0.5;"></div></div>
+          <div class="weight-value">30%</div>
+        </div>
+        <div class="weight-bar">
+          <div class="weight-label">Custo</div>
+          <div class="weight-track"><div class="weight-fill" style="width: 10%; opacity: 0.3;"></div></div>
+          <div class="weight-value">10%</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="method fade-in">
+      <div class="method-num">iii</div>
+      <div class="method-content">
+        <h3>Método do Custo</h3>
+        <p class="method-en">Cost Approach</p>
+        <p class="method-question">Quanto custaria reproduzir isto a partir do zero?</p>
+        <p class="method-body">
+          Estima o valor a partir do custo de reposição, ajustado pela depreciação acumulada. A premissa, igualmente económica: ninguém racional paga mais por um imóvel usado do que custaria adquirir o terreno e construir um equivalente novo. Decompõe o cálculo em três componentes — valor do terreno, custo de reposição da construção, e depreciação física, funcional e económica. É frequentemente o método mais fiável para moradias, imóveis atípicos e activos para reabilitação.
+        </p>
+        <p class="method-citation">IVS 103 §40 · EVS Methodology · RICS VPS 3</p>
+      </div>
+      <div class="method-weight">
+        <div class="method-weight-label">Peso típico — moradia em zona ilíquida</div>
+        <div class="weight-bar">
+          <div class="weight-label">Custo</div>
+          <div class="weight-track"><div class="weight-fill" style="width: 50%;"></div></div>
+          <div class="weight-value">50%</div>
+        </div>
+        <div class="weight-bar">
+          <div class="weight-label">Comparativo</div>
+          <div class="weight-track"><div class="weight-fill" style="width: 30%; opacity: 0.5;"></div></div>
+          <div class="weight-value">30%</div>
+        </div>
+        <div class="weight-bar">
+          <div class="weight-label">Rendimento</div>
+          <div class="weight-track"><div class="weight-fill" style="width: 20%; opacity: 0.3;"></div></div>
+          <div class="weight-value">20%</div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============== RECONCILIAÇÃO ============== -->
+<section class="section" id="reconciliacao">
+  <div class="section-header">
+    <div class="section-num">
+      § 03
+      <em>Reconciliação</em>
+    </div>
+    <div>
+      <h2 class="section-title fade-in">A convergência dos métodos é, em si, <em>informação</em>.</h2>
+      <p class="section-intro fade-in delay-1">
+        Os três métodos produzem três estimativas distintas. A reconciliação é o processo pelo qual o avaliador, aplicando juízo profissional, integra essas três estimativas numa conclusão única — informada pela qualidade dos dados de cada método.
+      </p>
+    </div>
+  </div>
+
+  <div class="reconcile">
+    <div class="reconcile-text fade-in">
+      <p>
+        Quando os três métodos produzem estimativas próximas — tipicamente dentro de uma banda de ±5% em torno da mediana —, a convergência valida a estimativa final e permite comunicar elevada confiança no resultado.
+      </p>
+      <p>
+        Quando os métodos divergem, a divergência é diagnóstico. Comparativo significativamente acima do rendimento sugere mercado a precificar valorização futura. Rendimento de uso alternativo acima do comparativo sugere <strong>highest and best use diferente do uso actual</strong>. Custo abaixo do comparativo pode revelar comparáveis a inflacionar artificialmente o valor.
+      </p>
+      <p>
+        Em qualquer cenário de divergência material — superior a ±15% entre métodos —, o relatório inclui análise explícita da divergência, identificando a causa diagnosticada e o impacto no nível de confiança da estimativa final.
+      </p>
+    </div>
+
+    <div class="confidence fade-in delay-1">
+      <h4 class="confidence-title">Bandas de incerteza</h4>
+      <p class="confidence-sub">Cada estimativa é comunicada com banda associada, em função da convergência dos métodos.</p>
+
+      <div class="confidence-band">
+        <div class="confidence-band-head">
+          <span class="confidence-level">Confiança alta</span>
+          <span class="confidence-range">±5%</span>
+        </div>
+        <p class="confidence-cond">Múltiplos comparáveis recentes, convergência dos três métodos, mercado líquido.</p>
+      </div>
+
+      <div class="confidence-band">
+        <div class="confidence-band-head">
+          <span class="confidence-level">Confiança média</span>
+          <span class="confidence-range">±10%</span>
+        </div>
+        <p class="confidence-cond">Comparáveis suficientes mas não ideais, alguma divergência metodológica, mercado em transição.</p>
+      </div>
+
+      <div class="confidence-band">
+        <div class="confidence-band-head">
+          <span class="confidence-level">Confiança baixa</span>
+          <span class="confidence-range">±15-20%</span>
+        </div>
+        <p class="confidence-cond">Comparáveis escassos, divergência material, mercado ilíquido ou activo singular.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== HIERARQUIA DE FONTES ============== -->
+<section class="section" id="fontes" style="background: var(--paper-warm); max-width: 100%; padding-left: max(32px, calc(50% - 624px)); padding-right: max(32px, calc(50% - 624px)); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);">
+  <div class="section-header">
+    <div class="section-num">
+      § 04
+      <em>Fontes de dados</em>
+    </div>
+    <div>
+      <h2 class="section-title fade-in">Nem todas as fontes são <em>equivalentes</em>.</h2>
+      <p class="section-intro fade-in delay-1">
+        A qualidade de uma estimativa de valor é, antes de tudo, função da qualidade dos dados sobre os quais é construída. A Terrae estabelece uma hierarquia explícita das fontes admitidas, da mais fiável para a menos fiável.
+      </p>
+    </div>
+  </div>
+
+  <div class="sources-table">
+    <div class="source-row fade-in">
+      <div class="source-tier">i</div>
+      <div class="source-type">Transacções reais oficiais</div>
+      <div class="source-examples">INE (dados fiscais da Autoridade Tributária) · Escrituras públicas registadas</div>
+    </div>
+    <div class="source-row fade-in">
+      <div class="source-tier">ii</div>
+      <div class="source-type">Transacções reais profissionais</div>
+      <div class="source-examples">Confidencial Imobiliário (SIR) · Avaliações bancárias publicadas</div>
+    </div>
+    <div class="source-row fade-in">
+      <div class="source-tier">iii</div>
+      <div class="source-type">Ofertas activas de mercado</div>
+      <div class="source-examples">Idealista, Casafari, Imovirtual — preços pedidos, com aplicação de desconto de negociação</div>
+    </div>
+    <div class="source-row fade-in">
+      <div class="source-tier">iv</div>
+      <div class="source-type">Reportagem profissional</div>
+      <div class="source-examples">CBRE, Cushman &amp; Wakefield, JLL, Worx, Savills — análises de yields e dinâmicas</div>
+    </div>
+    <div class="source-row fade-in">
+      <div class="source-tier">v</div>
+      <div class="source-type">Reportagem secundária</div>
+      <div class="source-examples">Imprensa imobiliária especializada · Rankings setoriais</div>
+    </div>
+    <div class="source-row fade-in">
+      <div class="source-tier">vi</div>
+      <div class="source-type">Conhecimento de mercado</div>
+      <div class="source-examples">Conhecimento do consultor local · Contactos de mercado, com cepticismo profissional</div>
+    </div>
+  </div>
+
+  <p style="font-family: 'Newsreader', serif; font-style: italic; font-size: 16px; color: var(--muted); margin-top: 32px; max-width: 800px; line-height: 1.55;">
+    A regra é que as estimativas de valor devem ser ancoradas, sempre que possível, em dados de Nível i ou ii. Dados de níveis inferiores são utilizados como complemento, contexto ou validação qualitativa — nunca como base directa de estimativa.
+  </p>
+</section>
+
+<!-- ============== ESTRUTURA DO RELATÓRIO ============== -->
+<section class="section" id="relatorio">
+  <div class="section-header">
+    <div class="section-num">
+      § 05
+      <em>Reporting</em>
+    </div>
+    <div>
+      <h2 class="section-title fade-in">O que cada relatório <em>contém</em>.</h2>
+      <p class="section-intro fade-in delay-1">
+        Em conformidade com IVS 106, EVS 5 e RICS VPS 6, todo o relatório de avaliação Terrae é auto-suficiente: um leitor competente que receba apenas o relatório consegue compreender o método aplicado, as fontes utilizadas, os pressupostos assumidos e o raciocínio que sustenta a estimativa final.
+      </p>
+    </div>
+  </div>
+
+  <div class="report-structure">
+    <div class="report-item fade-in">
+      <div class="report-item-num">01</div>
+      <h4>Identificação e finalidade</h4>
+      <p>Cliente, datas, avaliador responsável, identificação registral, finalidade da avaliação e base de valor aplicada.</p>
+    </div>
+    <div class="report-item fade-in">
+      <div class="report-item-num">02</div>
+      <h4>Pressupostos e pressupostos especiais</h4>
+      <p>Lista exaustiva dos pressupostos assumidos, com fundamentação. Pressupostos especiais identificados com impacto quantificado.</p>
+    </div>
+    <div class="report-item fade-in">
+      <div class="report-item-num">03</div>
+      <h4>Descrição do imóvel</h4>
+      <p>Localização, tipologia, áreas, estado de conservação, características relevantes para o valor, registo fotográfico.</p>
+    </div>
+    <div class="report-item fade-in">
+      <div class="report-item-num">04</div>
+      <h4>Análise de mercado</h4>
+      <p>Caracterização da zona de mercado, dinâmicas de procura e oferta, evolução de preços, tempo médio de absorção.</p>
+    </div>
+    <div class="report-item fade-in">
+      <div class="report-item-num">05</div>
+      <h4>Aplicação dos métodos</h4>
+      <p>Cada método aplicado tem secção própria, com identificação das fontes, ajustamentos e estimativa intermédia.</p>
+    </div>
+    <div class="report-item fade-in">
+      <div class="report-item-num">06</div>
+      <h4>Reconciliação</h4>
+      <p>Ponderação aplicada e fundamentação. Em divergência material, análise explícita da causa diagnosticada.</p>
+    </div>
+    <div class="report-item fade-in">
+      <div class="report-item-num">07</div>
+      <h4>Conclusão e banda de incerteza</h4>
+      <p>Estimativa de valor pontual e banda de incerteza, com identificação do nível de confiança aplicável.</p>
+    </div>
+    <div class="report-item fade-in">
+      <div class="report-item-num">08</div>
+      <h4>Anexo de evidência</h4>
+      <p>Tabela de comparáveis utilizados, documentos relevantes, e referenciação metodológica completa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== TRANSPARÊNCIA SOBRE ÂMBITO ============== -->
+<section class="transparency">
+  <div class="transparency-inner">
+    <div class="eyebrow">§ 06 — Transparência sobre o âmbito</div>
+    <h2 class="transparency-title">
+      Adoptamos os standards. Não nos arrogamos a <em>certificação</em>.
+    </h2>
+
+    <div class="transparency-grid">
+      <div class="transparency-col">
+        <h4>O que esta Norma é</h4>
+        <p>
+          A adopção voluntária, pela Terrae, dos mesmos standards técnicos que regem a prática dos peritos certificados em Portugal e na União Europeia: <strong>European Valuation Standards 2025</strong>, <strong>International Valuation Standards 2025</strong>, e <strong>RICS Red Book 2025</strong>.
+        </p>
+        <p style="margin-top: 16px;">
+          Cada estimativa Terrae aplica os métodos consagrados, segue as regras de reconciliação, utiliza as categorias de fontes admitidas e produz um relatório com a estrutura exigida pelos standards.
+        </p>
+      </div>
+      <div class="transparency-col">
+        <h4>O que esta Norma não é</h4>
+        <p>
+          A actividade de <strong>Perito Avaliador de Imóveis</strong> ao serviço de entidades do sistema financeiro nacional é regulada pela Lei n.º 153/2015 e exige registo prévio na CMVM, qualificações técnicas formais e seguro de responsabilidade civil profissional.
+        </p>
+        <p style="margin-top: 16px;">
+          A Terrae, no momento desta publicação, <strong>não exerce essa actividade reservada</strong>, e as suas estimativas não substituem nem se equiparam juridicamente a uma avaliação produzida por PAI registado para os fins previstos pelo legislador.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CTA / DOWNLOAD ============== -->
+<section class="cta">
+  <div class="cta-inner">
+    <div>
+      <h2 class="cta-title fade-in">A Norma completa, <em>em documento.</em></h2>
+      <p class="cta-desc fade-in delay-1">
+        Esta página é a destilação institucional. O documento integral inclui o detalhe técnico de cada método, os critérios de homogeneização, os princípios deontológicos, o processo de avaliação em cinco fases, os standards de reporting e a tabela de aderência normativa que mapeia cada princípio Terrae à regra técnica correspondente em EVS, IVS e RICS Red Book.
+      </p>
+    </div>
+
+    <div class="download-card fade-in delay-2">
+      <div class="download-card-badge">PDF · Versão 1.0</div>
+      <p class="download-meta">Documento Institucional · Maio 2026</p>
+      <h3 class="download-title">Norma Metodológica Terrae</h3>
+      <p class="download-sub">Avaliação de Imóveis para Fins de Comercialização</p>
+
+      <a href="/normas/Norma_Metodologica_Terrae_v1.pdf" class="download-button" download>
+        Descarregar PDF
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+      </a>
+
+      <div class="download-stats">
+        <div class="stat"><strong>33</strong>páginas</div>
+        <div class="stat"><strong>9</strong>secções</div>
+        <div class="stat"><strong>2</strong>anexos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand"><span class="brand-mark" style="background: var(--paper);"></span>Terrae</div>
+      <p class="footer-tag">Consultoria e mediação imobiliária com método explícito, fontes documentadas e capacidade de auditoria.</p>
+    </div>
+    <div>
+      <h5>Metodologia</h5>
+      <ul>
+        <li>Standards aplicados</li>
+        <li>Os três métodos</li>
+        <li>Fontes de dados</li>
+        <li>Estrutura do relatório</li>
+        <li>Norma completa (PDF)</li>
+      </ul>
+    </div>
+    <div>
+      <h5>Referências</h5>
+      <ul>
+        <li>TEGoVA — EVS 2025</li>
+        <li>IVSC — IVS 2025</li>
+        <li>RICS — Red Book 2025</li>
+        <li>Lei n.º 153/2015</li>
+        <li>Reg. CMVM 7/2023</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Terrae · Todos os direitos reservados</span>
+    <span>Norma v1.0 · Maio 2026</span>
+  </div>
+</footer>
+
+<script>
+// Scroll-triggered animations
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -60px 0px' };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
