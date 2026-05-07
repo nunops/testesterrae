@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terraǝ Capital — Investimento Imobiliário</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F2EBDC;
+    --cream-soft: #EDE5D3;
+    --ink: #1F2820;
+    --ink-soft: #2D3A30;
+    --ink-deep: #161D17;
+    --terracotta: #A04F2C;
+    --terracotta-deep: #803D20;
+    --terracotta-soft: #C97D5E;
+    --sage: #7B8467;
+    --brown: #5A4A3A;
+    --brown-light: #8A7866;
+    --rule: #C9BFA8;
+    --rule-soft: #D9D0BA;
+    --rule-dark: rgba(242, 235, 220, 0.15);
+    --paper: #F8F2E4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  /* ---------- NAV ---------- */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 40px;
+    border-bottom: 1px solid var(--rule-dark);
+    position: sticky;
+    top: 0;
+    background: rgba(31, 40, 32, 0.92);
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+  .wordmark {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: 0.02em;
+    color: var(--cream);
+    font-variation-settings: "SOFT" 50, "opsz" 144;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .wordmark sup {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--terracotta);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+  .nav-links { display: flex; gap: 32px; font-size: 14px; }
+  .nav-links a {
+    color: var(--cream);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    opacity: 0.75;
+    transition: opacity 0.2s, color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--terracotta); opacity: 1; }
+  .nav-phone {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--cream);
+    opacity: 0.6;
+  }
+  /* ---------- BREADCRUMB ---------- */
+  .breadcrumb {
+    padding: 28px 40px 0;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.5;
+    font-family: 'JetBrains Mono', monospace;
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+  .breadcrumb a { color: var(--cream); text-decoration: none; opacity: 0.7; }
+  .breadcrumb span { margin: 0 8px; opacity: 0.4; }
+  /* ---------- HERO ---------- */
+  .hero {
+    padding: 60px 40px 100px;
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+  .hero-stamp {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero-stamp::before {
+    content: '';
+    width: 36px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 100px;
+    align-items: end;
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-variation-settings: "SOFT" 50, "opsz" 144;
+    font-size: clamp(48px, 7vw, 110px);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    margin-bottom: 36px;
+    color: var(--cream);
+  }
+  .hero-title em { font-style: italic; color: var(--terracotta); }
+  .hero-deck {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(18px, 1.8vw, 22px);
+    line-height: 1.55;
+    color: var(--cream);
+    opacity: 0.75;
+    max-width: 52ch;
+  }
+  .hero-stat {
+    border-left: 1px solid var(--rule-dark);
+    padding-left: 36px;
+  }
+  .hero-stat-key {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.55;
+    margin-bottom: 16px;
+  }
+  .hero-stat-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 80px;
+    line-height: 0.9;
+    letter-spacing: -0.025em;
+    color: var(--terracotta);
+    margin-bottom: 12px;
+  }
+  .hero-stat-num small {
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--cream);
+    opacity: 0.5;
+    letter-spacing: 0;
+  }
+  .hero-stat-foot {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 15px;
+    color: var(--cream);
+    opacity: 0.7;
+    line-height: 1.5;
+    max-width: 28ch;
+  }
+  /* ---------- LEGAL DISCLAIMER STRIP ---------- */
+  .legal-strip {
+    border-top: 1px solid var(--rule-dark);
+    border-bottom: 1px solid var(--rule-dark);
+    padding: 16px 40px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--cream);
+    opacity: 0.5;
+    text-align: center;
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+  .legal-strip span { color: var(--terracotta); opacity: 1; }
+  /* ---------- SECTION (DARK BY DEFAULT) ---------- */
+  section {
+    padding: 120px 40px;
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+  section.full {
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  section.light {
+    background: var(--cream);
+    color: var(--ink);
+  }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .section-label::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 72px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+    max-width: 20ch;
+  }
+  .section-title em { font-style: italic; color: var(--terracotta); }
+  .section-deck {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 19px;
+    color: var(--cream);
+    opacity: 0.75;
+    max-width: 60ch;
+    margin-bottom: 56px;
+    line-height: 1.55;
+  }
+  .light .section-deck { color: var(--brown); opacity: 1; }
+  /* ---------- TESE ---------- */
+  .tese {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 80px;
+    margin-top: 56px;
+  }
+  .tese-text {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 21px;
+    line-height: 1.65;
+    color: var(--cream);
+    opacity: 0.9;
+  }
+  .tese-text p { margin-bottom: 24px; max-width: 56ch; }
+  .tese-text p:first-child::first-letter {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    float: left;
+    font-size: 88px;
+    line-height: 0.85;
+    padding-right: 14px;
+    padding-top: 8px;
+    color: var(--terracotta);
+  }
+  .tese-text strong { color: var(--cream); font-weight: 500; opacity: 1; }
+  /* ---------- DIFFERENCES TABLE ---------- */
+  .diff-table {
+    margin-top: 32px;
+    border-top: 1px solid var(--rule-dark);
+    border-bottom: 1px solid var(--rule-dark);
+  }
+  .diff-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.4fr;
+    border-bottom: 1px solid var(--rule-dark);
+    padding: 20px 0;
+    align-items: baseline;
+  }
+  .diff-row:last-child { border-bottom: none; }
+  .diff-row.head {
+    padding: 12px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.5;
+  }
+  .diff-cell { padding-right: 16px; font-size: 14px; }
+  .diff-cell.label {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--cream);
+  }
+  .diff-cell.muted { color: var(--cream); opacity: 0.55; }
+  .diff-cell.terrae {
+    color: var(--terracotta);
+    font-weight: 500;
+  }
+  /* ---------- DIAGRAM SECTION ---------- */
+  .diagram-wrap {
+    background: var(--paper);
+    padding: 64px 56px;
+    border-radius: 2px;
+    margin-top: 48px;
+  }
+  .diagram-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 32px;
+  }
+  .diagram-legend {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    border-top: 1px solid var(--rule);
+    padding-top: 24px;
+  }
+  .leg-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .leg-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--terracotta);
+    background: var(--cream);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-weight: 500;
+    border: 1px solid var(--terracotta);
+  }
+  .leg-text {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+  .leg-text strong {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    display: block;
+    margin-bottom: 4px;
+    color: var(--ink);
+    font-size: 16px;
+  }
+  /* ---------- WATERFALL ---------- */
+  .waterfall {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .waterfall-col h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 22px;
+    margin-bottom: 24px;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .waterfall-list {
+    list-style: none;
+    counter-reset: wf;
+  }
+  .waterfall-list li {
+    counter-increment: wf;
+    padding: 18px 0 18px 56px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    color: var(--ink-soft);
+  }
+  .waterfall-list li:last-child { border-bottom: none; }
+  .waterfall-list li::before {
+    content: counter(wf, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--terracotta);
+    font-weight: 500;
+  }
+  .wf-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 17px;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .wf-desc {
+    font-size: 13px;
+    color: var(--brown);
+    line-height: 1.5;
+  }
+  /* protections */
+  .protections-list {
+    list-style: none;
+  }
+  .protections-list li {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .protections-list li:last-child { border-bottom: none; }
+  .prot-glyph {
+    color: var(--terracotta);
+    font-family: 'JetBrains Mono', monospace;
+    flex-shrink: 0;
+    font-size: 14px;
+    padding-top: 2px;
+  }
+  .prot-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .prot-desc {
+    font-size: 13px;
+    color: var(--brown);
+    line-height: 1.5;
+  }
+  /* ---------- PARTNERS ---------- */
+  .partners-section {
+    background: var(--ink-deep);
+  }
+  .partners-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 56px;
+    border-top: 1px solid var(--rule-dark);
+    border-bottom: 1px solid var(--rule-dark);
+  }
+  .partner {
+    padding: 40px 32px;
+    border-right: 1px solid var(--rule-dark);
+  }
+  .partner:last-child { border-right: none; }
+  .partner-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 16px;
+  }
+  .partner-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    color: var(--cream);
+    letter-spacing: -0.005em;
+  }
+  .partner-desc {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--cream);
+    opacity: 0.65;
+  }
+  /* ---------- TRACK RECORD ---------- */
+  .track-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+  .track-card {
+    border: 1px solid var(--rule-dark);
+    border-radius: 2px;
+    padding: 32px 28px;
+    background: rgba(242, 235, 220, 0.02);
+    position: relative;
+  }
+  .track-stage {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .stage-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--terracotta);
+  }
+  .track-card.future .stage-dot { background: rgba(160, 79, 44, 0.3); border: 1px solid var(--terracotta); }
+  .track-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 1.15;
+    margin-bottom: 12px;
+    color: var(--cream);
+    letter-spacing: -0.01em;
+  }
+  .track-desc {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--cream);
+    opacity: 0.7;
+    margin-bottom: 24px;
+    min-height: 70px;
+  }
+  .track-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    border-top: 1px solid var(--rule-dark);
+    padding-top: 20px;
+  }
+  .track-meta-key {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.5;
+    margin-bottom: 4px;
+  }
+  .track-meta-val {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    color: var(--cream);
+  }
+  .honesty-note {
+    margin-top: 56px;
+    padding: 32px 36px;
+    background: rgba(160, 79, 44, 0.08);
+    border-left: 3px solid var(--terracotta);
+    border-radius: 0 2px 2px 0;
+    max-width: 700px;
+  }
+  .honesty-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 12px;
+  }
+  .honesty-text {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--cream);
+    opacity: 0.9;
+  }
+  /* ---------- RETURNS ---------- */
+  .returns-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-top: 56px;
+    align-items: start;
+  }
+  .returns-table { width: 100%; border-collapse: collapse; }
+  .returns-table tr { border-bottom: 1px solid var(--rule); }
+  .returns-table tr:last-child { border-bottom: none; }
+  .returns-table td {
+    padding: 18px 0;
+    font-size: 15px;
+  }
+  .returns-table td:first-child {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--brown);
+    width: 50%;
+  }
+  .returns-table td:last-child {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    color: var(--ink);
+    text-align: right;
+    font-size: 18px;
+  }
+  .scenarios-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .scen-card {
+    border: 1px solid var(--rule);
+    padding: 24px 28px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--cream);
+  }
+  .scen-card.recommended {
+    border: 2px solid var(--terracotta);
+    background: rgba(160, 79, 44, 0.04);
+  }
+  .scen-name {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 17px;
+    color: var(--ink);
+  }
+  .scen-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 1;
+    color: var(--terracotta);
+    letter-spacing: -0.015em;
+  }
+  .scen-num small {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 13px;
+    color: var(--brown);
+    margin-left: 4px;
+  }
+  /* ---------- FORM ---------- */
+  .form-section {
+    background: var(--ink-deep);
+  }
+  .form-inner {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .form-head {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .form-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    color: var(--cream);
+  }
+  .form-title em { font-style: italic; color: var(--terracotta); }
+  .form-deck {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--cream);
+    opacity: 0.75;
+    max-width: 56ch;
+    margin: 0 auto;
+  }
+  .form-card {
+    background: rgba(242, 235, 220, 0.03);
+    border: 1px solid var(--rule-dark);
+    padding: 56px 64px;
+    border-radius: 3px;
+  }
+  .field { margin-bottom: 28px; }
+  .field label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cream);
+    opacity: 0.7;
+    margin-bottom: 10px;
+  }
+  .field input, .field textarea, .field select {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(242, 235, 220, 0.04);
+    border: 1px solid var(--rule-dark);
+    color: var(--cream);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 15px;
+    border-radius: 2px;
+  }
+  .field textarea { min-height: 100px; resize: vertical; font-family: 'Instrument Sans', sans-serif; }
+  .field input:focus, .field textarea:focus, .field select:focus {
+    outline: none;
+    border-color: var(--terracotta);
+    background: rgba(160, 79, 44, 0.08);
+  }
+  .field input::placeholder, .field textarea::placeholder { color: rgba(242, 235, 220, 0.4); }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .chips { display: flex; gap: 10px; flex-wrap: wrap; }
+  .chip {
+    padding: 12px 20px;
+    border: 1px solid var(--rule-dark);
+    background: rgba(242, 235, 220, 0.03);
+    color: var(--cream);
+    font-size: 14px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Instrument Sans', sans-serif;
+  }
+  .chip:hover { border-color: var(--terracotta); }
+  .chip.selected { background: var(--terracotta); border-color: var(--terracotta); }
+  .qualified-block {
+    background: rgba(160, 79, 44, 0.08);
+    border-left: 3px solid var(--terracotta);
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    border-radius: 0 2px 2px 0;
+  }
+  .qualified-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 8px;
+  }
+  .qualified-text {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--cream);
+    opacity: 0.85;
+    font-family: 'Instrument Sans', sans-serif;
+    margin-bottom: 12px;
+  }
+  .qualified-text a {
+    color: var(--terracotta);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+  /* radio yes/no */
+  .yn {
+    display: flex;
+    gap: 12px;
+  }
+  .yn-option {
+    flex: 1;
+    padding: 14px 20px;
+    border: 1px solid var(--rule-dark);
+    background: rgba(242, 235, 220, 0.03);
+    color: var(--cream);
+    font-size: 14px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Instrument Sans', sans-serif;
+    text-align: center;
+  }
+  .yn-option:hover { border-color: var(--terracotta); }
+  .yn-option.selected { background: var(--terracotta); border-color: var(--terracotta); }
+  .form-submit {
+    margin-top: 36px;
+    text-align: right;
+  }
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 24px;
+    border: 1px solid var(--cream);
+    color: var(--cream);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 2px;
+    font-family: 'Instrument Sans', sans-serif;
+  }
+  .btn::after {
+    content: '→';
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+  }
+  .btn:hover { background: var(--cream); color: var(--ink); }
+  .btn-primary { background: var(--terracotta); border-color: var(--terracotta); color: var(--cream); }
+  .btn-primary:hover { background: var(--terracotta-deep); border-color: var(--terracotta-deep); color: var(--cream); }
+  .btn-large { padding: 18px 32px; font-size: 14px; }
+  .light .btn { border-color: var(--ink); color: var(--ink); }
+  .light .btn:hover { background: var(--ink); color: var(--cream); }
+  .light .btn-primary { background: var(--ink); border-color: var(--ink); color: var(--cream); }
+  .light .btn-primary:hover { background: var(--terracotta); border-color: var(--terracotta); }
+  /* ---------- FAQ ---------- */
+  .faq-list { margin-top: 48px; max-width: 900px; }
+  .faq-item {
+    border-top: 1px solid var(--rule-dark);
+    padding: 22px 0;
+    cursor: pointer;
+  }
+  .faq-item:last-child { border-bottom: 1px solid var(--rule-dark); }
+  .faq-q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 1.3;
+    color: var(--cream);
+    gap: 16px;
+  }
+  .faq-q::after {
+    content: '+';
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 24px;
+    color: var(--terracotta);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s;
+    color: var(--cream);
+    opacity: 0.75;
+    font-size: 16px;
+    line-height: 1.65;
+    max-width: 65ch;
+  }
+  .faq-item.open .faq-a {
+    max-height: 400px;
+    margin-top: 14px;
+  }
+  /* ---------- LEGAL FOOTNOTE ---------- */
+  .legal-footnote {
+    background: var(--ink-deep);
+    padding: 56px 40px;
+    border-top: 1px solid var(--rule-dark);
+  }
+  .legal-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    line-height: 1.7;
+    color: var(--cream);
+    opacity: 0.55;
+    letter-spacing: 0.02em;
+  }
+  .legal-inner strong {
+    color: var(--cream);
+    opacity: 0.85;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    font-size: 10px;
+    display: block;
+    margin-bottom: 12px;
+  }
+  /* ---------- FOOTER ---------- */
+  footer {
+    padding: 80px 40px 40px;
+    background: var(--ink-deep);
+    color: var(--cream);
+    border-top: 1px solid var(--rule-dark);
+  }
+  .footer-inner {
+    max-width: 1500px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--rule-dark);
+  }
+  .footer-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 300;
+    margin-bottom: 16px;
+    font-variation-settings: "SOFT" 100;
+  }
+  .footer-tag {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 17px;
+    opacity: 0.75;
+    max-width: 36ch;
+    line-height: 1.5;
+  }
+  .footer-col h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0.6;
+    font-weight: 400;
+  }
+  .footer-col a {
+    display: block;
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 6px 0;
+    opacity: 0.85;
+  }
+  .footer-bottom {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    opacity: 0.5;
+  }
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 1024px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 56px; }
+    .hero-stat { border-left: none; border-top: 1px solid var(--rule-dark); padding-left: 0; padding-top: 36px; }
+    .tese { grid-template-columns: 1fr; gap: 40px; }
+    .diff-row { grid-template-columns: 1fr 1fr; }
+    .diff-row .diff-cell:nth-child(2) { grid-column: 1; }
+    .diff-row .diff-cell:nth-child(3) { grid-column: 2; }
+    .diff-row .diff-cell.label { grid-column: 1 / -1; margin-bottom: 8px; }
+    .partners-grid { grid-template-columns: 1fr 1fr; }
+    .partner { border-bottom: 1px solid var(--rule-dark); }
+    .partner:nth-child(2n) { border-right: none; }
+    .partner:nth-last-child(-n+2) { border-bottom: none; }
+    .track-grid { grid-template-columns: 1fr; }
+    .returns-grid { grid-template-columns: 1fr; gap: 48px; }
+    .waterfall { grid-template-columns: 1fr; gap: 48px; }
+    .diagram-legend { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    nav { padding: 18px 20px; }
+    .nav-phone { display: none; }
+    .nav-links { gap: 18px; font-size: 12px; }
+    .breadcrumb { padding: 20px 20px 0; }
+    .legal-strip { padding: 14px 20px; font-size: 10px; }
+    .hero { padding: 40px 20px 60px; }
+    section { padding: 60px 20px; }
+    .partners-grid { grid-template-columns: 1fr; }
+    .partner { border-right: none; border-bottom: 1px solid var(--rule-dark); }
+    .partner:last-child { border-bottom: none; }
+    .form-card { padding: 32px 24px; }
+    .row-2 { grid-template-columns: 1fr; }
+    .diagram-wrap { padding: 32px 20px; }
+    .scen-card { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .footer-bottom { flex-direction: column; gap: 8px; }
+    .legal-footnote { padding: 40px 20px; }
+    .form-submit { text-align: center; }
+    .form-submit .btn { width: 100%; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wordmark">Terraǝ <sup>Capital</sup></div>
+  <div class="nav-links">
+    <a href="#">Comprar</a>
+    <a href="#">Vender</a>
+    <a href="#" class="active">Investir</a>
+    <a href="#">Editorial</a>
+  </div>
+  <div class="nav-phone">+351 21 000 0000</div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="#">Investir</a> <span>/</span> Terraǝ Capital
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-stamp">Terraǝ Capital · Investimento por Convite</div>
+  
+  <div class="hero-grid">
+    <div>
+      <h1 class="hero-title">Para quem não procura uma casa.<br>Procura um <em>veículo.</em></h1>
+      <p class="hero-deck">Co-investimento em projectos imobiliários de raiz, estruturados em SPVs dedicados, com horizonte de 2 a 3 anos e direcção operacional pela Terraǝ.</p>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-key">— TIR estimada por projecto</div>
+      <div class="hero-stat-num">30–35<small>%</small></div>
+      <p class="hero-stat-foot">Bruto, antes de carried interest. Horizonte típico de 24 a 36 meses do funding ao exit.</p>
+    </div>
+  </div>
+</header>
+
+<!-- ============ LEGAL STRIP ============ -->
+<div class="legal-strip">
+  <span>Aviso prévio:</span> Disponível apenas a investidores qualificados nos termos do Regulamento (UE) 2017/1129 e do Código dos Valores Mobiliários
+</div>
+
+<!-- ============ TESE ============ -->
+<section>
+  <div class="section-label">— Porque existe</div>
+  <h2 class="section-title">Há um <em>vazio</em> entre fazer sozinho e os fundos públicos.</h2>
+  
+  <div class="tese">
+    <p class="section-deck" style="margin-bottom: 0; max-width: 36ch;">É nesse vazio que a Terraǝ Capital opera — onde o capital encontra execução real, sem a fricção operacional de o fazer por conta própria.</p>
+    
+    <div class="tese-text">
+      <p>A maioria dos investidores tenta entrar no imobiliário <strong>sozinha</strong> — comprar, arrendar, gerir. É um trabalho a tempo inteiro disfarçado de investimento passivo, e a maior parte das vezes, o retorno não compensa o tempo. Do outro lado, os REITs e fundos abertos oferecem liquidez mas rentabilidades anémicas, geralmente abaixo de uma promoção bem executada.</p>
+      
+      <p>A Terraǝ Capital opera no espaço entre estes dois extremos. Para cada projecto criamos uma <strong>SPV — sociedade por quotas com objecto exclusivo</strong>, com cap table proporcional ao capital investido, gerência executiva da Terraǝ e estrutura jurídica preparada pela Antas da Cunha ECIJA. O investidor entra, espera, e sai com a operação concluída e dissolvida.</p>
+      
+      <p>Não é fundo. Não é REIT. Não é compra fraccionada de imóveis arrendados. É promoção imobiliária estruturada — a forma mais antiga e mais rentável de fazer dinheiro neste mercado, abrida a quem não quer construir uma operação para o fazer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIFFERENCES TABLE ============ -->
+<section style="padding-top: 0;">
+  <div class="diff-table">
+    <div class="diff-row head">
+      <div class="diff-cell"></div>
+      <div class="diff-cell">Investir directamente</div>
+      <div class="diff-cell">REIT / Fundo aberto</div>
+    </div>
+    <div class="diff-row">
+      <div class="diff-cell label">Rentabilidade típica</div>
+      <div class="diff-cell muted">Variável. Geralmente 4–8% líquidos com arrendamento.</div>
+      <div class="diff-cell muted">3–6% antes de fees e fiscalidade.</div>
+    </div>
+    <div class="diff-row">
+      <div class="diff-cell label">Compromisso de tempo</div>
+      <div class="diff-cell muted">Alto. Procura, gestão, manutenção, fiscalidade.</div>
+      <div class="diff-cell muted">Zero. Mas zero controlo também.</div>
+    </div>
+    <div class="diff-row">
+      <div class="diff-cell label">Horizonte</div>
+      <div class="diff-cell muted">Indefinido. Saída exige venda do imóvel.</div>
+      <div class="diff-cell muted">Líquido — vendes em qualquer momento.</div>
+    </div>
+    <div class="diff-row">
+      <div class="diff-cell label">Risco de execução</div>
+      <div class="diff-cell muted">Total. É inteiramente teu.</div>
+      <div class="diff-cell muted">Diluído. E os ganhos também.</div>
+    </div>
+    <div class="diff-row">
+      <div class="diff-cell label">Alinhamento de interesses</div>
+      <div class="diff-cell muted">Total — é o teu próprio capital.</div>
+      <div class="diff-cell muted">Baixo. O gestor cobra fee fixo.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STRUCTURE ============ -->
+<section class="light full">
+  <div style="max-width: 1500px; margin: 0 auto; padding: 0 40px;">
+    <div class="section-label">— A estrutura</div>
+    <h2 class="section-title" style="color: var(--ink);">Como se desenha uma <em>SPV</em>.</h2>
+    <p class="section-deck">Cada projecto vive num veículo próprio — segregação total de risco, autonomia patrimonial, exit definido. Estrutura preparada e revista pela Antas da Cunha ECIJA.</p>
+    
+    <div class="diagram-wrap">
+      <svg class="diagram-svg" viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
+        <!-- Investors row -->
+        <g font-family="Instrument Sans, sans-serif" font-size="13" fill="#1F2820">
+          <!-- Investor boxes -->
+          <g>
+            <rect x="40" y="20" width="160" height="60" rx="2" fill="#F2EBDC" stroke="#C9BFA8" stroke-width="1"/>
+            <text x="120" y="48" text-anchor="middle" font-family="Fraunces, serif" font-size="14" fill="#1F2820">Investidor 1</text>
+            <text x="120" y="65" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#A04F2C">Capital · 30%</text>
+          </g>
+          <g>
+            <rect x="220" y="20" width="160" height="60" rx="2" fill="#F2EBDC" stroke="#C9BFA8" stroke-width="1"/>
+            <text x="300" y="48" text-anchor="middle" font-family="Fraunces, serif" font-size="14" fill="#1F2820">Investidor 2</text>
+            <text x="300" y="65" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#A04F2C">Capital · 25%</text>
+          </g>
+          <g>
+            <rect x="400" y="20" width="160" height="60" rx="2" fill="#F2EBDC" stroke="#C9BFA8" stroke-width="1"/>
+            <text x="480" y="48" text-anchor="middle" font-family="Fraunces, serif" font-size="14" fill="#1F2820">Investidor 3</text>
+            <text x="480" y="65" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#A04F2C">Capital · 25%</text>
+          </g>
+          <g>
+            <rect x="580" y="20" width="160" height="60" rx="2" fill="#F2EBDC" stroke="#C9BFA8" stroke-width="1"/>
+            <text x="660" y="48" text-anchor="middle" font-family="Fraunces, serif" font-size="14" fill="#1F2820">Sandro Sousa</text>
+            <text x="660" y="65" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#A04F2C">Capital · 20% + Gerência</text>
+          </g>
+        </g>
+        
+        <!-- Lines down to SPV -->
+        <g stroke="#A04F2C" stroke-width="1" fill="none" opacity="0.5">
+          <line x1="120" y1="80" x2="120" y2="120"/>
+          <line x1="300" y1="80" x2="300" y2="120"/>
+          <line x1="480" y1="80" x2="480" y2="120"/>
+          <line x1="660" y1="80" x2="660" y2="120"/>
+          <line x1="120" y1="120" x2="660" y2="120"/>
+          <line x1="390" y1="120" x2="390" y2="150"/>
+        </g>
+        
+        <!-- SPV box -->
+        <g>
+          <rect x="220" y="150" width="340" height="80" rx="2" fill="#1F2820" stroke="#A04F2C" stroke-width="2"/>
+          <text x="390" y="178" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#A04F2C" letter-spacing="2">SPV / NEWCO</text>
+          <text x="390" y="200" text-anchor="middle" font-family="Fraunces, serif" font-size="20" fill="#F2EBDC">Sociedade por Quotas</text>
+          <text x="390" y="218" text-anchor="middle" font-family="Fraunces, serif" font-style="italic" font-size="13" fill="#F2EBDC" opacity="0.7">objecto exclusivo · um projecto</text>
+        </g>
+        
+        <!-- Arrow to operations -->
+        <g stroke="#A04F2C" stroke-width="1" fill="none" opacity="0.5">
+          <line x1="390" y1="230" x2="390" y2="260"/>
+        </g>
+        
+        <!-- Operations row -->
+        <g>
+          <rect x="50" y="260" width="200" height="60" rx="2" fill="#F2EBDC" stroke="#C9BFA8"/>
+          <text x="150" y="285" text-anchor="middle" font-family="Fraunces, serif" font-size="14" fill="#1F2820">Aquisição de terreno</text>
+          <text x="150" y="303" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#8A7866">Loteamento aprovado</text>
+        </g>
+        <g>
+          <rect x="290" y="260" width="200" height="60" rx="2" fill="#F2EBDC" stroke="#C9BFA8"/>
+          <text x="390" y="285" text-anchor="middle" font-family="Fraunces, serif" font-size="14" fill="#1F2820">Construção</text>
+          <text x="390" y="303" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#8A7866">Linha Gerais · 18–24m</text>
+        </g>
+        <g>
+          <rect x="530" y="260" width="200" height="60" rx="2" fill="#F2EBDC" stroke="#C9BFA8"/>
+          <text x="630" y="285" text-anchor="middle" font-family="Fraunces, serif" font-size="14" fill="#1F2820">Comercialização</text>
+          <text x="630" y="303" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#8A7866">Mediação Terraǝ</text>
+        </g>
+        
+        <!-- Lines connecting -->
+        <g stroke="#A04F2C" stroke-width="1" fill="none" opacity="0.3">
+          <line x1="150" y1="260" x2="150" y2="245" />
+          <line x1="150" y1="245" x2="630" y2="245" />
+          <line x1="630" y1="245" x2="630" y2="260" />
+        </g>
+        
+        <!-- Final arrow -->
+        <g stroke="#A04F2C" stroke-width="1" fill="none" opacity="0.5">
+          <line x1="390" y1="320" x2="390" y2="350"/>
+          <polygon points="385,345 395,345 390,355" fill="#A04F2C"/>
+        </g>
+        
+        <text x="390" y="375" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#A04F2C" letter-spacing="2">DISSOLUÇÃO + DISTRIBUIÇÃO</text>
+      </svg>
+      
+      <div class="diagram-legend">
+        <div class="leg-item">
+          <span class="leg-num">1</span>
+          <div class="leg-text">
+            <strong>Capital social proporcional</strong>
+            Cada sócio detém quotas na exacta proporção do capital aportado. A entrada no projecto é antecedida por NDA e Acordo Parassocial.
+          </div>
+        </div>
+        <div class="leg-item">
+          <span class="leg-num">2</span>
+          <div class="leg-text">
+            <strong>Gerência executiva única</strong>
+            Sandro Sousa conduz a operação dia-a-dia: relação com construtor, arquitectura, banca, comercialização. Todas as matérias estruturantes exigem quórum qualificado.
+          </div>
+        </div>
+        <div class="leg-item">
+          <span class="leg-num">3</span>
+          <div class="leg-text">
+            <strong>Exit definido em escritura</strong>
+            Vendidas as fracções, a SPV é dissolvida e os resultados distribuídos pela cascata pré-acordada. Sem fund-of-funds, sem rolling, sem extensões.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WATERFALL + PROTECTIONS ============ -->
+<section class="light full">
+  <div style="max-width: 1500px; margin: 0 auto; padding: 0 40px 120px;">
+    <div class="waterfall">
+      <div class="waterfall-col">
+        <div class="section-label">— Cascata de distribuição</div>
+        <h3 style="font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(28px, 3.5vw, 44px); line-height: 1.1; letter-spacing: -0.015em; color: var(--ink); margin-bottom: 16px;">Quem recebe primeiro, e em que <em style="color: var(--terracotta); font-style: italic;">ordem</em>.</h3>
+        <p style="font-family: 'Fraunces', serif; font-style: italic; color: var(--brown); margin-bottom: 32px; max-width: 50ch;">Definida em Acordo Parassocial. Sem ambiguidade, sem renegociação a meio do percurso.</p>
+        
+        <ul class="waterfall-list">
+          <li>
+            <span class="wf-name">Despesas operacionais</span>
+            <span class="wf-desc">AT, Segurança Social, fornecedores, trabalhadores. O básico para a SPV existir e cumprir.</span>
+          </li>
+          <li>
+            <span class="wf-name">Banco — juros</span>
+            <span class="wf-desc">Pagamento de juros sobre o financiamento bancário, se aplicável ao projecto.</span>
+          </li>
+          <li>
+            <span class="wf-name">Banco — amortização</span>
+            <span class="wf-desc">Reembolso do capital mutuado conforme cronograma definido na carta de financiamento.</span>
+          </li>
+          <li>
+            <span class="wf-name">Sócios — suprimentos</span>
+            <span class="wf-desc">Reembolso proporcional dos suprimentos aportados, acrescidos dos juros à taxa contratada.</span>
+          </li>
+          <li>
+            <span class="wf-name">Sócios — dividendos + carried</span>
+            <span class="wf-desc">Distribuição final, incluindo o carried interest escalonado de Sandro Sousa, definido caso a caso no Business Plan.</span>
+          </li>
+        </ul>
+      </div>
+      
+      <div class="waterfall-col">
+        <div class="section-label">— Proteções dos investidores</div>
+        <h3 style="font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(28px, 3.5vw, 44px); line-height: 1.1; letter-spacing: -0.015em; color: var(--ink); margin-bottom: 16px;">O que está <em style="color: var(--terracotta); font-style: italic;">escrito</em>, antes da assinatura.</h3>
+        <p style="font-family: 'Fraunces', serif; font-style: italic; color: var(--brown); margin-bottom: 32px; max-width: 50ch;">Cláusulas standard, herdadas das melhores práticas de private equity, adaptadas a real estate.</p>
+        
+        <ul class="protections-list">
+          <li>
+            <span class="prot-glyph">→</span>
+            <div>
+              <span class="prot-name">Direito de preferência</span>
+              <span class="prot-desc">Em qualquer transmissão de quotas a terceiros, os outros sócios têm preferência nas mesmas condições.</span>
+            </div>
+          </li>
+          <li>
+            <span class="prot-glyph">→</span>
+            <div>
+              <span class="prot-name">Tag-Along</span>
+              <span class="prot-desc">Se Sandro vender a sua participação, os investidores podem exigir que o comprador adquira também as deles, nas mesmas condições.</span>
+            </div>
+          </li>
+          <li>
+            <span class="prot-glyph">→</span>
+            <div>
+              <span class="prot-name">Drag-Along com piso de rentabilidade</span>
+              <span class="prot-desc">Sandro pode forçar venda conjunta — apenas se garantida uma rentabilidade mínima ao investidor, definida no Acordo Parassocial.</span>
+            </div>
+          </li>
+          <li>
+            <span class="prot-glyph">→</span>
+            <div>
+              <span class="prot-name">Anti-diluição em chamadas de capital</span>
+              <span class="prot-desc">Mecanismo definido para o caso de qualquer sócio falhar a sua quota numa chamada de capital, protegendo os que cumpriram.</span>
+            </div>
+          </li>
+          <li>
+            <span class="prot-glyph">→</span>
+            <div>
+              <span class="prot-name">Proibição de oneração das quotas</span>
+              <span class="prot-desc">Nenhum sócio pode dar as suas quotas em garantia ou onerá-las sem autorização expressa dos restantes.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PARTNERS ============ -->
+<section class="partners-section full">
+  <div style="max-width: 1500px; margin: 0 auto; padding: 100px 40px;">
+    <div class="section-label">— Quem está à mesa</div>
+    <h2 class="section-title">Quatro nomes. <em>Zero</em> intermediários.</h2>
+    <p class="section-deck">Os parceiros da Terraǝ Capital trabalham directamente com a SPV — não em sub-cadeia, não terceirizados. Cada um responde pelo seu mandato.</p>
+    
+    <div class="partners-grid">
+      <div class="partner">
+        <div class="partner-role">Jurídico</div>
+        <h3 class="partner-name">Antas da Cunha ECIJA</h3>
+        <p class="partner-desc">Sociedade de advogados de referência em Portugal. Estrutura SPV, Acordo Parassocial, Acordo de Investimento, due diligence legal de terreno e financiamento.</p>
+      </div>
+      <div class="partner">
+        <div class="partner-role">Arquitectura</div>
+        <h3 class="partner-name">F. Simões Arquitectos</h3>
+        <p class="partner-desc">Projecto, licenciamento, fiscalização, renders 3D para comercialização. Responsável também pelo Jardins do Anjo.</p>
+      </div>
+      <div class="partner">
+        <div class="partner-role">Construção</div>
+        <h3 class="partner-name">Linha Gerais</h3>
+        <p class="partner-desc">Empreiteiro geral. Contratação a preço fechado sempre que possível, com cronograma e milestones contratualizados.</p>
+      </div>
+      <div class="partner">
+        <div class="partner-role">Operação</div>
+        <h3 class="partner-name">Terraǝ + EgoRealEstate</h3>
+        <p class="partner-desc">Comercialização, marketing, intermediação de crédito aos compradores, e CRM com reporting trimestral aos investidores.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRACK RECORD ============ -->
+<section>
+  <div class="section-label">— Estado actual</div>
+  <h2 class="section-title">A Terraǝ Capital está no <em>início</em>. Aqui está o que está em curso.</h2>
+  <p class="section-deck">Honestidade primeiro: ainda não fechámos um ciclo completo de SPV. O que mostramos é a operação de mediação que sustenta a credibilidade de execução, e o que está em pipeline.</p>
+  
+  <div class="track-grid">
+    <div class="track-card">
+      <div class="track-stage"><span class="stage-dot"></span>Em curso · mediação total</div>
+      <h3 class="track-name">Jardins do Anjo</h3>
+      <p class="track-desc">18 apartamentos em Quinta do Anjo, comercialização faseada em 3 lotes. A Terraǝ é mediador exclusivo. Prova de execução comercial e de pipeline.</p>
+      <div class="track-meta">
+        <div>
+          <div class="track-meta-key">VGV</div>
+          <div class="track-meta-val">7,4M €</div>
+        </div>
+        <div>
+          <div class="track-meta-key">Conclusão</div>
+          <div class="track-meta-val">Q4 2026</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="track-card">
+      <div class="track-stage"><span class="stage-dot"></span>Lançamento · Dezembro 2026</div>
+      <h3 class="track-name">Vila Franca de Xira</h3>
+      <p class="track-desc">44 apartamentos. Mediação Terraǝ exclusiva. Parte da operação em parceria com promotor; em estudo a estruturação parcial via SPV para o segundo lote.</p>
+      <div class="track-meta">
+        <div>
+          <div class="track-meta-key">Unidades</div>
+          <div class="track-meta-val">44</div>
+        </div>
+        <div>
+          <div class="track-meta-key">Lançamento</div>
+          <div class="track-meta-val">Dez 2026</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="track-card future">
+      <div class="track-stage"><span class="stage-dot"></span>SPV #1 · em estruturação</div>
+      <h3 class="track-name">Próximo Projecto</h3>
+      <p class="track-desc">Identificação de terreno na Grande Lisboa em curso, com loteamento aprovado ou viabilidade consolidada. Business Plan em preparação para Q3 2026.</p>
+      <div class="track-meta">
+        <div>
+          <div class="track-meta-key">Estatuto</div>
+          <div class="track-meta-val">Pre-launch</div>
+        </div>
+        <div>
+          <div class="track-meta-key">BP disponível</div>
+          <div class="track-meta-val">Q3 2026</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="honesty-note">
+    <div class="honesty-label">— Nota de transparência</div>
+    <p class="honesty-text">Não vendemos track record que não temos. A primeira SPV Terraǝ Capital fecha o seu ciclo completo previsivelmente em 2028. Quem entra no primeiro projecto entra com essa consciência — e em troca participa na definição de termos que o segundo projecto já não terá.</p>
+  </div>
+</section>
+
+<!-- ============ RETURNS & FEES ============ -->
+<section class="light full">
+  <div style="max-width: 1500px; margin: 0 auto; padding: 100px 40px;">
+    <div class="section-label">— Retornos e fees</div>
+    <h2 class="section-title" style="color: var(--ink);">Os números, em <em>cima da mesa</em>.</h2>
+    <p class="section-deck">Não há side letters, side deals, fees escondidos. Tudo o que cobramos está nesta tabela.</p>
+    
+    <div class="returns-grid">
+      <div>
+        <table class="returns-table">
+          <tr><td>Investimento mínimo</td><td>Sob consulta</td></tr>
+          <tr><td>Horizonte típico</td><td>2 a 3 anos</td></tr>
+          <tr><td>TIR estimada bruta</td><td>30 – 35%</td></tr>
+          <tr><td>Fee de set-up (Sandro)</td><td>1,5% (uma vez)</td></tr>
+          <tr><td>Fee de gestão anual</td><td>1,5% / ano</td></tr>
+          <tr><td>Fee de avalista (se aplicável)</td><td>1,5% / ano</td></tr>
+          <tr><td>Carried interest</td><td>Escalonado · BP</td></tr>
+          <tr><td>Frequência de reporting</td><td>Trimestral</td></tr>
+          <tr><td>Auditoria externa</td><td>Anual + final</td></tr>
+        </table>
+      </div>
+      
+      <div>
+        <h4 style="font-family: 'Fraunces', serif; font-weight: 400; font-size: 22px; margin-bottom: 16px; color: var(--ink); letter-spacing: -0.005em;">Cenários de TIR sobre capital próprio</h4>
+        <p style="font-size: 14px; color: var(--brown); margin-bottom: 24px; font-style: italic; font-family: 'Fraunces', serif;">Modelados sobre projecto-tipo de 4M €, com 50% de financiamento bancário e 36 meses do funding ao exit.</p>
+        
+        <div class="scenarios-stack">
+          <div class="scen-card">
+            <span class="scen-name">Conservador · venda lenta + cost overrun</span>
+            <span class="scen-num">22<small>%</small></span>
+          </div>
+          <div class="scen-card recommended">
+            <span class="scen-name">Base · execução conforme BP</span>
+            <span class="scen-num">31<small>%</small></span>
+          </div>
+          <div class="scen-card">
+            <span class="scen-name">Optimista · pre-sales + exit acelerado</span>
+            <span class="scen-num">38<small>%</small></span>
+          </div>
+        </div>
+        
+        <p style="font-size: 12px; color: var(--brown); margin-top: 24px; font-family: 'JetBrains Mono', monospace; line-height: 1.5; letter-spacing: 0.02em;">Cenários ilustrativos. Cada Business Plan apresenta projecções específicas com sensibilidade a custos de construção, taxa de juro, ritmo de venda e preço médio de saída.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FORM ============ -->
+<section class="form-section full" id="form">
+  <div style="max-width: 1500px; margin: 0 auto; padding: 100px 40px;">
+    <div class="form-inner">
+      <div class="form-head">
+        <div class="section-label" style="justify-content: center;">— Próximo passo</div>
+        <h2 class="form-title">Receber o próximo<br><em>Business Plan</em>.</h2>
+        <p class="form-deck">A apresentação completa do projecto SPV #1 fica disponível em Q3 2026, mediante NDA. Quem se inscreve recebe primeiro, e tem prioridade na alocação de capital.</p>
+      </div>
+      
+      <div class="form-card">
+        <div class="qualified-block">
+          <div class="qualified-label">— Investidor qualificado</div>
+          <p class="qualified-text">Por força da legislação aplicável, o acesso a investimentos como o presente é restrito a investidores qualificados nos termos do Regulamento (UE) 2017/1129 e do Código dos Valores Mobiliários. <a href="#">Saber mais sobre o estatuto de investidor qualificado →</a></p>
+        </div>
+        
+        <div class="row-2">
+          <div class="field">
+            <label>Nome</label>
+            <input type="text" placeholder="O seu nome">
+          </div>
+          <div class="field">
+            <label>Telefone</label>
+            <input type="tel" placeholder="+351 ...">
+          </div>
+        </div>
+        
+        <div class="field">
+          <label>Email profissional</label>
+          <input type="email" placeholder="email@empresa.pt">
+        </div>
+        
+        <div class="field">
+          <label>É investidor qualificado nos termos da legislação aplicável?</label>
+          <div class="yn">
+            <div class="yn-option">Sim</div>
+            <div class="yn-option">Não tenho a certeza</div>
+            <div class="yn-option">Não</div>
+          </div>
+        </div>
+        
+        <div class="field">
+          <label>Capital potencialmente disponível para alocação</label>
+          <div class="chips">
+            <div class="chip">Inferior a 100k €</div>
+            <div class="chip">100k – 250k €</div>
+            <div class="chip selected">250k – 500k €</div>
+            <div class="chip">500k – 1M €</div>
+            <div class="chip">Superior a 1M €</div>
+          </div>
+        </div>
+        
+        <div class="field">
+          <label>Horizonte preferido</label>
+          <div class="chips">
+            <div class="chip">Inferior a 2 anos</div>
+            <div class="chip selected">2 a 3 anos</div>
+            <div class="chip">3 a 5 anos</div>
+            <div class="chip">Superior a 5 anos</div>
+          </div>
+        </div>
+        
+        <div class="field">
+          <label>Notas (opcional) — experiência prévia em real estate, perguntas, contexto</label>
+          <textarea placeholder="Ex.: já participei em SPVs no passado / interessa-me especificamente Lisboa / quero conhecer Sandro antes de avançar..."></textarea>
+        </div>
+        
+        <div class="form-submit">
+          <a href="#" class="btn btn-primary btn-large">Solicitar acesso ao Business Plan</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section>
+  <div class="section-label">— Perguntas frequentes</div>
+  <h2 class="section-title">O que normalmente <em>vale a pena perguntar</em>.</h2>
+  
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q">O que define um investidor qualificado em Portugal?</div>
+      <div class="faq-a">Os critérios estão definidos no Regulamento (UE) 2017/1129 e no Código dos Valores Mobiliários. Em síntese: profissionais financeiros (bancos, sociedades de investimento, fundos), grandes empresas que cumpram dois de três critérios de balanço, ou pessoas singulares que tenham requerido formalmente esse estatuto à CMVM mediante a verificação de critérios de carteira, transações e experiência. Em caso de dúvida, conversamos antes de avançar com o BP.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Posso sair do projecto antes do exit?</div>
+      <div class="faq-a">Em princípio não — a SPV tem objecto exclusivo e horizonte definido. A saída antecipada implica encontrar um comprador para a sua quota, com sujeição ao direito de preferência dos outros sócios. Todas as cláusulas de saída estão detalhadas no Acordo Parassocial e são negociadas antes da entrada.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Quem responde se a obra atrasar ou os custos derraparem?</div>
+      <div class="faq-a">A obra é contratada a preço fechado com a Linha Gerais sempre que possível, com penalidades por atraso. Em caso de cost overrun, é ativada cláusula de chamada de capital — com mecanismo de anti-diluição protegendo os sócios que cumprirem a sua parte. Tudo declarado no Business Plan.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">O Sandro investe capital próprio na SPV?</div>
+      <div class="faq-a">Sim. O alinhamento de interesses é estrutural: Sandro participa no capital social da SPV proporcionalmente, além de prestar gerência. Se for exigido aval pessoal junto de banco, é remunerado em separado por fee de avalista (1,5%/ano sobre o montante mutuado), o qual é divulgado ao investidor.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Como funciona o reporting durante o projecto?</div>
+      <div class="faq-a">Reporting trimestral em PDF: estado da obra (fotografia + cronograma), execução orçamental, estado de comercialização (unidades reservadas, CPCV, escrituras), e variações relevantes face ao Business Plan. Auditoria anual e final por revisor oficial de contas independente.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Que documentação recebo antes de decidir?</div>
+      <div class="faq-a">Após NDA assinado: Business Plan completo do projecto (50+ páginas), minuta do Acordo de Investimento, minuta do Acordo Parassocial, due diligence legal do terreno, projecto de arquitectura, e proposta de financiamento bancário. Todos os documentos são trabalhados pela Antas da Cunha ECIJA.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Os retornos referidos são líquidos ou brutos? Com ou sem fiscalidade?</div>
+      <div class="faq-a">A TIR de 30–35% é bruta — antes do carried interest de Sandro e antes da fiscalidade do investidor. A fiscalidade depende da forma jurídica em que cada investidor entra (pessoa singular vs pessoa colectiva, residente vs não residente) e é matéria de aconselhamento fiscal próprio. Não fazemos planeamento fiscal pelos investidores.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEGAL FOOTNOTE ============ -->
+<div class="legal-footnote">
+  <div class="legal-inner">
+    <strong>— Nota legal</strong>
+    Este documento constitui comunicação de marketing e não consubstancia oferta pública de valores mobiliários, recomendação de investimento, aconselhamento financeiro, fiscal ou jurídico. Os investimentos referidos estão restritos a investidores qualificados nos termos do Regulamento (UE) 2017/1129 do Parlamento Europeu e do Conselho e do Código dos Valores Mobiliários. Rentabilidades passadas não constituem garantia de rentabilidades futuras. Investimentos imobiliários comportam risco de perda parcial ou total do capital investido. Antes de qualquer decisão de investimento, deve ser consultado o Business Plan específico, o Acordo de Investimento e o Acordo Parassocial do projecto, bem como obtido aconselhamento jurídico, fiscal e financeiro independente. A Terraǝ Capital opera enquanto designação comercial associada a sociedade veículo a constituir para cada projecto, sem prejuízo das regras societárias e regulatórias aplicáveis. Para informação adicional contacte-nos directamente.
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Terraǝ</div>
+      <p class="footer-tag">Transformamos cada decisão imobiliária numa experiência de excelência. Mediação, crédito e investimento — em três áreas que se alimentam mutuamente.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Comprar</h4>
+      <a href="#">Empreendimentos</a>
+      <a href="#">Casas selecionadas</a>
+      <a href="#">Simulador de crédito</a>
+      <a href="#">Lista de espera VFX</a>
+    </div>
+    <div class="footer-col">
+      <h4>Vender</h4>
+      <a href="#">Avaliação em 24h</a>
+      <a href="#">Property Films</a>
+      <a href="#">Diagnóstico de Venda</a>
+    </div>
+    <div class="footer-col">
+      <h4>Investir</h4>
+      <a href="#">Estrutura SPV</a>
+      <a href="#">Próximos projetos</a>
+      <a href="#">Track record</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 Terraǝ · AMI 00000</div>
+    <div>Linda-a-Velha · Lisboa · Portugal</div>
+  </div>
+</footer>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => item.classList.toggle('open'));
+  });
+  
+  // Chips
+  document.querySelectorAll('.chips').forEach(group => {
+    group.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        group.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+        chip.classList.add('selected');
+      });
+    });
+  });
+  
+  // Yes/No
+  document.querySelectorAll('.yn').forEach(group => {
+    group.querySelectorAll('.yn-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        group.querySelectorAll('.yn-option').forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
