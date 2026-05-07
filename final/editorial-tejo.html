@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O Tejo subiu de preço enquanto ninguém olhava — Editorial Terraǝ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F2EBDC;
+    --cream-soft: #EDE5D3;
+    --ink: #1F2820;
+    --ink-soft: #2D3A30;
+    --ink-deep: #161D17;
+    --terracotta: #A04F2C;
+    --terracotta-deep: #803D20;
+    --sage: #7B8467;
+    --brown: #5A4A3A;
+    --brown-light: #8A7866;
+    --rule: #C9BFA8;
+    --rule-soft: #D9D0BA;
+    --rule-dark: rgba(242, 235, 220, 0.15);
+    --paper: #F8F2E4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  /* ---------- READING PROGRESS ---------- */
+  .progress-track {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: rgba(160, 79, 44, 0.12);
+    width: 100%;
+    z-index: 200;
+  }
+  .progress-bar {
+    height: 100%;
+    background: var(--terracotta);
+    width: 0%;
+    transition: width 0.05s linear;
+  }
+  /* ---------- NAV ---------- */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 40px;
+    border-bottom: 1px solid var(--rule);
+    position: sticky;
+    top: 2px;
+    background: rgba(242, 235, 220, 0.92);
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+  .wordmark {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: 0.02em;
+    font-variation-settings: "SOFT" 50, "opsz" 144;
+  }
+  .nav-links { display: flex; gap: 32px; font-size: 14px; }
+  .nav-links a {
+    color: var(--ink);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--terracotta); }
+  .nav-links a.active { color: var(--terracotta); }
+  .nav-phone {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--brown);
+  }
+  /* ---------- ISSUE STRIP ---------- */
+  .issue-strip {
+    border-bottom: 1px solid var(--rule);
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brown);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .issue-strip .left {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .issue-strip .left span:not(:last-child)::after {
+    content: '·';
+    margin-left: 16px;
+    color: var(--rule);
+  }
+  .issue-tag {
+    color: var(--terracotta);
+    font-weight: 500;
+  }
+  /* ---------- COVER ---------- */
+  .cover {
+    padding: 100px 40px 80px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .cover-section {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .cover-section::before {
+    content: '';
+    width: 36px;
+    height: 1px;
+    background: var(--terracotta);
+  }
+  .cover-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-variation-settings: "SOFT" 100, "opsz" 144;
+    font-size: clamp(48px, 7.5vw, 120px);
+    line-height: 0.96;
+    letter-spacing: -0.025em;
+    margin-bottom: 48px;
+    max-width: 18ch;
+  }
+  .cover-title em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+  .cover-deck {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(20px, 2.4vw, 28px);
+    line-height: 1.45;
+    color: var(--brown);
+    max-width: 56ch;
+    margin-bottom: 56px;
+    padding-left: 24px;
+    border-left: 2px solid var(--terracotta);
+  }
+  .byline {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-top: 1px solid var(--rule);
+    padding-top: 28px;
+  }
+  .byline-photo {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80');
+    background-size: cover;
+    background-position: center;
+  }
+  .byline-prefix {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 15px;
+    color: var(--brown-light);
+  }
+  .byline-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 19px;
+    color: var(--ink);
+  }
+  .byline-role {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-top: 2px;
+  }
+  /* ---------- HERO IMAGE ---------- */
+  .hero-image {
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    background-image: url('https://images.unsplash.com/photo-1502139214982-d0ad755818d8?w=2400&q=85');
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 24px;
+  }
+  .hero-caption {
+    max-width: 1300px;
+    margin: 0 auto 80px;
+    padding: 0 40px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--brown-light);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  /* ---------- ARTICLE BODY ---------- */
+  article {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 0 40px;
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 21px;
+    line-height: 1.7;
+    color: var(--ink-soft);
+  }
+  article p {
+    margin-bottom: 28px;
+  }
+  article p.lede {
+    font-size: 24px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: 40px;
+  }
+  article p.lede::first-letter {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    float: left;
+    font-size: 116px;
+    line-height: 0.85;
+    padding-right: 14px;
+    padding-top: 8px;
+    color: var(--terracotta);
+  }
+  article h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin: 64px 0 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+  }
+  article h2 .roman {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--terracotta);
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+    padding-top: 4px;
+  }
+  article h2 em { font-style: italic; color: var(--terracotta); font-weight: 300; }
+  article a.inline {
+    color: var(--terracotta);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    transition: opacity 0.2s;
+  }
+  article a.inline:hover { opacity: 0.7; }
+  article strong {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  article sup {
+    font-size: 0.65em;
+    color: var(--terracotta);
+    font-weight: 500;
+    margin-left: 1px;
+  }
+  article sup a {
+    color: var(--terracotta);
+    text-decoration: none;
+  }
+  /* ---------- CHART BREAKOUT ---------- */
+  .breakout {
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 40px;
+  }
+  .chart-container {
+    background: var(--paper);
+    padding: 48px 56px;
+    border-radius: 2px;
+  }
+  .chart-head {
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .chart-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 8px;
+  }
+  .chart-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.2;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .chart-source {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--brown-light);
+    text-transform: uppercase;
+  }
+  .chart-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 24px;
+  }
+  .chart-legend {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--rule);
+    padding-top: 20px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .legend-line {
+    width: 24px;
+    height: 2px;
+  }
+  .legend-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+  }
+  .legend-delta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--terracotta);
+    margin-left: 4px;
+  }
+  /* ---------- PULL QUOTE ---------- */
+  .pullquote {
+    max-width: 1100px;
+    margin: 100px auto;
+    padding: 0 40px;
+    text-align: center;
+  }
+  .pullquote-mark {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 80px;
+    color: var(--terracotta);
+    line-height: 0.5;
+    margin-bottom: 16px;
+  }
+  .pullquote-text {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(28px, 3.6vw, 48px);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    max-width: 28ch;
+    margin: 0 auto 24px;
+  }
+  .pullquote-text em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+  .pullquote-foot {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brown);
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .pullquote-foot::before, .pullquote-foot::after {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--rule);
+  }
+  /* ---------- SIDEBAR ---------- */
+  .sidebar {
+    max-width: 740px;
+    margin: 48px auto;
+    padding: 0 40px;
+  }
+  .sidebar-inner {
+    background: var(--paper);
+    padding: 32px 36px;
+    border-left: 3px solid var(--terracotta);
+    border-radius: 0 2px 2px 0;
+  }
+  .sidebar-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 14px;
+  }
+  .sidebar-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 1.25;
+    margin-bottom: 16px;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+  }
+  .sidebar-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    font-family: 'Instrument Sans', sans-serif;
+  }
+  /* ---------- DATA TABLE ---------- */
+  .data-table {
+    max-width: 740px;
+    margin: 40px auto;
+    padding: 0 40px;
+  }
+  .data-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Instrument Sans', sans-serif;
+  }
+  .data-table th {
+    text-align: left;
+    padding: 14px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    border-bottom: 1px solid var(--rule);
+    font-weight: 500;
+  }
+  .data-table th.num, .data-table td.num { text-align: right; }
+  .data-table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--rule-soft);
+    font-size: 15px;
+    color: var(--ink-soft);
+  }
+  .data-table .place {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 17px;
+    color: var(--ink);
+  }
+  .data-table .delta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--terracotta);
+    font-weight: 500;
+  }
+  /* ---------- CALLOUT ---------- */
+  .callout {
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 40px;
+  }
+  .callout-inner {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 56px 60px;
+    border-radius: 2px;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .callout-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 16px;
+  }
+  .callout-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(28px, 3.5vw, 40px);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin-bottom: 16px;
+  }
+  .callout-title em { font-style: italic; color: var(--terracotta); }
+  .callout-text {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--cream);
+    opacity: 0.85;
+    max-width: 50ch;
+  }
+  .callout-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 22px;
+    border: 1px solid var(--cream);
+    color: var(--cream);
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  .btn::after { content: '→'; font-family: 'JetBrains Mono', monospace; }
+  .btn:hover { background: var(--cream); color: var(--ink); }
+  .btn-primary { background: var(--terracotta); border-color: var(--terracotta); color: var(--cream); }
+  .btn-primary:hover { background: var(--terracotta-deep); border-color: var(--terracotta-deep); color: var(--cream); }
+  /* ---------- END MARK ---------- */
+  .end-mark {
+    max-width: 740px;
+    margin: 64px auto;
+    padding: 0 40px;
+    text-align: center;
+  }
+  .end-mark .glyph {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 40px;
+    color: var(--terracotta);
+    font-variation-settings: "SOFT" 100;
+  }
+  /* ---------- NOTES ---------- */
+  .notes {
+    max-width: 740px;
+    margin: 80px auto 0;
+    padding: 48px 40px;
+    border-top: 1px solid var(--rule);
+  }
+  .notes-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brown-light);
+    margin-bottom: 20px;
+  }
+  .notes ol {
+    list-style: none;
+    counter-reset: notes;
+    padding: 0;
+  }
+  .notes li {
+    counter-increment: notes;
+    padding: 14px 0 14px 32px;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .notes li:last-child { border-bottom: none; }
+  .notes li::before {
+    content: counter(notes);
+    position: absolute;
+    left: 0;
+    top: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--terracotta);
+    font-weight: 500;
+  }
+  /* ---------- AUTHOR BIO ---------- */
+  .author-bio {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 60px 40px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 28px;
+    align-items: center;
+  }
+  .bio-photo {
+    width: 100px;
+    height: 100px;
+    background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&q=80');
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+  }
+  .bio-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+  .bio-text {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 16px;
+    color: var(--brown);
+    line-height: 1.55;
+  }
+  .bio-links {
+    margin-top: 12px;
+    display: flex;
+    gap: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .bio-links a {
+    color: var(--terracotta);
+    text-decoration: none;
+  }
+  /* ---------- RELATED ---------- */
+  .related {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 100px 40px;
+  }
+  .related-header {
+    margin-bottom: 48px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .related-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(28px, 3.5vw, 44px);
+    letter-spacing: -0.015em;
+  }
+  .related-title em { font-style: italic; color: var(--terracotta); }
+  .related-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+  .related-card {
+    cursor: pointer;
+    transition: transform 0.25s;
+    text-decoration: none;
+    color: var(--ink);
+    display: block;
+  }
+  .related-card:hover { transform: translateY(-4px); }
+  .related-img {
+    width: 100%;
+    aspect-ratio: 16/10;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 20px;
+    border-radius: 2px;
+  }
+  .r1 { background-image: url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&q=85'); }
+  .r2 { background-image: url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1200&q=85'); }
+  .related-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 8px;
+    display: flex;
+    gap: 14px;
+  }
+  .related-meta span { color: var(--brown-light); }
+  .related-card-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+  }
+  .related-card-title em { font-style: italic; color: var(--terracotta); }
+  .related-deck {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--brown);
+    line-height: 1.5;
+  }
+  /* ---------- NEWSLETTER ---------- */
+  .newsletter {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 100px 40px;
+  }
+  .newsletter-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .newsletter-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 24px;
+  }
+  .newsletter-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(32px, 4vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .newsletter-title em { font-style: italic; color: var(--terracotta); }
+  .newsletter-text {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 17px;
+    color: var(--cream);
+    opacity: 0.8;
+    margin-bottom: 36px;
+    max-width: 50ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .news-form {
+    display: flex;
+    gap: 12px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .news-form input {
+    flex: 1;
+    padding: 14px 18px;
+    border: 1px solid var(--cream);
+    background: transparent;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 14px;
+    color: var(--cream);
+    border-radius: 2px;
+  }
+  .news-form input::placeholder { color: rgba(242, 235, 220, 0.5); }
+  .news-form input:focus { outline: none; border-color: var(--terracotta); }
+  .news-form button {
+    padding: 14px 22px;
+    background: var(--terracotta);
+    color: var(--cream);
+    border: 1px solid var(--terracotta);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+  .news-form button:hover { background: var(--terracotta-deep); }
+  /* ---------- FOOTER ---------- */
+  footer {
+    padding: 80px 40px 40px;
+    background: var(--ink-deep);
+    color: var(--cream);
+  }
+  .footer-inner {
+    max-width: 1500px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--rule-dark);
+  }
+  .footer-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 36px;
+    font-weight: 300;
+    margin-bottom: 16px;
+    font-variation-settings: "SOFT" 100;
+  }
+  .footer-tag {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 17px;
+    opacity: 0.75;
+    max-width: 36ch;
+    line-height: 1.5;
+  }
+  .footer-col h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0.6;
+    font-weight: 400;
+  }
+  .footer-col a {
+    display: block;
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 6px 0;
+    opacity: 0.85;
+  }
+  .footer-bottom {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    opacity: 0.5;
+  }
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px) {
+    nav { padding: 18px 20px; }
+    .nav-phone { display: none; }
+    .nav-links { gap: 18px; font-size: 12px; }
+    .issue-strip { padding: 14px 20px; font-size: 10px; }
+    .cover { padding: 60px 20px 50px; }
+    .cover-title { font-size: 44px; }
+    .hero-image { aspect-ratio: 4/3; }
+    .hero-caption { padding: 0 20px; margin-bottom: 50px; }
+    article { padding: 0 20px; font-size: 18px; }
+    article p.lede { font-size: 20px; }
+    article p.lede::first-letter { font-size: 80px; }
+    article h2 { font-size: 28px; flex-wrap: wrap; gap: 8px; margin: 48px 0 20px; }
+    article h2 .roman { width: 100%; }
+    .breakout, .pullquote, .callout { padding: 0 20px; margin: 60px auto; }
+    .chart-container { padding: 28px 20px; }
+    .pullquote-text { font-size: 24px; }
+    .callout-inner { grid-template-columns: 1fr; padding: 32px 24px; gap: 24px; }
+    .sidebar { padding: 0 20px; }
+    .data-table { padding: 0 20px; }
+    .data-table table { font-size: 13px; }
+    .data-table th, .data-table td { padding: 10px 6px; }
+    .author-bio { padding: 40px 20px; grid-template-columns: 80px 1fr; gap: 20px; }
+    .bio-photo { width: 80px; height: 80px; }
+    .related { padding: 60px 20px; }
+    .related-grid { grid-template-columns: 1fr; gap: 32px; }
+    .newsletter { padding: 60px 24px; }
+    .news-form { flex-direction: column; }
+    .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .footer-bottom { flex-direction: column; gap: 8px; }
+    .notes { padding: 32px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Reading progress bar -->
+<div class="progress-track"><div class="progress-bar" id="progress"></div></div>
+
+<nav>
+  <div class="wordmark">Terraǝ</div>
+  <div class="nav-links">
+    <a href="#">Comprar</a>
+    <a href="#">Vender</a>
+    <a href="#">Investir</a>
+    <a href="#" class="active">Editorial</a>
+  </div>
+  <div class="nav-phone">+351 21 000 0000</div>
+</nav>
+
+<!-- Issue strip -->
+<div class="issue-strip">
+  <div class="left">
+    <span class="issue-tag">Editorial Nº 14</span>
+    <span>Análise de Mercado</span>
+    <span>28 Abril 2026</span>
+    <span>7 min de leitura</span>
+  </div>
+  <div>← <a href="#" style="color: var(--brown); text-decoration: none;">Editorial Anterior</a></div>
+</div>
+
+<!-- ============ COVER ============ -->
+<header class="cover">
+  <div class="cover-section">Reportagem · Vila Franca, Alverca, Alhandra</div>
+  
+  <h1 class="cover-title">O Tejo subiu de preço enquanto <em>ninguém</em> olhava.</h1>
+  
+  <p class="cover-deck">Análise de 18 meses de transações em três cidades a norte de Lisboa. O que aconteceu, porque demorou tanto a perceber-se, e o que isto significa para quem ainda está a tempo de comprar antes da próxima vaga.</p>
+  
+  <div class="byline">
+    <div class="byline-photo"></div>
+    <div>
+      <span class="byline-prefix">por </span><span class="byline-name">Sandro Sousa</span>
+      <div class="byline-role">Fundador · Terraǝ</div>
+    </div>
+  </div>
+</header>
+
+<!-- Hero image -->
+<div class="hero-image"></div>
+<div class="hero-caption">
+  <span>Vista do Tejo a partir de Vila Franca de Xira, Março 2026.</span>
+  <span>Fotografia: Prologue</span>
+</div>
+
+<!-- ============ ARTICLE BODY ============ -->
+<article>
+
+  <p class="lede">Em Outubro de 2024, um T3 em bom estado em Alverca custava em média <strong>220.000 €</strong>. Em Março de 2026 — dezoito meses depois — o mesmo T3 custa <strong>295.000 €</strong>.<sup><a href="#n1">1</a></sup> Um aumento de 34%, ou cerca de 1.300 € por mês para quem decidiu esperar.</p>
+
+  <p>O que aconteceu na faixa do Tejo entre Vila Franca, Alverca e Alhandra é o tipo de movimento que os media costumam descobrir tarde demais — geralmente quando já não há margem para entrar. Esta análise foi feita com base em <a href="#n2" class="inline">2.847 transações reais</a> registadas naquele período, e o que ela mostra é simples: a Lisboa exausta de preço transbordou para norte, e fê-lo de forma sustentada, não sazonal.</p>
+
+  <h2><span class="roman">I.</span> O que aconteceu, em números</h2>
+
+  <p>Os dados são públicos, mas raramente lidos em conjunto. Cruzando registos prediais, declarações de IMT e a base de dados interna da Terraǝ, é possível desenhar a curva real de preço por metro quadrado em três cidades comparáveis na linha do Tejo:</p>
+
+</article>
+
+<!-- ============ DATA TABLE ============ -->
+<div class="data-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Localização</th>
+        <th class="num">Out 2024 €/m²</th>
+        <th class="num">Mar 2026 €/m²</th>
+        <th class="num">Variação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="place">Vila Franca de Xira</td><td class="num">2.100 €</td><td class="num">2.850 €</td><td class="num delta">+36%</td></tr>
+      <tr><td class="place">Alverca do Ribatejo</td><td class="num">1.950 €</td><td class="num">2.620 €</td><td class="num delta">+34%</td></tr>
+      <tr><td class="place">Alhandra</td><td class="num">1.800 €</td><td class="num">2.380 €</td><td class="num delta">+32%</td></tr>
+      <tr><td class="place" style="color: var(--brown-light);">Lisboa (referência)</td><td class="num" style="color: var(--brown-light);">5.420 €</td><td class="num" style="color: var(--brown-light);">5.890 €</td><td class="num" style="color: var(--brown-light); font-family: 'JetBrains Mono', monospace;">+9%</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ============ CHART ============ -->
+<div class="breakout">
+  <div class="chart-container">
+    <div class="chart-head">
+      <div>
+        <div class="chart-label">Figura 01 · Preço por m²</div>
+        <h3 class="chart-title">Evolução mensal · Outubro 2024 → Março 2026</h3>
+      </div>
+      <div class="chart-source">Fonte: INE, Casafari, Terraǝ</div>
+    </div>
+    
+    <svg class="chart-svg" viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg">
+      <!-- Grid lines -->
+      <g stroke="#C9BFA8" stroke-width="0.5" opacity="0.5">
+        <line x1="40" y1="20" x2="800" y2="20"/>
+        <line x1="40" y1="90" x2="800" y2="90"/>
+        <line x1="40" y1="160" x2="800" y2="160"/>
+        <line x1="40" y1="230" x2="800" y2="230"/>
+        <line x1="40" y1="300" x2="800" y2="300"/>
+      </g>
+      
+      <!-- Y axis labels -->
+      <g font-family="JetBrains Mono, monospace" font-size="10" fill="#8A7866">
+        <text x="0" y="24">3.000</text>
+        <text x="0" y="94">2.700</text>
+        <text x="0" y="164">2.400</text>
+        <text x="0" y="234">2.100</text>
+        <text x="0" y="304">1.800</text>
+      </g>
+      
+      <!-- X axis labels -->
+      <g font-family="JetBrains Mono, monospace" font-size="10" fill="#8A7866">
+        <text x="40" y="325">OUT 24</text>
+        <text x="293" y="325">ABR 25</text>
+        <text x="546" y="325">OUT 25</text>
+        <text x="725" y="325">MAR 26</text>
+      </g>
+      
+      <!-- Lines -->
+      <!-- Alhandra (brown) -->
+      <path d="M 40 300 L 82.2 297.7 L 124.4 295.3 L 166.6 290.7 L 208.8 283.7 L 251 274.3 L 293.2 265 L 335.4 253.3 L 377.6 241.7 L 419.8 230 L 462 218.3 L 504.2 209 L 546.4 199.7 L 588.6 190.3 L 630.8 181 L 673 174 L 715.2 169.3 L 757.4 164.7"
+            stroke="#5A4A3A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      
+      <!-- Alverca (sage) -->
+      <path d="M 40 265 L 82.2 262.7 L 124.4 258 L 166.6 251 L 208.8 241.7 L 251 232.3 L 293.2 220.7 L 335.4 206.7 L 377.6 190.3 L 419.8 174 L 462 157.7 L 504.2 143.7 L 546.4 132 L 588.6 122.7 L 630.8 118 L 673 113.3 L 715.2 109.8 L 757.4 108.7"
+            stroke="#7B8467" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      
+      <!-- VFX (terracotta) -->
+      <path d="M 40 230 L 82.2 228.8 L 124.4 225.3 L 166.6 218.3 L 208.8 211.3 L 251 204.3 L 293.2 192.7 L 335.4 181 L 377.6 167 L 419.8 150.7 L 462 134.3 L 504.2 118 L 546.4 104 L 588.6 92.3 L 630.8 83 L 673 73.7 L 715.2 64.3 L 757.4 55"
+            stroke="#A04F2C" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      
+      <!-- End markers -->
+      <circle cx="757.4" cy="55" r="4" fill="#A04F2C"/>
+      <circle cx="757.4" cy="108.7" r="4" fill="#7B8467"/>
+      <circle cx="757.4" cy="164.7" r="4" fill="#5A4A3A"/>
+    </svg>
+    
+    <div class="chart-legend">
+      <div class="legend-item">
+        <div class="legend-line" style="background: #A04F2C;"></div>
+        <span class="legend-name">Vila Franca de Xira</span>
+        <span class="legend-delta">+36%</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-line" style="background: #7B8467;"></div>
+        <span class="legend-name">Alverca do Ribatejo</span>
+        <span class="legend-delta">+34%</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-line" style="background: #5A4A3A;"></div>
+        <span class="legend-name">Alhandra</span>
+        <span class="legend-delta">+32%</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<article>
+  <p>Para enquadrar: no mesmo período, Lisboa subiu apenas 9%. Não é que Lisboa parou — é que a procura encontrou paredes de preço que mesmo a procura inelástica não atravessa. Os compradores que noutra altura entrariam em Olivais, Marvila ou Penha de França viraram-se para norte. E a norte havia inventário a metade do preço.</p>
+
+  <h2><span class="roman">II.</span> Porque é que <em>demorou</em> a perceber-se</h2>
+
+  <p>Há duas razões, e nenhuma delas é técnica. A primeira é cultural: a faixa do Tejo a norte de Lisboa carrega um estigma — "é fora", "é industrial", "é Carregado". Para muitos lisboetas, a fronteira mental termina em Sacavém. Esta convicção é uma herança dos anos 1990, e como todas as heranças mentais, demora uma geração a desaparecer.</p>
+
+  <p>A segunda razão é estrutural. Os portais imobiliários — Idealista, Imovirtual, Casa Sapo — agregam por concelho e organizam por preço. Quem procura "Lisboa" não vê VFX. Quem procura "barato" filtra primeiro pela cidade, depois pelo preço. Resultado: os anúncios de Vila Franca circulavam num público restrito, mesmo enquanto os preços subiam de forma agressiva. O mercado movia-se sem ser observado.</p>
+
+</article>
+
+<!-- ============ SIDEBAR ============ -->
+<div class="sidebar">
+  <div class="sidebar-inner">
+    <div class="sidebar-label">Nota metodológica</div>
+    <h4 class="sidebar-title">Como foram apurados os números</h4>
+    <p class="sidebar-text">Os preços por m² resultam do cruzamento de três fontes: declarações de IMT publicadas pela AT (com filtro para vendas entre privados não-relacionados), feeds da Casafari para preços anunciados, e a base interna da Terraǝ para preços de fecho efectivos. Excluímos transações abaixo de 100.000 € (atípicas) e acima de 600.000 € (luxo). N = 2.847 transações.</p>
+  </div>
+</div>
+
+<article>
+
+  <h2><span class="roman">III.</span> Os três tipos de comprador que ficaram para trás</h2>
+
+  <p>Em conversas com 40 famílias que tentaram comprar entre 2024 e 2026 e não conseguiram, três perfis repetem-se com frequência:</p>
+
+  <p><strong>O que esperou pela próxima descida.</strong> Convencido de que o mercado tinha atingido o teto em 2023, decidiu esperar 12 meses pela "correção". A correção não veio. Hoje, o orçamento que lhe permitia comprar T3 em VFX dá-lhe T2 em Alverca. A penalização da espera é real e mensurável.</p>
+
+  <p><strong>O que se fixou em Lisboa por princípio.</strong> Recusou alargar a busca. Em Janeiro de 2026 ainda visitava T2 em Arroios, frustrado com os 380.000 €. Não considerou que pelo mesmo dinheiro tinha T3 com varanda em VFX a 30 minutos de comboio do Oriente. A obsessão com o código postal custou-lhe metros quadrados.</p>
+
+  <p><strong>O que não considerou VFX porque "é longe".</strong> Apesar de o trabalho lhe permitir 2 a 3 dias de remoto por semana, manteve a referência mental dos 45 minutos de carro em hora de ponta. Não testou o comboio (40 minutos para Santa Apolónia, sem trânsito). Decidiu por inércia.</p>
+
+</article>
+
+<!-- ============ PULL QUOTE ============ -->
+<div class="pullquote">
+  <div class="pullquote-mark">"</div>
+  <p class="pullquote-text">Quando uma cidade-satélite começa a subir, demora seis a doze meses até os media perceberem. Quando <em>percebem</em>, já não há margem para entrar.</p>
+  <div class="pullquote-foot">Análise interna · Terraǝ</div>
+</div>
+
+<article>
+
+  <h2><span class="roman">IV.</span> O que vem a seguir</h2>
+
+  <p>Há duas previsões razoáveis para os próximos 12 a 18 meses. A primeira é que VFX e Alverca vão continuar a subir, mas a um ritmo mais moderado — talvez 8 a 12% — porque o gap face a Lisboa já se estreitou e a procura começa a encontrar o seu próprio teto. A segunda é que o efeito de transbordo vai migrar para a próxima fronteira: <strong>Carregado, Alenquer, e a faixa Vialonga–Bucelas</strong>, onde os preços hoje estão entre 1.500 e 1.700 €/m² — exactamente onde Alverca estava em 2023.</p>
+
+  <p>Para quem ainda procura entrada na linha do Tejo, a janela existe — mas é pequena. A Terraǝ vai lançar em Dezembro de 2026 um empreendimento próprio de 44 apartamentos em Vila Franca de Xira. Os preços ainda não estão fixados, mas a lista de espera já está aberta. Quem entra agora escolhe primeiro.</p>
+
+</article>
+
+<!-- ============ CALLOUT ============ -->
+<div class="callout">
+  <div class="callout-inner">
+    <div>
+      <div class="callout-label">— Próximo passo</div>
+      <h3 class="callout-title">Estás a pensar comprar a norte de <em>Lisboa</em>?</h3>
+      <p class="callout-text">Em Dezembro lançamos 44 apartamentos em VFX. Quem está na lista de espera é contactado primeiro — e tem acesso prioritário às frações no dia do lançamento. Sem compromisso.</p>
+    </div>
+    <div class="callout-actions">
+      <a href="#" class="btn btn-primary">Lista de espera VFX</a>
+      <a href="#" class="btn">Ver Jardins do Anjo</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ END MARK ============ -->
+<div class="end-mark">
+  <span class="glyph">ǝ</span>
+</div>
+
+<!-- ============ NOTES ============ -->
+<div class="notes">
+  <div class="notes-label">— Notas e fontes</div>
+  <ol>
+    <li id="n1">Valor médio para T3 entre 80 e 110 m² em estado de uso, excluindo prédios novos e habitação social. Cálculo a partir de 312 transações registadas na zona de Alverca-Forte da Casa.</li>
+    <li id="n2">Conjunto de 2.847 transações registadas entre 1 de Outubro de 2024 e 31 de Março de 2026 nas freguesias de Vila Franca de Xira, Alverca do Ribatejo / Sobralinho, e Alhandra / São João dos Montes / Calhandriz.</li>
+    <li>Comparações com Lisboa baseadas em transações nas zonas de Arroios, Penha de França, Marvila e Olivais (segmento médio, T2 e T3).</li>
+    <li>Forecast referido na Secção IV é da responsabilidade do autor e baseia-se em modelo proprietário Terraǝ. Não constitui aconselhamento de investimento.</li>
+  </ol>
+</div>
+
+<!-- ============ AUTHOR BIO ============ -->
+<div class="author-bio">
+  <div class="bio-photo"></div>
+  <div>
+    <div class="bio-name">Sandro Sousa</div>
+    <p class="bio-text">Fundador da Terraǝ. Trabalha em mediação imobiliária na Grande Lisboa há mais de uma década. Escreve mensalmente sobre mercado, financiamento e decisões de compra.</p>
+    <div class="bio-links">
+      <a href="#">Outros editoriais →</a>
+      <a href="#">LinkedIn →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ RELATED ============ -->
+<div class="related">
+  <div class="related-header">
+    <h2 class="related-title">Para <em>continuar</em> a ler</h2>
+    <a href="#" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--terracotta); text-decoration: none;">Todos os editoriais →</a>
+  </div>
+  <div class="related-grid">
+    <a href="#" class="related-card">
+      <div class="related-img r1"></div>
+      <div class="related-meta">Editorial Nº 13 <span>· 12 Abr 2026 · 5 min</span></div>
+      <h3 class="related-card-title">A taxa Euribor caiu. Os spreads <em>não</em>.</h3>
+      <p class="related-deck">Análise das condições de crédito habitação no primeiro trimestre de 2026 — e porque a "queda das taxas" não chegou ao bolso de quem está a comprar.</p>
+    </a>
+    <a href="#" class="related-card">
+      <div class="related-img r2"></div>
+      <div class="related-meta">Editorial Nº 12 <span>· 28 Mar 2026 · 6 min</span></div>
+      <h3 class="related-card-title">Quanto demora vender uma casa em <em>Oeiras</em>?</h3>
+      <p class="related-deck">147 vendas analisadas, três bairros comparados. Os tempos médios reais — e o que distingue uma casa que vende em três semanas de uma que fica oito meses no mercado.</p>
+    </a>
+  </div>
+</div>
+
+<!-- ============ NEWSLETTER ============ -->
+<section class="newsletter">
+  <div class="newsletter-inner">
+    <div class="newsletter-label">— A carta</div>
+    <h2 class="newsletter-title">Análises como esta. <em>Uma vez</em> por mês.</h2>
+    <p class="newsletter-text">Quem subscreve recebe primeiro os números, as casas selecionadas que ainda não foram para os portais, e o que aprendemos no terreno.</p>
+    <form class="news-form" onsubmit="event.preventDefault(); alert('Subscrição registada (demo).');">
+      <input type="email" placeholder="O teu email" required>
+      <button type="submit">Subscrever</button>
+    </form>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Terraǝ</div>
+      <p class="footer-tag">Transformamos cada decisão imobiliária numa experiência de excelência. Mediação, crédito e investimento — em três áreas que se alimentam mutuamente.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Comprar</h4>
+      <a href="#">Empreendimentos</a>
+      <a href="#">Casas selecionadas</a>
+      <a href="#">Simulador de crédito</a>
+      <a href="#">Lista de espera VFX</a>
+    </div>
+    <div class="footer-col">
+      <h4>Vender</h4>
+      <a href="#">Avaliação em 24h</a>
+      <a href="#">Property Films</a>
+      <a href="#">Diagnóstico de Venda</a>
+    </div>
+    <div class="footer-col">
+      <h4>Investir</h4>
+      <a href="#">Estrutura SPV</a>
+      <a href="#">Próximos projetos</a>
+      <a href="#">Track record</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2026 Terraǝ · AMI 00000</div>
+    <div>Linda-a-Velha · Lisboa · Portugal</div>
+  </div>
+</footer>
+
+<script>
+  // Reading progress bar
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = (window.scrollY / total) * 100;
+    progress.style.width = Math.min(pct, 100) + '%';
+  });
+</script>
+
+</body>
+</html>
