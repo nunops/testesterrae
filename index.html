@@ -1,1875 +1,1096 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terrae — Imobiliário com critério</title>
-<meta name="description" content="Estamos a construir uma imobiliária com critério. Mediação, investimento e consultoria — em Lisboa, Setúbal e Oeiras.">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Metodologia — Terrae</title>
+<meta name="description" content="A metodologia de avaliação de imóveis aplicada pela Terrae, alinhada com as European Valuation Standards 2025, as International Valuation Standards e o RICS Red Book Global." />
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
-  :root {
-    --cream: #F2EBDC;
-    --cream-soft: #EDE5D3;
-    --paper: #F8F2E4;
-    --ink: #1F2820;
-    --ink-soft: #2D3A30;
-    --ink-deep: #161D17;
-    --terracotta: #A04F2C;
-    --terracotta-deep: #803D20;
-    --terracotta-soft: rgba(160, 79, 44, 0.08);
-    --sage: #7B8467;
-    --sage-light: #9DA68A;
-    --sage-soft: rgba(123, 132, 103, 0.08);
-    --brown: #5A4A3A;
-    --brown-light: #8A7866;
-    --rule: #C9BFA8;
-    --rule-soft: #D9D0BA;
-    --rule-dark: rgba(242, 235, 220, 0.18);
-  }
+:root {
+  --ink: #10130F;
+  --ink-soft: #2A2E27;
+  --paper: #F4F0E6;
+  --paper-warm: #FBF7ED;
+  --paper-deep: #E9E0CF;
+  --paper-mist: #F8F4EA;
+  --terra: #26392D;
+  --terra-deep: #16231B;
+  --terra-mid: #3F5646;
+  --terra-soft: #647761;
+  --soil: #5A3B2C;
+  --clay: #A46F4E;
+  --ochre: #C69A63;
+  --sand: #DAC6A0;
+  --line: rgba(38, 57, 45, .18);
+  --line-strong: rgba(38, 57, 45, .36);
+  --muted: #6C6B62;
+  --shadow-soft: 0 24px 70px rgba(22, 35, 27, .10);
+  --shadow-hover: 0 32px 90px rgba(22, 35, 27, .16);
+  --radius-sm: 6px;
+  --radius-md: 14px;
+  --radius-lg: 28px;
+}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--cream);
-    color: var(--ink);
-    font-family: 'Instrument Sans', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 8% 8%, rgba(198, 154, 99, .20), transparent 28vw),
+    radial-gradient(circle at 86% 12%, rgba(38, 57, 45, .12), transparent 26vw),
+    linear-gradient(180deg, var(--paper-warm) 0%, var(--paper) 42%, #EFE6D6 100%);
+  font-feature-settings: "kern" 1, "liga" 1, "onum" 1;
+  overflow-x: hidden;
+}
 
-  ::selection { background: var(--terracotta); color: var(--cream); }
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  opacity: .055;
+  background-image:
+    linear-gradient(90deg, rgba(16, 19, 15, .7) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(16, 19, 15, .7) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(180deg, black, transparent 72%);
+}
 
-  /* ════════════════════════════════════════
-     NAV
-  ════════════════════════════════════════ */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 40px;
-    background: rgba(242, 235, 220, 0.85);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    z-index: 100;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s, padding 0.3s;
-  }
-  nav.scrolled {
-    border-bottom-color: var(--rule);
-    padding: 14px 40px;
-  }
-  .wordmark {
-    font-family: 'Fraunces', serif;
-    font-weight: 400;
-    font-size: 24px;
-    letter-spacing: 0.01em;
-    font-variation-settings: "SOFT" 50, "opsz" 144;
-    cursor: pointer;
-    color: var(--ink);
-    text-decoration: none;
-  }
-  .nav-links {
-    display: flex;
-    gap: 30px;
-    align-items: center;
-  }
-  .nav-links a {
-    color: var(--ink);
-    text-decoration: none;
-    font-size: 11px;
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-    position: relative;
-    padding: 4px 0;
-  }
-  .nav-links a:hover { color: var(--terracotta); }
-  .nav-links a.active { color: var(--terracotta); }
-  .nav-links a.active::after {
-    content: '';
-    position: absolute;
-    bottom: -2px; left: 0;
-    width: 100%;
-    height: 1px;
-    background: var(--terracotta);
-  }
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 998;
+  opacity: .12;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+}
 
-  .nav-stamp {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    color: var(--brown-light);
-    border: 1px solid var(--rule);
-    padding: 5px 10px;
-    border-radius: 2px;
-  }
+::selection { background: var(--terra); color: var(--paper-warm); }
 
-  .burger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    padding: 8px;
-  }
-  .burger span {
-    width: 22px;
-    height: 1.5px;
-    background: var(--ink);
-    transition: 0.3s;
-  }
-  .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-  .burger.open span:nth-child(2) { opacity: 0; }
-  .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+/* Tipografia */
+.display, .brand, .hero-title, .section-title, .standard-name, .method-content h3, .cta-title, .download-title, .footer-brand {
+  font-family: 'Fraunces', Georgia, serif;
+  font-variation-settings: "opsz" 144;
+}
 
-  .mob-menu {
-    display: none;
-    position: fixed;
-    top: 64px; left: 0; right: 0; bottom: 0;
-    background: var(--cream);
-    flex-direction: column;
-    padding: 40px;
-    z-index: 99;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .mob-menu.show { opacity: 1; }
-  .mob-menu a {
-    color: var(--ink);
-    text-decoration: none;
-    font-family: 'Fraunces', serif;
-    font-size: 32px;
-    padding: 18px 0;
-    border-bottom: 1px solid var(--rule);
-    font-weight: 400;
-  }
-  .mob-menu a.active { color: var(--terracotta); font-style: italic; }
+.eyebrow, .nav-links a, .section-num, .hero-meta-item, .standard-tag, .standard-effective, .method-citation, .method-weight-label, .weight-value, .confidence-range, .report-item-num, .download-meta, .download-button, .footer h5, .footer-bottom, .source-kicker {
+  font-family: 'JetBrains Mono', monospace;
+}
 
-  /* ════════════════════════════════════════
-     LAYOUT BASE
-  ════════════════════════════════════════ */
-  main {
-    padding-top: 64px;
-    min-height: 100vh;
-  }
+.eyebrow {
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--terra);
+}
 
-  .view {
-    display: none;
-    animation: fadeIn 0.5s ease;
-  }
-  .view.active { display: block; }
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+/* Navegação */
+.nav {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  right: 18px;
+  z-index: 100;
+  border: 1px solid rgba(38, 57, 45, .16);
+  background: rgba(251, 247, 237, .76);
+  backdrop-filter: blur(18px) saturate(1.25);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  border-radius: 999px;
+  box-shadow: 0 18px 60px rgba(22, 35, 27, .08);
+}
 
-  section {
-    padding: 100px 40px;
-    max-width: 1280px;
-    margin: 0 auto;
-  }
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 12px 18px 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .section-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--terracotta);
-    margin-bottom: 28px;
-  }
+.brand {
+  font-weight: 500;
+  font-size: 21px;
+  letter-spacing: .03em;
+  color: var(--ink);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+}
 
-  h1.display {
-    font-family: 'Fraunces', serif;
-    font-weight: 300;
-    font-size: clamp(40px, 6.4vw, 88px);
-    line-height: 1.05;
-    letter-spacing: -0.025em;
-    font-variation-settings: "SOFT" 30, "opsz" 144;
-    color: var(--ink);
-  }
-  h1.display em {
-    font-style: italic;
-    color: var(--terracotta);
-    font-weight: 300;
-  }
-  h2.section-title {
-    font-family: 'Fraunces', serif;
-    font-weight: 400;
-    font-size: clamp(30px, 4vw, 52px);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 36px;
-    font-variation-settings: "SOFT" 30, "opsz" 144;
-    max-width: 880px;
-  }
-  h2.section-title em {
-    font-style: italic;
-    color: var(--terracotta);
-  }
-  h3.block-title {
-    font-family: 'Fraunces', serif;
-    font-weight: 400;
-    font-size: clamp(22px, 2.4vw, 30px);
-    line-height: 1.2;
-    letter-spacing: -0.015em;
-    margin-bottom: 16px;
-  }
+.brand-mark {
+  width: 27px;
+  height: 27px;
+  border: 1px solid var(--terra);
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  position: relative;
+  background: radial-gradient(circle, rgba(38, 57, 45, .12), transparent 56%);
+}
 
-  p.lead {
-    font-family: 'Fraunces', serif;
-    font-weight: 300;
-    font-size: clamp(18px, 1.8vw, 22px);
-    line-height: 1.55;
-    color: var(--ink-soft);
-    max-width: 720px;
-    font-variation-settings: "SOFT" 50, "opsz" 144;
-  }
+.brand-mark::before, .brand-mark::after {
+  content: "";
+  position: absolute;
+  background: var(--terra);
+}
+.brand-mark::before { width: 12px; height: 1px; transform: rotate(45deg); }
+.brand-mark::after { width: 1px; height: 12px; transform: rotate(45deg); }
 
-  p.body {
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--ink-soft);
-    max-width: 680px;
-  }
+.nav-links {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
 
-  .small-meta {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    color: var(--brown-light);
-    text-transform: uppercase;
-  }
+.nav-links a {
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  text-decoration: none;
+  transition: .25s ease;
+  padding: 10px 14px;
+  border-radius: 999px;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--paper-warm);
+  background: var(--terra);
+}
 
-  .rule { height: 1px; background: var(--rule); width: 100%; }
-  .rule-thick { height: 1px; background: var(--ink); width: 64px; }
+/* Hero */
+.hero {
+  min-height: 100vh;
+  padding: 150px 32px 94px;
+  max-width: 1360px;
+  margin: 0 auto;
+  position: relative;
+}
 
-  /* ════════════════════════════════════════
-     HERO (Home)
-  ════════════════════════════════════════ */
-  .hero {
-    padding: 96px 40px 80px;
-    max-width: 1380px;
-    margin: 0 auto;
-    position: relative;
-  }
-  .hero-stamp {
-    position: absolute;
-    top: 80px;
-    right: 40px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.16em;
-    color: var(--brown-light);
-    text-align: right;
-    line-height: 1.8;
-    text-transform: uppercase;
-  }
-  .hero-stamp strong {
-    color: var(--terracotta);
-    font-weight: 500;
-  }
-  .hero-title {
-    font-family: 'Fraunces', serif;
-    font-weight: 300;
-    font-size: clamp(44px, 8vw, 124px);
-    line-height: 0.98;
-    letter-spacing: -0.035em;
-    color: var(--ink);
-    font-variation-settings: "SOFT" 30, "opsz" 144;
-    margin-bottom: 40px;
-    max-width: 1100px;
-  }
-  .hero-title em {
-    font-style: italic;
-    color: var(--terracotta);
-    font-weight: 300;
-  }
-  .hero-sub {
-    max-width: 540px;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--ink-soft);
-    margin-bottom: 52px;
-  }
-  .hero-meta {
-    display: flex;
-    gap: 56px;
-    flex-wrap: wrap;
-    padding-top: 36px;
-    border-top: 1px solid var(--rule);
-    align-items: flex-start;
-  }
-  .hero-meta-item {
-    flex: 0 0 auto;
-  }
-  .hero-meta-item .small-meta { display: block; margin-bottom: 8px; }
-  .hero-meta-item .val {
-    font-family: 'Fraunces', serif;
-    font-size: 22px;
-    line-height: 1.3;
-    color: var(--ink);
-  }
+.hero::before {
+  content: "TERRAE";
+  position: absolute;
+  top: 132px;
+  right: -18px;
+  font-family: 'Fraunces', serif;
+  font-size: clamp(80px, 16vw, 240px);
+  line-height: 1;
+  letter-spacing: -.08em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(38, 57, 45, .11);
+  pointer-events: none;
+}
 
-  /* ════════════════════════════════════════
-     PRINCIPIOS — Home: O que somos / O que recusamos
-  ════════════════════════════════════════ */
-  .two-cols {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-  }
-  .two-cols .col-intro { position: sticky; top: 100px; }
-  .col-intro h2 { margin-bottom: 24px; }
-  .col-intro .small-meta { margin-bottom: 14px; }
+.hero-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, .72fr);
+  gap: 72px;
+  align-items: end;
+}
 
-  .principle-list {
-    list-style: none;
-  }
-  .principle-list li {
-    padding: 22px 0;
-    border-bottom: 1px solid var(--rule);
-    display: grid;
-    grid-template-columns: 28px 1fr;
-    gap: 14px;
-    align-items: baseline;
-  }
-  .principle-list li:last-child { border-bottom: none; }
-  .principle-list .num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    color: var(--terracotta);
-    padding-top: 4px;
-  }
-  .principle-list .principle {
-    font-family: 'Fraunces', serif;
-    font-size: 19px;
-    line-height: 1.4;
-    color: var(--ink);
-    font-weight: 400;
-  }
-  .principle-list .principle em {
-    font-style: italic;
-    color: var(--terracotta);
-  }
+.hero-eyebrow {
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.hero-eyebrow::before {
+  content: "";
+  width: 58px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--terra), transparent);
+}
 
-  /* ════════════════════════════════════════
-     ÁREAS DE ATUAÇÃO (Home)
-  ════════════════════════════════════════ */
-  .areas {
-    background: var(--paper);
-    margin: 0;
-    max-width: none;
-    padding: 100px 0;
-  }
-  .areas-inner {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 40px;
-  }
-  .area-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0;
-    border-top: 1px solid var(--rule);
-    border-left: 1px solid var(--rule);
-  }
-  .area-card {
-    padding: 40px;
-    border-bottom: 1px solid var(--rule);
-    border-right: 1px solid var(--rule);
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    color: inherit;
-    transition: background 0.25s;
-    cursor: pointer;
-    position: relative;
-    min-height: 280px;
-  }
-  .area-card:hover { background: var(--cream-soft); }
-  .area-card .area-num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.16em;
-    color: var(--brown-light);
-    text-transform: uppercase;
-    margin-bottom: 28px;
-  }
-  .area-card h3 {
-    font-family: 'Fraunces', serif;
-    font-weight: 400;
-    font-size: 32px;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 12px;
-    color: var(--ink);
-  }
-  .area-card h3 em { font-style: italic; color: var(--terracotta); }
-  .area-card p {
-    font-size: 14px;
-    line-height: 1.65;
-    color: var(--ink-soft);
-    margin-bottom: 20px;
-    flex-grow: 1;
-  }
-  .area-card .area-go {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.16em;
-    color: var(--terracotta);
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: gap 0.2s;
-  }
-  .area-card:hover .area-go { gap: 16px; }
-  .area-card .area-go::after {
-    content: '→';
-    font-family: 'Instrument Sans', sans-serif;
-    font-size: 14px;
-    transition: transform 0.2s;
-  }
+.hero-title {
+  font-weight: 300;
+  font-size: clamp(54px, 8vw, 116px);
+  line-height: .89;
+  letter-spacing: -.058em;
+  color: var(--ink);
+  margin-bottom: 34px;
+  max-width: 920px;
+}
+.hero-title em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--terra);
+  position: relative;
+}
+.hero-title em::after {
+  content: "";
+  position: absolute;
+  left: .04em;
+  right: -.06em;
+  bottom: .05em;
+  height: .18em;
+  background: rgba(198, 154, 99, .36);
+  z-index: -1;
+  border-radius: 999px;
+}
 
-  /* ════════════════════════════════════════
-     CITAÇÃO (Home)
-  ════════════════════════════════════════ */
-  .quote-section {
-    background: var(--ink);
-    color: var(--cream);
-    padding: 120px 40px;
-    margin: 0;
-    max-width: none;
-  }
-  .quote-inner { max-width: 1080px; margin: 0 auto; }
-  .quote-section .small-meta { color: var(--terracotta); margin-bottom: 36px; }
-  .quote-section blockquote {
-    font-family: 'Fraunces', serif;
-    font-weight: 300;
-    font-size: clamp(28px, 3.6vw, 48px);
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-    font-variation-settings: "SOFT" 30, "opsz" 144;
-    color: var(--cream);
-    max-width: 980px;
-  }
-  .quote-section blockquote em {
-    font-style: italic;
-    color: var(--terracotta);
-  }
-  .quote-attrib {
-    margin-top: 40px;
-    padding-top: 24px;
-    border-top: 1px solid var(--rule-dark);
-    display: flex;
-    gap: 20px;
-    align-items: center;
-  }
-  .quote-attrib .name {
-    font-family: 'Fraunces', serif;
-    font-size: 18px;
-    color: var(--cream);
-  }
-  .quote-attrib .role {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--sage-light);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
+.hero-card {
+  background: rgba(251, 247, 237, .72);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 34px;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+.hero-card::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px solid rgba(38, 57, 45, .10);
+  border-radius: 22px;
+  pointer-events: none;
+}
+.hero-lede {
+  font-size: 21px;
+  line-height: 1.48;
+  color: var(--ink-soft);
+  position: relative;
+  z-index: 1;
+}
+.hero-lede em { font-style: italic; color: var(--terra); }
 
-  /* ════════════════════════════════════════
-     MANIFESTO PAGES — INTRO HERO
-  ════════════════════════════════════════ */
-  .page-hero {
-    padding: 120px 40px 80px;
-    max-width: 1280px;
-    margin: 0 auto;
-    border-bottom: 1px solid var(--rule);
-  }
-  .page-hero .crumb {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--brown-light);
-    margin-bottom: 32px;
-  }
-  .page-hero .crumb a { color: var(--brown-light); text-decoration: none; }
-  .page-hero .crumb a:hover { color: var(--terracotta); }
-  .page-hero .crumb strong { color: var(--terracotta); font-weight: 500; }
-  .page-hero h1 {
-    font-family: 'Fraunces', serif;
-    font-weight: 300;
-    font-size: clamp(40px, 6vw, 84px);
-    line-height: 1.02;
-    letter-spacing: -0.03em;
-    font-variation-settings: "SOFT" 30, "opsz" 144;
-    margin-bottom: 36px;
-    max-width: 980px;
-  }
-  .page-hero h1 em { font-style: italic; color: var(--terracotta); font-weight: 300; }
-  .page-hero .lead { max-width: 720px; }
+.hero-meta {
+  margin-top: 34px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  position: relative;
+  z-index: 1;
+}
+.hero-meta-item {
+  font-size: 11px;
+  letter-spacing: .05em;
+  color: var(--muted);
+  line-height: 1.6;
+  padding-left: 18px;
+  border-left: 2px solid rgba(38, 57, 45, .18);
+}
+.hero-meta-item strong {
+  display: block;
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 3px;
+}
 
-  /* ════════════════════════════════════════
-     METODO / CADERNO (manifestos das áreas)
-  ════════════════════════════════════════ */
-  .method-grid {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 80px;
-    align-items: start;
-  }
-  .method-grid .col-intro { position: sticky; top: 100px; }
+.hero-scroll {
+  position: absolute;
+  left: 32px;
+  bottom: 34px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.hero-scroll span {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--terra);
+}
 
-  .method-list {
-    list-style: none;
-    counter-reset: meth;
-  }
-  .method-list li {
-    counter-increment: meth;
-    padding: 32px 0;
-    border-bottom: 1px solid var(--rule);
-    display: grid;
-    grid-template-columns: 60px 1fr;
-    gap: 28px;
-    align-items: start;
-  }
-  .method-list li:first-child { padding-top: 0; }
-  .method-list li:last-child { border-bottom: none; }
-  .method-list li::before {
-    content: counter(meth, decimal-leading-zero);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    color: var(--terracotta);
-    padding-top: 6px;
-  }
-  .method-list h4 {
-    font-family: 'Fraunces', serif;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 1.2;
-    letter-spacing: -0.015em;
-    margin-bottom: 10px;
-    color: var(--ink);
-  }
-  .method-list h4 em { font-style: italic; color: var(--terracotta); }
-  .method-list p {
-    font-size: 15px;
-    line-height: 1.7;
-    color: var(--ink-soft);
-    max-width: 660px;
-  }
-  .method-list .tag {
-    margin-top: 14px;
-    display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    color: var(--brown);
-    background: var(--terracotta-soft);
-    padding: 5px 10px;
-    border-radius: 2px;
-    text-transform: uppercase;
-  }
+/* Secções */
+.section {
+  padding: 110px 32px;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+}
+.section-header {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 64px;
+  margin-bottom: 70px;
+  align-items: start;
+}
+.section-num {
+  font-size: 11px;
+  letter-spacing: .18em;
+  color: var(--terra);
+  padding-top: 14px;
+  border-top: 1px solid var(--terra);
+  position: sticky;
+  top: 104px;
+}
+.section-num em {
+  display: block;
+  font-style: normal;
+  font-size: 11px;
+  margin-top: 8px;
+  color: var(--muted);
+  letter-spacing: .08em;
+}
+.section-title {
+  font-weight: 350;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.01;
+  letter-spacing: -.035em;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+.section-title em { font-style: italic; color: var(--terra); }
+.section-intro {
+  font-size: 20px;
+  line-height: 1.58;
+  color: var(--ink-soft);
+  max-width: 710px;
+}
 
-  /* ════════════════════════════════════════
-     PROMESSAS — listas de compromisso público
-  ════════════════════════════════════════ */
-  .promises {
-    background: var(--paper);
-    margin: 0;
-    max-width: none;
-    padding: 100px 0;
-  }
-  .promises-inner {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 40px;
-  }
-  .promise-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border-top: 1px solid var(--rule);
-  }
-  .promise-card {
-    padding: 36px 32px 36px 0;
-    border-right: 1px solid var(--rule);
-  }
-  .promise-card:last-child { border-right: none; padding-right: 0; }
-  .promise-card:not(:first-child) { padding-left: 32px; }
-  .promise-card .small-meta { color: var(--terracotta); margin-bottom: 16px; }
-  .promise-card h4 {
-    font-family: 'Fraunces', serif;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    margin-bottom: 12px;
-    color: var(--ink);
-  }
-  .promise-card p {
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--ink-soft);
-  }
+/* Problema */
+.problem {
+  padding: 108px 32px;
+  position: relative;
+  overflow: hidden;
+  background: var(--terra-deep);
+  color: var(--paper-warm);
+}
+.problem::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: .24;
+  background:
+    radial-gradient(circle at 25% 45%, rgba(198, 154, 99, .48), transparent 28%),
+    linear-gradient(120deg, transparent 0 48%, rgba(244, 240, 230, .07) 48% 52%, transparent 52% 100%);
+}
+.problem-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+.problem-quote {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(31px, 4vw, 55px);
+  line-height: 1.13;
+  letter-spacing: -.025em;
+}
+.problem-quote em { font-style: italic; color: var(--sand); }
+.problem-attr {
+  margin-top: 34px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(244, 240, 230, .64);
+}
 
-  /* ════════════════════════════════════════
-     EM CONSTRUÇÃO (transparência sobre roadmap)
-  ════════════════════════════════════════ */
-  .building {
-    padding: 100px 40px;
-    max-width: 1280px;
-    margin: 0 auto;
-  }
-  .building-grid {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 80px;
-    align-items: start;
-  }
-  .building-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    color: var(--sage);
-    text-transform: uppercase;
-    margin-bottom: 16px;
-  }
-  .building-tag::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--sage);
-    animation: pulse 2.4s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50%      { opacity: 0.5; transform: scale(1.4); }
-  }
-  .building-list {
-    list-style: none;
-    border-top: 1px solid var(--rule);
-  }
-  .building-list li {
-    padding: 24px 0;
-    border-bottom: 1px solid var(--rule);
-    display: grid;
-    grid-template-columns: 1fr 120px;
-    gap: 24px;
-    align-items: center;
-  }
-  .building-list .label {
-    font-family: 'Fraunces', serif;
-    font-size: 18px;
-    line-height: 1.4;
-    color: var(--ink);
-  }
-  .building-list .status {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-align: right;
-    color: var(--brown-light);
-  }
-  .building-list .status.live { color: var(--sage); }
-  .building-list .status.next { color: var(--terracotta); }
+/* Standards */
+.standards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.standard {
+  background: rgba(251, 247, 237, .72);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 34px 30px 36px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 0 rgba(255,255,255,.6) inset;
+  transition: .35s ease;
+}
+.standard::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 7px;
+  background: linear-gradient(90deg, var(--terra), var(--ochre), transparent);
+  opacity: .85;
+}
+.standard:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); border-color: var(--line-strong); }
+.standard-num {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 74px;
+  color: rgba(38, 57, 45, .10);
+  line-height: 1;
+}
+.standard-tag {
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--paper-warm);
+  margin-bottom: 18px;
+  display: inline-flex;
+  padding: 6px 11px;
+  background: var(--terra);
+  border-radius: 999px;
+}
+.standard-name {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.08;
+  color: var(--ink);
+  margin-bottom: 8px;
+  letter-spacing: -.025em;
+  position: relative;
+  z-index: 1;
+}
+.standard-publisher {
+  font-style: italic;
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 23px;
+}
+.standard-rule { height: 1px; background: var(--line); margin: 23px 0; }
+.standard-body {
+  font-size: 16.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+}
+.standard-effective {
+  font-size: 10px;
+  letter-spacing: .1em;
+  color: var(--muted);
+  text-transform: uppercase;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.standard-effective strong { color: var(--terra); font-weight: 600; }
 
-  /* ════════════════════════════════════════
-     INVESTIR — números, modelo SPV
-  ════════════════════════════════════════ */
-  .thesis-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
-    margin: 56px 0 0;
-  }
-  .thesis-card {
-    padding: 32px;
-    background: var(--paper);
-    border: 1px solid var(--rule);
-    border-radius: 2px;
-  }
-  .thesis-card .num {
-    font-family: 'Fraunces', serif;
-    font-size: 56px;
-    line-height: 1;
-    color: var(--terracotta);
-    margin-bottom: 18px;
-    font-weight: 400;
-    letter-spacing: -0.03em;
-  }
-  .thesis-card .num small {
-    font-size: 22px;
-    color: var(--brown);
-    margin-left: 4px;
-  }
-  .thesis-card .small-meta { margin-bottom: 14px; color: var(--brown-light); }
-  .thesis-card h4 {
-    font-family: 'Fraunces', serif;
-    font-size: 17px;
-    font-weight: 500;
-    line-height: 1.35;
-    margin-bottom: 8px;
-  }
-  .thesis-card p {
-    font-size: 13px;
-    line-height: 1.65;
-    color: var(--ink-soft);
-  }
+/* Métodos */
+.methods {
+  background:
+    linear-gradient(180deg, rgba(38, 57, 45, .06), rgba(198, 154, 99, .08)),
+    var(--paper-warm);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 112px 0;
+}
+.methods-inner { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+.method {
+  display: grid;
+  grid-template-columns: 88px 1fr 338px;
+  gap: 56px;
+  padding: 50px 0;
+  border-top: 1px solid var(--line);
+  align-items: start;
+}
+.method:last-child { border-bottom: 1px solid var(--line); }
+.method-num {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 62px;
+  color: var(--terra);
+  line-height: .9;
+  position: sticky;
+  top: 114px;
+}
+.method-content h3 {
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 4px;
+  letter-spacing: -.02em;
+}
+.method-en { font-style: italic; font-size: 16px; color: var(--muted); margin-bottom: 24px; }
+.method-question {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 1.34;
+  color: var(--terra);
+  margin-bottom: 20px;
+  padding: 18px 20px;
+  border-left: 3px solid var(--terra);
+  background: rgba(38, 57, 45, .05);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.method-body { font-size: 17.5px; line-height: 1.62; color: var(--ink-soft); margin-bottom: 20px; }
+.method-citation {
+  font-size: 10px;
+  letter-spacing: .08em;
+  color: var(--muted);
+  text-transform: uppercase;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.method-weight {
+  background: rgba(244, 240, 230, .76);
+  padding: 25px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 45px rgba(22, 35, 27, .06);
+}
+.method-weight-label {
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 17px;
+  font-weight: 600;
+}
+.weight-bar { display: grid; grid-template-columns: 100px 1fr 50px; gap: 12px; align-items: center; margin-bottom: 12px; font-size: 13px; }
+.weight-label { font-style: italic; color: var(--ink-soft); }
+.weight-track { height: 8px; background: rgba(38,57,45,.12); position: relative; border-radius: 999px; overflow: hidden; }
+.weight-fill { position: absolute; top: 0; left: 0; bottom: 0; background: linear-gradient(90deg, var(--terra), var(--ochre)); border-radius: 999px; }
+.weight-value { font-size: 11px; color: var(--terra); font-weight: 600; text-align: right; }
 
-  /* ════════════════════════════════════════
-     CONSULTOR — modelo financeiro visual
-  ════════════════════════════════════════ */
-  .model-stack {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    border: 1px solid var(--rule);
-    border-radius: 2px;
-    overflow: hidden;
-    margin-top: 56px;
-  }
-  .model-side {
-    padding: 48px 40px;
-  }
-  .model-side.left {
-    background: var(--cream-soft);
-    border-right: 1px solid var(--rule);
-  }
-  .model-side.right {
-    background: var(--ink);
-    color: var(--cream);
-  }
-  .model-side .label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--brown-light);
-    margin-bottom: 14px;
-  }
-  .model-side.right .label { color: var(--sage-light); }
-  .model-side .big {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(48px, 6vw, 80px);
-    line-height: 1;
-    color: var(--ink);
-    margin-bottom: 18px;
-    font-weight: 300;
-    letter-spacing: -0.03em;
-    font-variation-settings: "SOFT" 30, "opsz" 144;
-  }
-  .model-side.right .big { color: var(--terracotta); }
-  .model-side .desc {
-    font-family: 'Fraunces', serif;
-    font-size: 17px;
-    line-height: 1.5;
-    color: var(--ink-soft);
-    font-style: italic;
-  }
-  .model-side.right .desc { color: var(--cream); font-style: normal; }
+/* Reconciliação */
+.reconcile { display: grid; grid-template-columns: 1fr 420px; gap: 60px; align-items: start; }
+.reconcile-text { font-size: 19px; line-height: 1.68; color: var(--ink-soft); }
+.reconcile-text p { margin-bottom: 22px; }
+.reconcile-text strong { color: var(--terra); font-weight: 500; }
+.confidence {
+  background: var(--terra);
+  color: var(--paper-warm);
+  padding: 34px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  position: sticky;
+  top: 104px;
+}
+.confidence-title { font-family: 'Fraunces', serif; font-weight: 400; font-size: 25px; color: var(--paper-warm); margin-bottom: 5px; }
+.confidence-sub { font-style: italic; font-size: 15px; color: rgba(244,240,230,.7); margin-bottom: 26px; }
+.confidence-band { padding: 19px 0; border-top: 1px solid rgba(244,240,230,.18); }
+.confidence-band:last-child { border-bottom: 1px solid rgba(244,240,230,.18); }
+.confidence-band-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; gap: 20px; }
+.confidence-level { font-family: 'Fraunces', serif; font-style: italic; font-size: 19px; color: var(--paper-warm); }
+.confidence-range { font-size: 14px; font-weight: 600; color: var(--sand); white-space: nowrap; }
+.confidence-cond { font-size: 14.5px; line-height: 1.5; color: rgba(244,240,230,.72); }
 
-  .system-list {
-    list-style: none;
-    margin-top: 56px;
-  }
-  .system-list > li {
-    padding: 28px 0;
-    border-bottom: 1px solid var(--rule);
-    display: grid;
-    grid-template-columns: 200px 1fr 100px;
-    gap: 32px;
-    align-items: start;
-  }
-  .system-list > li:last-child { border-bottom: none; }
-  .system-list .pillar {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--terracotta);
-    padding-top: 4px;
-  }
-  .system-list .what h4 {
-    font-family: 'Fraunces', serif;
-    font-size: 21px;
-    line-height: 1.3;
-    margin-bottom: 8px;
-    font-weight: 400;
-    color: var(--ink);
-  }
-  .system-list .what p {
-    font-size: 14px;
-    line-height: 1.65;
-    color: var(--ink-soft);
-  }
-  .system-list .effort {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-align: right;
-    color: var(--brown-light);
-    padding-top: 4px;
-  }
+/* Fontes */
+.sources-section {
+  background: var(--terra-deep);
+  color: var(--paper-warm);
+  max-width: 100%;
+  padding-left: max(32px, calc(50% - 624px));
+  padding-right: max(32px, calc(50% - 624px));
+}
+.sources-section .section-num { color: var(--sand); border-color: var(--sand); }
+.sources-section .section-num em, .sources-section .section-intro { color: rgba(244,240,230,.72); }
+.sources-section .section-title { color: var(--paper-warm); }
+.sources-section .section-title em { color: var(--sand); }
+.sources-table { margin-top: 42px; border-top: 1px solid rgba(244,240,230,.18); }
+.source-row {
+  display: grid;
+  grid-template-columns: 74px 1fr 2fr;
+  gap: 32px;
+  padding: 25px 0;
+  border-bottom: 1px solid rgba(244,240,230,.14);
+  align-items: baseline;
+  transition: .25s ease;
+}
+.source-row:hover { padding-left: 16px; background: rgba(244,240,230,.035); }
+.source-tier { font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; font-size: 30px; color: var(--sand); }
+.source-type { font-family: 'Fraunces', serif; font-weight: 500; font-size: 18px; color: var(--paper-warm); letter-spacing: -.01em; }
+.source-examples { font-style: italic; font-size: 16px; color: rgba(244,240,230,.66); line-height: 1.5; }
+.sources-note { font-style: italic; font-size: 17px; color: rgba(244,240,230,.72); margin-top: 32px; max-width: 840px; line-height: 1.55; }
 
-  /* ════════════════════════════════════════
-     CTA — A CARTA (subscrição)
-  ════════════════════════════════════════ */
-  .cta {
-    background: var(--ink);
-    color: var(--cream);
-    padding: 120px 40px;
-    margin: 0;
-    max-width: none;
-  }
-  .cta-inner {
-    max-width: 880px;
-    margin: 0 auto;
-    text-align: left;
-  }
-  .cta .small-meta { color: var(--terracotta); margin-bottom: 24px; }
-  .cta h2 {
-    font-family: 'Fraunces', serif;
-    font-weight: 300;
-    font-size: clamp(34px, 4.4vw, 60px);
-    line-height: 1.1;
-    letter-spacing: -0.025em;
-    color: var(--cream);
-    margin-bottom: 28px;
-    font-variation-settings: "SOFT" 30, "opsz" 144;
-  }
-  .cta h2 em { font-style: italic; color: var(--terracotta); font-weight: 300; }
-  .cta p.lead {
-    color: var(--cream);
-    opacity: 0.85;
-    max-width: 640px;
-    margin-bottom: 44px;
-  }
-  .cta-form {
-    display: flex;
-    gap: 0;
-    max-width: 540px;
-    border: 1px solid var(--rule-dark);
-    background: rgba(242, 235, 220, 0.04);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .cta-form input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    color: var(--cream);
-    padding: 18px 22px;
-    font-family: 'Instrument Sans', sans-serif;
-    font-size: 15px;
-    outline: none;
-  }
-  .cta-form input::placeholder {
-    color: rgba(242, 235, 220, 0.4);
-  }
-  .cta-form button {
-    background: var(--terracotta);
-    color: var(--cream);
-    border: none;
-    padding: 18px 26px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  .cta-form button:hover { background: var(--terracotta-deep); }
-  .cta-foot {
-    margin-top: 22px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--sage-light);
-    letter-spacing: 0.04em;
-    max-width: 540px;
-    line-height: 1.7;
-  }
-  .cta-success {
-    margin-top: 24px;
-    padding: 16px 22px;
-    background: rgba(123, 132, 103, 0.15);
-    border-left: 2px solid var(--sage);
-    color: var(--cream);
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-size: 16px;
-    display: none;
-  }
-  .cta-success.show { display: block; animation: fadeIn 0.4s ease; }
+/* Reporting */
+.report-structure {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 40px;
+}
+.report-item {
+  padding: 26px 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: rgba(251,247,237,.68);
+  min-height: 215px;
+  transition: .3s ease;
+}
+.report-item:hover { transform: translateY(-5px); box-shadow: var(--shadow-soft); background: var(--paper-warm); }
+.report-item-num { font-size: 11px; letter-spacing: .18em; color: var(--terra); margin-bottom: 10px; font-weight: 600; }
+.report-item h4 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 19px; line-height: 1.14; color: var(--ink); margin-bottom: 10px; letter-spacing: -.015em; }
+.report-item p { font-size: 15.5px; line-height: 1.52; color: var(--muted); }
 
-  /* ════════════════════════════════════════
-     FOOTER
-  ════════════════════════════════════════ */
-  footer {
-    background: var(--cream);
-    border-top: 1px solid var(--rule);
-    padding: 64px 40px 36px;
-  }
-  .foot-inner {
-    max-width: 1280px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 60px;
-    margin-bottom: 56px;
-  }
-  .foot-brand .wordmark { font-size: 32px; display: block; margin-bottom: 18px; }
-  .foot-brand p {
-    font-size: 14px;
-    line-height: 1.7;
-    color: var(--ink-soft);
-    max-width: 320px;
-    margin-bottom: 18px;
-  }
-  .foot-brand .stamp {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--brown-light);
-    border: 1px solid var(--rule);
-    padding: 6px 12px;
-    border-radius: 2px;
-    display: inline-block;
-  }
-  .foot-col h5 {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--terracotta);
-    margin-bottom: 18px;
-    font-weight: 500;
-  }
-  .foot-col a {
-    display: block;
-    color: var(--ink-soft);
-    text-decoration: none;
-    font-size: 14px;
-    line-height: 1.6;
-    padding: 4px 0;
-    transition: color 0.2s;
-    cursor: pointer;
-  }
-  .foot-col a:hover { color: var(--terracotta); }
-  .foot-bottom {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding-top: 24px;
-    border-top: 1px solid var(--rule);
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--brown-light);
-    letter-spacing: 0.04em;
-  }
+/* Transparência */
+.transparency {
+  background: linear-gradient(135deg, var(--terra) 0%, var(--terra-deep) 100%);
+  color: var(--paper);
+  padding: 112px 32px;
+  position: relative;
+  overflow: hidden;
+}
+.transparency::after {
+  content: "CERTIFICAÇÃO";
+  position: absolute;
+  right: -42px;
+  bottom: -18px;
+  font-family: 'Fraunces', serif;
+  font-size: clamp(70px, 12vw, 180px);
+  letter-spacing: -.07em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(244,240,230,.09);
+}
+.transparency-inner { max-width: 1120px; margin: 0 auto; position: relative; z-index: 1; }
+.transparency .eyebrow { color: var(--sand); }
+.transparency-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 350;
+  font-size: clamp(34px, 4.5vw, 62px);
+  line-height: 1.02;
+  letter-spacing: -.035em;
+  color: var(--paper);
+  margin: 24px 0 48px;
+  max-width: 960px;
+}
+.transparency-title em { font-style: italic; color: var(--sand); opacity: .85; }
+.transparency-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 46px; }
+.transparency-col {
+  border: 1px solid rgba(244,240,230,.16);
+  border-radius: var(--radius-lg);
+  padding: 34px;
+  background: rgba(244,240,230,.055);
+  backdrop-filter: blur(8px);
+}
+.transparency-col h4 { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--sand); margin-bottom: 18px; font-weight: 600; }
+.transparency-col p { font-size: 17.5px; line-height: 1.65; color: rgba(244,240,230,.88); }
+.transparency-col strong { color: var(--paper); font-weight: 500; }
 
-  /* ════════════════════════════════════════
-     REVEAL ANIMATION
-  ════════════════════════════════════════ */
-  .rev {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .rev.in { opacity: 1; transform: translateY(0); }
-  .rev.d1 { transition-delay: 0.08s; }
-  .rev.d2 { transition-delay: 0.16s; }
-  .rev.d3 { transition-delay: 0.24s; }
-  .rev.d4 { transition-delay: 0.32s; }
-  .rev.d5 { transition-delay: 0.40s; }
+/* CTA */
+.cta {
+  background: var(--paper-warm);
+  border-top: 1px solid var(--line);
+  padding: 104px 32px;
+}
+.cta-inner { max-width: 1120px; margin: 0 auto; display: grid; grid-template-columns: 1fr 440px; gap: 74px; align-items: center; }
+.cta-title { font-weight: 350; font-size: clamp(31px, 4vw, 52px); line-height: 1.04; letter-spacing: -.03em; color: var(--ink); margin-bottom: 20px; }
+.cta-title em { font-style: italic; color: var(--terra); }
+.cta-desc { font-size: 18px; line-height: 1.62; color: var(--ink-soft); }
+.download-card {
+  background: linear-gradient(180deg, rgba(244,240,230,.92), rgba(251,247,237,.98));
+  padding: 38px;
+  border: 1px solid var(--terra);
+  border-radius: var(--radius-lg);
+  position: relative;
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+.download-card::after {
+  content: "PDF";
+  position: absolute;
+  right: -10px;
+  bottom: -28px;
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 112px;
+  color: rgba(38,57,45,.07);
+}
+.download-card-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--terra);
+  color: var(--paper);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  padding: 7px 14px;
+  font-weight: 600;
+  border-radius: 999px;
+}
+.download-meta { font-size: 11px; letter-spacing: .06em; color: var(--muted); margin-top: 28px; margin-bottom: 8px; text-transform: uppercase; }
+.download-title { font-weight: 400; font-size: 31px; line-height: 1.08; color: var(--ink); margin-bottom: 7px; letter-spacing: -.02em; max-width: 280px; }
+.download-sub { font-style: italic; font-size: 15px; color: var(--muted); margin-bottom: 30px; }
+.download-button {
+  display: inline-flex; align-items: center; gap: 14px; padding: 15px 24px; background: var(--ink); color: var(--paper); text-decoration: none; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; transition: .25s ease; border-radius: 999px; position: relative; z-index: 1;
+}
+.download-button:hover { background: var(--terra); transform: translateY(-2px); }
+.download-button svg { width: 14px; height: 14px; transition: transform .25s; }
+.download-button:hover svg { transform: translateY(2px); }
+.download-stats { margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--line); display: flex; gap: 28px; position: relative; z-index: 1; }
+.stat { font-size: 14px; color: var(--muted); }
+.stat strong { display: block; font-family: 'Fraunces', serif; font-weight: 500; font-size: 25px; color: var(--terra); font-style: italic; }
 
-  /* ════════════════════════════════════════
-     RESPONSIVE
-  ════════════════════════════════════════ */
-  @media (max-width: 880px) {
-    nav { padding: 14px 20px; }
-    nav.scrolled { padding: 12px 20px; }
-    .nav-links, .nav-stamp { display: none; }
-    .burger { display: flex; }
-    .mob-menu { display: flex; }
+/* Footer */
+.footer { background: var(--ink); color: var(--paper-deep); padding: 64px 32px 38px; }
+.footer-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; }
+.footer-brand { font-weight: 400; font-size: 34px; color: var(--paper); letter-spacing: .02em; margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+.footer-tag { font-style: italic; font-size: 15px; color: rgba(244,240,230,.56); max-width: 370px; line-height: 1.55; }
+.footer h5 { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--paper); margin-bottom: 18px; font-weight: 600; }
+.footer ul { list-style: none; }
+.footer li { font-size: 14px; line-height: 1.9; color: rgba(244,240,230,.56); }
+.footer-bottom { max-width: 1280px; margin: 60px auto 0; padding-top: 24px; border-top: 1px solid rgba(244,240,230,.1); display: flex; justify-content: space-between; font-size: 11px; letter-spacing: .06em; color: rgba(244,240,230,.44); }
 
-    section, .hero, .areas-inner, .promises-inner, .building, .quote-inner, .cta-inner, .foot-inner, .foot-bottom {
-      padding-left: 22px; padding-right: 22px;
-    }
-    section { padding-top: 64px; padding-bottom: 64px; }
-    .hero { padding-top: 56px; padding-bottom: 80px; min-height: auto; }
-    .hero-stamp { position: static; margin-bottom: 36px; text-align: left; }
+/* Animações */
+.fade-in { opacity: 0; transform: translateY(18px); transition: opacity .8s ease, transform .8s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+.fade-in.delay-1 { transition-delay: .1s; }
+.fade-in.delay-2 { transition-delay: .2s; }
+.fade-in.delay-3 { transition-delay: .3s; }
 
-    .two-cols, .method-grid, .building-grid {
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
-    .two-cols .col-intro,
-    .method-grid .col-intro { position: static; }
-    .area-grid { grid-template-columns: 1fr; }
-    .area-card { min-height: auto; padding: 32px 22px; }
-    .promise-grid { grid-template-columns: 1fr; }
-    .promise-card { padding: 28px 0 !important; border-right: none; border-bottom: 1px solid var(--rule); }
-    .promise-card:last-child { border-bottom: none; }
-    .thesis-grid { grid-template-columns: 1fr; }
-    .model-stack { grid-template-columns: 1fr; }
-    .model-side.left { border-right: none; border-bottom: 1px solid var(--rule); }
-    .system-list > li {
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-    .system-list .effort { text-align: left; }
-    .building-list li { grid-template-columns: 1fr; gap: 6px; }
-    .building-list .status { text-align: left; }
+@media (max-width: 1050px) {
+  .hero-grid, .cta-inner { grid-template-columns: 1fr; }
+  .hero { min-height: auto; }
+  .standards-grid { grid-template-columns: 1fr; }
+  .method { grid-template-columns: 70px 1fr; }
+  .method-weight { grid-column: 2; }
+  .reconcile { grid-template-columns: 1fr; }
+  .confidence { position: relative; top: 0; }
+  .report-structure { grid-template-columns: repeat(2, 1fr); }
+}
 
-    .cta-form { flex-direction: column; }
-    .cta-form input { padding: 16px 18px; }
-    .cta-form button { padding: 16px 18px; }
-
-    .foot-inner { grid-template-columns: 1fr; gap: 40px; }
-    .quote-section, .cta { padding: 80px 22px; }
-
-    .hero-meta { gap: 28px; }
-  }
-
-  @media (max-width: 480px) {
-    .hero-title { font-size: 44px; }
-    h1.display { font-size: 38px; }
-    h2.section-title { font-size: 28px; }
-  }
+@media (max-width: 768px) {
+  body { font-size: 17px; }
+  .nav { top: 10px; left: 10px; right: 10px; border-radius: 24px; }
+  .nav-inner { padding: 10px 12px; }
+  .brand { font-size: 18px; }
+  .brand-mark { width: 24px; height: 24px; }
+  .nav-links { gap: 2px; }
+  .nav-links a { font-size: 9px; padding: 8px 10px; }
+  .nav-links a:not(.active) { display: none; }
+  .hero { padding: 120px 20px 70px; }
+  .hero::before { top: 96px; right: -40px; }
+  .hero-grid { gap: 30px; }
+  .hero-title { font-size: clamp(50px, 16vw, 78px); margin-bottom: 24px; }
+  .hero-card { padding: 26px; border-radius: 22px; }
+  .hero-lede { font-size: 18px; }
+  .hero-scroll { display: none; }
+  .section, .problem, .transparency, .cta { padding: 68px 20px; }
+  .section-header { grid-template-columns: 1fr; gap: 18px; margin-bottom: 42px; }
+  .section-num { position: relative; top: 0; }
+  .section-title { font-size: clamp(34px, 10vw, 46px); }
+  .section-intro { font-size: 18px; }
+  .methods { padding: 68px 0; }
+  .methods-inner { padding: 0 20px; }
+  .method { grid-template-columns: 1fr; gap: 18px; padding: 42px 0; }
+  .method-num { position: relative; top: 0; font-size: 42px; }
+  .method-weight { grid-column: auto; }
+  .method-content h3 { font-size: 28px; }
+  .method-question { font-size: 19px; }
+  .sources-section { padding-left: 20px; padding-right: 20px; }
+  .source-row { grid-template-columns: 50px 1fr; gap: 16px; padding: 19px 0; }
+  .source-examples { grid-column: 2; font-size: 14.5px; }
+  .report-structure { grid-template-columns: 1fr; }
+  .report-item { min-height: auto; }
+  .transparency-grid { grid-template-columns: 1fr; }
+  .download-card { padding: 30px; }
+  .download-card-badge { position: static; display: inline-flex; margin-bottom: 18px; }
+  .download-meta { margin-top: 0; }
+  .footer { padding: 44px 20px 30px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 34px; }
+  .footer-bottom { flex-direction: column; gap: 12px; }
+}
 </style>
 </head>
-<body>
 
-<!-- ═══════════════════ NAV ═══════════════════ -->
-<nav id="nav">
-  <a href="#inicio" class="wordmark">Terrae</a>
-  <div class="nav-links">
-    <a href="#inicio" data-route="inicio">Início</a>
-    <a href="#vender" data-route="vender">Vender</a>
-    <a href="#comprar" data-route="comprar">Comprar</a>
-    <a href="#investir" data-route="investir">Investir</a>
-    <a href="#consultor" data-route="consultor">Consultor</a>
-  </div>
-  <div class="nav-stamp">Pré-lançamento · 2026</div>
-  <div class="burger" id="burger">
-    <span></span><span></span><span></span>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="brand"><span class="brand-mark"></span>Terrae</a>
+    <div class="nav-links">
+      <a href="/">Início</a>
+      <a href="/serviços">Serviços</a>
+      <a href="#" class="active">Metodologia</a>
+      <a href="/equipa">Equipa</a>
+      <a href="/contacto">Contacto</a>
+    </div>
   </div>
 </nav>
-<div class="mob-menu" id="mobMenu">
-  <a href="#inicio" data-route="inicio">Início</a>
-  <a href="#vender" data-route="vender">Vender</a>
-  <a href="#comprar" data-route="comprar">Comprar</a>
-  <a href="#investir" data-route="investir">Investir</a>
-  <a href="#consultor" data-route="consultor">Consultor</a>
-</div>
 
-<main>
-
-<!-- ════════════════════════════════════════════════════════════
-     VIEW · INÍCIO (Manifesto)
-════════════════════════════════════════════════════════════ -->
-<div class="view active" id="view-inicio">
-
-  <div class="hero">
-    <h1 class="hero-title rev d1">
-      O imobiliário em Portugal precisa de mais <em>critério</em>.<br>
-      Estamos a construir uma imobiliária com critério.
-    </h1>
-    <p class="hero-sub rev d2">
-      Acreditamos que comprar, vender ou investir em imobiliário é uma das decisões mais relevantes que uma família ou um investidor toma. E que é tomada, hoje, com a informação errada, ao lado das pessoas erradas, dentro de processos que ninguém explica. A Terrae existe para mudar isto.
-    </p>
-  </div>
-
-  <!-- O QUE SOMOS / O QUE RECUSAMOS -->
-  <section>
-    <div class="two-cols">
-      <div class="col-intro rev">
-        <span class="small-meta">— O que defendemos</span>
-        <h2 class="section-title">Sete princípios que <em>não vamos</em> negociar.</h2>
-        <p class="body">A Terrae é, antes do mais, uma posição. Antes de termos as ferramentas todas, antes de termos o site funcional, antes de termos os primeiros 100 clientes — temos princípios. Estes:</p>
-      </div>
-      <ul class="principle-list">
-        <li class="rev">
-          <span class="num">01</span>
-          <span class="principle">A casa serve a vida do cliente. Não o contrário. <em>Nunca o contrário.</em></span>
-        </li>
-        <li class="rev d1">
-          <span class="num">02</span>
-          <span class="principle">A nossa comissão é sempre <em>conhecida à entrada</em>. E reflecte o resultado, não o esforço.</span>
-        </li>
-        <li class="rev d1">
-          <span class="num">03</span>
-          <span class="principle">Não promovemos uma casa que não venderíamos a um amigo. Recusar é parte do trabalho.</span>
-        </li>
-        <li class="rev d2">
-          <span class="num">04</span>
-          <span class="principle">A informação é <em>aberta</em>. Tempos médios, comparáveis, número de visitas, motivo do não-fecho — tudo.</span>
-        </li>
-        <li class="rev d2">
-          <span class="num">05</span>
-          <span class="principle">Cada decisão imobiliária é técnica antes de ser emocional. <em>Vamos primeiro aos números.</em></span>
-        </li>
-        <li class="rev d3">
-          <span class="num">06</span>
-          <span class="principle">Investimento e mediação alimentam-se. Quem promove uma casa com excelência atrai a próxima.</span>
-        </li>
-        <li class="rev d3">
-          <span class="num">07</span>
-          <span class="principle">O consultor é um <em>closer</em> apoiado por um sistema. Não um faz-tudo deixado à sorte.</span>
-        </li>
-      </ul>
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-eyebrow eyebrow">Norma Metodológica · Versão 1.0</div>
+      <h1 class="hero-title fade-in">O valor de um<br>imóvel <em>defende-se</em><br>com método.</h1>
     </div>
-  </section>
-
-  <!-- ÁREAS -->
-  <div class="areas">
-    <div class="areas-inner">
-      <div class="rev" style="margin-bottom: 56px;">
-        <span class="small-meta">— Quatro frentes, um sistema</span>
-        <h2 class="section-title">Não somos quatro <em>negócios diferentes</em>.<br>Somos um único negócio em quatro frentes.</h2>
-        <p class="body">Cada frente alimenta as outras. O comprador de hoje é o vendedor de daqui a cinco anos. O investidor financia os empreendimentos onde os compradores entram. O consultor é o ponto de contacto humano em todas estas histórias. O sistema só funciona se todas as peças funcionarem juntas.</p>
-      </div>
-      <div class="area-grid">
-        <a class="area-card rev" data-go="vender">
-          <span class="area-num">01 / Manifesto</span>
-          <h3>A nossa visão sobre <em>vender</em>.</h3>
-          <p>Vender uma casa não é pôr no Idealista. É um trabalho técnico de posicionamento, comunicação, qualificação e negociação. E o vendedor merece saber isso à entrada — não no fim.</p>
-          <span class="area-go">Ler manifesto</span>
-        </a>
-        <a class="area-card rev d1" data-go="comprar">
-          <span class="area-num">02 / Manifesto</span>
-          <h3>A nossa visão sobre <em>comprar</em>.</h3>
-          <p>Comprar casa em Portugal é uma decisão de centenas de milhares de euros tomada com a informação de um classificado. Acreditamos que se pode fazer melhor — e queremos provar.</p>
-          <span class="area-go">Ler manifesto</span>
-        </a>
-        <a class="area-card rev d2" data-go="investir">
-          <span class="area-num">03 / Manifesto</span>
-          <h3>A nossa visão sobre <em>investir</em>.</h3>
-          <p>O investidor português está entre o private banking que não o entende e os portais que o tratam como retalho. Há um espaço a meio — disciplinado, transparente, alinhado. É o que vamos ocupar.</p>
-          <span class="area-go">Ler manifesto</span>
-        </a>
-        <a class="area-card rev d3" data-go="consultor">
-          <span class="area-num">04 / Manifesto</span>
-          <h3>A nossa visão sobre o <em>consultor</em>.</h3>
-          <p>Serviço premium não se faz com um consultor sobrecarregado. Faz-se com uma estrutura que entrega cada parte da mediação a quem a sabe fazer melhor — e deixa o consultor concentrar-se no que ninguém pode fazer por ele.</p>
-          <span class="area-go">Ler manifesto</span>
-        </a>
+    <div class="hero-card fade-in delay-2">
+      <p class="hero-lede">Toda a estimativa de valor que produzimos é construída sobre os mesmos standards técnicos que regem a prática dos peritos certificados em Portugal e na União Europeia.</p>
+      <p class="hero-lede" style="margin-top: 16px;">Esta página explica <em>como</em>.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><strong>Aderência</strong>EVS 2025 · IVS 2025<br>RICS Red Book 2025</div>
+        <div class="hero-meta-item"><strong>Quadro Nacional</strong>Lei 153/2015<br>Reg. CMVM 7/2023</div>
+        <div class="hero-meta-item"><strong>Última revisão</strong>Maio 2026</div>
       </div>
     </div>
   </div>
+  <div class="hero-scroll"><span>↓</span>Explorar metodologia</div>
+</section>
 
-  <!-- CITAÇÃO SANDRO -->
-  <section class="quote-section">
-    <div class="quote-inner rev">
-      <span class="small-meta">— Porque é que existimos</span>
-      <blockquote>
-        “Cresci num sector que pediu sempre demasiado dos clientes e demasiado pouco de si próprio. A Terrae é o sítio onde vou tentar provar que <em>se pode fazer doutra forma</em> — devagar, com dados, com gente que ouve antes de vender. É um trabalho de muitos anos. Já começámos.”
-      </blockquote>
-      <div class="quote-attrib">
-        <div>
-          <div class="name">Sandro Sousa</div>
-          <div class="role">Fundador · Terrae</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta">
-    <div class="cta-inner rev">
-      <span class="small-meta">— A carta</span>
-      <h2>Uma carta. <em>Por mês.</em> Sem ruído.</h2>
-      <p class="lead">Estamos a construir em público. Quando lançarmos algo — um empreendimento, uma análise de mercado, um Business Plan, uma vaga de consultor — quem está nesta lista é o primeiro a saber. Sem cliques, sem urgência fabricada, sem links patrocinados. Uma carta editorial honesta, escrita por quem está a fazer.</p>
-      <form class="cta-form" data-form="inicio" onsubmit="handleSubscribe(event)">
-        <input type="email" placeholder="O teu email" required name="email">
-        <button type="submit">Entrar na carta</button>
-      </form>
-      <p class="cta-foot">Sem spam. Cancelas com um clique. Não vendemos a tua morada a ninguém — esse é, aliás, princípio número quatro.</p>
-      <div class="cta-success" data-success="inicio">Bem-vindo. A primeira carta chega no início do próximo mês.</div>
-    </div>
-  </section>
-</div>
-
-<!-- ════════════════════════════════════════════════════════════
-     VIEW · VENDER
-════════════════════════════════════════════════════════════ -->
-<div class="view" id="view-vender">
-
-  <div class="page-hero">
-    <div class="crumb rev">
-      <a data-go="inicio">Início</a> &nbsp;/&nbsp; <strong>Vender</strong> &nbsp;/&nbsp; Manifesto 01
-    </div>
-    <h1 class="rev d1">
-      Vender uma casa não é pôr no <em>Idealista</em>.<br>
-      É um trabalho <em>técnico.</em>
-    </h1>
-    <p class="lead rev d2">
-      O modelo português pede ao proprietário que escolha entre fotos com flash, anúncios mal escritos e cinco mediadoras a ligar. A Terrae vai responder à pergunta diferente: como é que se vende esta casa, a este preço, a este comprador, neste momento? Antes de avançar, vamos aos números.
-    </p>
+<section class="problem">
+  <div class="problem-inner">
+    <p class="problem-quote fade-in">A maioria das estimativas de valor produzidas no mercado imobiliário português não tem método explícito, não tem fontes documentadas, e <em>não tem capacidade de auditoria</em>.</p>
+    <p class="problem-attr fade-in delay-1">A premissa que justifica esta Norma</p>
   </div>
+</section>
 
-  <!-- O MÉTODO -->
-  <section>
-    <div class="method-grid">
-      <div class="col-intro rev">
-        <span class="small-meta">— O método</span>
-        <h2 class="section-title" style="font-size: 38px;">Cinco passos. Por esta ordem. <em>Sem atalhos.</em></h2>
-        <p class="body">Quando uma casa não vende, raramente é por falta de visitas. É por estar mal posicionada na primeira semana. Por isso o nosso método começa antes da casa ir ao mercado — e é aí que ganhamos ou perdemos a venda.</p>
-      </div>
-      <ol class="method-list">
-        <li class="rev">
-          <div>
-            <h4>Avaliação de mercado, com <em>dados</em> e com a casa.</h4>
-            <p>Não há venda séria sem entender a referência real do mercado para esta tipologia, nesta zona, neste estado de conservação, neste momento. Cruzamos comparáveis fechados, dados públicos do INE, base própria da Terrae e visita técnica à casa. Sai daqui um intervalo de preço justo — e a definição honesta do tempo expectável de venda.</p>
-            <span class="tag">Saída: Avaliação Terrae + intervalo de preço</span>
-          </div>
-        </li>
-        <li class="rev">
-          <div>
-            <h4>Posicionamento da casa para o <em>comprador certo</em>.</h4>
-            <p>Cada casa tem um comprador ideal. Identificamos quem é, onde vive, o que faz, em que canais se informa — e construímos a comunicação para essa pessoa. Não para o portal genérico. É a diferença entre um anúncio e uma proposta editorial.</p>
-            <span class="tag">Saída: Buyer Profile + estratégia de comunicação</span>
-          </div>
-        </li>
-        <li class="rev d1">
-          <div>
-            <h4>Produção: fotografia, vídeo, dossier, plantas, página da casa.</h4>
-            <p>Antes de a casa ir ao mercado, construímos os materiais como se a casa custasse o triplo. Fotografia profissional, vídeo, planta com cotas legíveis, certificado energético em destaque, página individual no nosso site. Cada casa é um pequeno produto editorial.</p>
-            <span class="tag">Saída: Página da casa + dossier técnico</span>
-          </div>
-        </li>
-        <li class="rev d2">
-          <div>
-            <h4>Pré-lançamento na <em>nossa base</em>. Lançamento no mercado.</h4>
-            <p>Antes de qualquer portal, a casa é apresentada à base de compradores qualificados que a Terrae tem para aquela zona e tipologia. Só depois vai a mercado aberto, num lançamento orquestrado — não publicado distraidamente numa terça-feira às 16h.</p>
-            <span class="tag">Saída: Calendário de lançamento + leads pré-mercado</span>
-          </div>
-        </li>
-        <li class="rev d3">
-          <div>
-            <h4>Acompanhamento ao vivo. Negociação técnica. <em>Pós-venda.</em></h4>
-            <p>Reportamos semanalmente o que está a acontecer: visitas, motivos de não-fecho, ajustes de comunicação, posição face ao mercado. A negociação é técnica — assente em comparáveis e no perfil concreto do comprador. E não desaparecemos depois da escritura.</p>
-            <span class="tag">Saída: Reporting semanal + acompanhamento até pós-venda</span>
-          </div>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- COMPROMISSOS PÚBLICOS -->
-  <div class="promises">
-    <div class="promises-inner">
-      <div class="rev" style="margin-bottom: 48px;">
-        <span class="small-meta">— Compromissos públicos</span>
-        <h2 class="section-title">Três coisas que <em>te garantimos</em> à entrada.</h2>
-      </div>
-      <div class="promise-grid">
-        <div class="promise-card rev">
-          <span class="small-meta">01 · Comissão</span>
-          <h4>Comissão variável, alinhada com o resultado.</h4>
-          <p>O que ganhamos depende de quão perto vendemos do preço justo, e em quanto tempo. Se o mercado resistir e tivermos de ajustar, a comissão desce connosco. É o oposto da comissão fixa cega.</p>
-        </div>
-        <div class="promise-card rev d1">
-          <span class="small-meta">02 · Transparência</span>
-          <h4>Reporting semanal, dados sempre abertos.</h4>
-          <p>Vês o que está a acontecer enquanto está a acontecer. Visitas, perfis dos visitantes, motivos de não-fecho, posição face a comparáveis. Sem caixas pretas, sem promessas vagas.</p>
-        </div>
-        <div class="promise-card rev d2">
-          <span class="small-meta">03 · Recusa</span>
-          <h4>Dizemos "não" quando faz sentido dizer "não".</h4>
-          <p>Se a casa estiver 30% acima da avaliação justa, dizemos. Se o documento não estiver em ordem, parámos. Se for melhor não vender agora, dizemos. Recusar é parte do serviço — não a sua falência.</p>
-        </div>
-      </div>
+<section class="section" id="standards">
+  <div class="section-header">
+    <div class="section-num">§ 01<em>Standards técnicos</em></div>
+    <div>
+      <h2 class="section-title fade-in">Três normas internacionais.<br><em>Uma metodologia coerente.</em></h2>
+      <p class="section-intro fade-in delay-1">A avaliação imobiliária profissional rege-se, a nível europeu e global, por três corpos normativos que convergem nos seus princípios fundamentais. A Terrae adopta voluntariamente os três como referência da sua prática.</p>
     </div>
   </div>
 
-  <!-- EM CONSTRUÇÃO -->
-  <div class="building">
-    <div class="building-grid">
-      <div class="rev">
-        <span class="building-tag">A construir em público</span>
-        <h2 class="section-title" style="font-size: 32px;">O que ainda <em>não está</em> pronto.</h2>
-        <p class="body">Acreditamos que não vale a pena fingir que temos coisas que ainda estamos a construir. Aqui está o que já existe, o que está prestes a entrar em produção, e o que vai chegar até ao fim do ano.</p>
+  <div class="standards-grid">
+    <article class="standard fade-in">
+      <div class="standard-num">i</div>
+      <span class="standard-tag">Espinha dorsal</span>
+      <h3 class="standard-name">European Valuation Standards</h3>
+      <p class="standard-publisher">TEGoVA — The European Group of Valuers' Associations</p>
+      <div class="standard-rule"></div>
+      <p class="standard-body">O "Blue Book" europeu. Reconhecido pelo Banco Central Europeu, ancorado no quadro jurídico da União Europeia. Define com clareza os três métodos de avaliação e a obrigatoriedade de reconciliação. É a referência metodológica primária da Terrae.</p>
+      <p class="standard-effective"><strong>EVS 2025</strong> · 10ª edição<br>Efectiva desde 1 Janeiro 2025</p>
+    </article>
+
+    <article class="standard fade-in delay-1">
+      <div class="standard-num">ii</div>
+      <span class="standard-tag">Princípios universais</span>
+      <h3 class="standard-name">International Valuation Standards</h3>
+      <p class="standard-publisher">IVSC — International Valuation Standards Council</p>
+      <div class="standard-rule"></div>
+      <p class="standard-body">A referência global de avaliação, adoptada por cerca de cem organizações profissionais em todo o mundo. Funciona como o quadro universal de princípios sobre o qual as EVS e o RICS Red Book se constroem. Define bases de valor, abordagens, dados e reporting.</p>
+      <p class="standard-effective"><strong>IVS 2025</strong><br>Efectivas a 31 Janeiro 2025</p>
+    </article>
+
+    <article class="standard fade-in delay-2">
+      <div class="standard-num">iii</div>
+      <span class="standard-tag">Padrão premium</span>
+      <h3 class="standard-name">RICS Valuation Global Standards</h3>
+      <p class="standard-publisher">Royal Institution of Chartered Surveyors</p>
+      <div class="standard-rule"></div>
+      <p class="standard-body">Conhecido como Red Book. Reconhecido como o standard mais exigente em matéria de processo, governance e ética da avaliação, sobretudo em contexto institucional, transacções cross-border e segmentos premium. Aplicado pela Terrae nos princípios profissionais e nos requisitos de reporting.</p>
+      <p class="standard-effective"><strong>Red Book 2025</strong><br>Efectivo a 31 Janeiro 2025</p>
+    </article>
+  </div>
+</section>
+
+<section class="methods" id="metodos">
+  <div class="methods-inner">
+    <div class="section-header">
+      <div class="section-num">§ 02<em>Os três métodos</em></div>
+      <div>
+        <h2 class="section-title fade-in">Cada método responde a uma <em>pergunta diferente</em>.</h2>
+        <p class="section-intro fade-in delay-1">Os standards internacionais reconhecem três métodos de avaliação. A Terrae aplica os três sempre que a evidência o permita — porque a triangulação dos resultados é a melhor protecção contra o erro.</p>
       </div>
-      <ul class="building-list rev">
-        <li><span class="label">Avaliação Terrae — relatório de mercado em 24h</span><span class="status next">Junho · 2026</span></li>
-        <li><span class="label">Página individual por casa, com dossier completo</span><span class="status live">Em produção</span></li>
-        <li><span class="label">Reporting semanal automático ao proprietário</span><span class="status next">Julho · 2026</span></li>
-        <li><span class="label">Base de compradores qualificados por zona</span><span class="status live">Em construção</span></li>
-        <li><span class="label">Property Films — vídeo editorial por casa</span><span class="status next">Agosto · 2026</span></li>
-      </ul>
+    </div>
+
+    <article class="method fade-in">
+      <div class="method-num">i</div>
+      <div class="method-content">
+        <h3>Método Comparativo</h3>
+        <p class="method-en">Market Approach</p>
+        <p class="method-question">Por quanto é que imóveis parecidos se venderam?</p>
+        <p class="method-body">A premissa é simples e poderosa: se um imóvel substancialmente semelhante foi efectivamente transaccionado por um determinado preço numa data próxima, esse preço é a melhor evidência disponível do valor de mercado. O método identifica comparáveis, ajusta-os por diferenças concretas (área, estado, andar, exposição, certificação energética) e calcula o valor unitário implícito.</p>
+        <p class="method-citation">IVS 103 §20 · EVS Methodology · RICS VPS 3</p>
+      </div>
+      <div class="method-weight">
+        <div class="method-weight-label">Peso típico — apartamento residencial</div>
+        <div class="weight-bar"><div class="weight-label">Comparativo</div><div class="weight-track"><div class="weight-fill" style="width: 65%;"></div></div><div class="weight-value">65%</div></div>
+        <div class="weight-bar"><div class="weight-label">Rendimento</div><div class="weight-track"><div class="weight-fill" style="width: 25%; opacity: .5;"></div></div><div class="weight-value">25%</div></div>
+        <div class="weight-bar"><div class="weight-label">Custo</div><div class="weight-track"><div class="weight-fill" style="width: 10%; opacity: .3;"></div></div><div class="weight-value">10%</div></div>
+      </div>
+    </article>
+
+    <article class="method fade-in">
+      <div class="method-num">ii</div>
+      <div class="method-content">
+        <h3>Método do Rendimento</h3>
+        <p class="method-en">Income Approach</p>
+        <p class="method-question">Quanto pagaria um investidor racional pelo rendimento que isto gera?</p>
+        <p class="method-body">Estima o valor a partir da expectativa de rendimento futuro. A premissa é económica: ninguém racional paga mais por um activo do que o valor presente dos rendimentos que esse activo produzirá. Aplica-se em duas variantes — capitalização directa (renda anualizada dividida por yield) e DCF (projecção plurianual descontada). Funciona como validação económica de fundo, mesmo para imóveis não destinados a arrendamento.</p>
+        <p class="method-citation">IVS 103 §30 · EVS Methodology · RICS VPS 3</p>
+      </div>
+      <div class="method-weight">
+        <div class="method-weight-label">Peso típico — imóvel de investimento</div>
+        <div class="weight-bar"><div class="weight-label">Rendimento</div><div class="weight-track"><div class="weight-fill" style="width: 60%;"></div></div><div class="weight-value">60%</div></div>
+        <div class="weight-bar"><div class="weight-label">Comparativo</div><div class="weight-track"><div class="weight-fill" style="width: 30%; opacity: .5;"></div></div><div class="weight-value">30%</div></div>
+        <div class="weight-bar"><div class="weight-label">Custo</div><div class="weight-track"><div class="weight-fill" style="width: 10%; opacity: .3;"></div></div><div class="weight-value">10%</div></div>
+      </div>
+    </article>
+
+    <article class="method fade-in">
+      <div class="method-num">iii</div>
+      <div class="method-content">
+        <h3>Método do Custo</h3>
+        <p class="method-en">Cost Approach</p>
+        <p class="method-question">Quanto custaria reproduzir isto a partir do zero?</p>
+        <p class="method-body">Estima o valor a partir do custo de reposição, ajustado pela depreciação acumulada. A premissa, igualmente económica: ninguém racional paga mais por um imóvel usado do que custaria adquirir o terreno e construir um equivalente novo. Decompõe o cálculo em três componentes — valor do terreno, custo de reposição da construção, e depreciação física, funcional e económica. É frequentemente o método mais fiável para moradias, imóveis atípicos e activos para reabilitação.</p>
+        <p class="method-citation">IVS 103 §40 · EVS Methodology · RICS VPS 3</p>
+      </div>
+      <div class="method-weight">
+        <div class="method-weight-label">Peso típico — moradia em zona ilíquida</div>
+        <div class="weight-bar"><div class="weight-label">Custo</div><div class="weight-track"><div class="weight-fill" style="width: 50%;"></div></div><div class="weight-value">50%</div></div>
+        <div class="weight-bar"><div class="weight-label">Comparativo</div><div class="weight-track"><div class="weight-fill" style="width: 30%; opacity: .5;"></div></div><div class="weight-value">30%</div></div>
+        <div class="weight-bar"><div class="weight-label">Rendimento</div><div class="weight-track"><div class="weight-fill" style="width: 20%; opacity: .3;"></div></div><div class="weight-value">20%</div></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="section" id="reconciliacao">
+  <div class="section-header">
+    <div class="section-num">§ 03<em>Reconciliação</em></div>
+    <div>
+      <h2 class="section-title fade-in">A convergência dos métodos é, em si, <em>informação</em>.</h2>
+      <p class="section-intro fade-in delay-1">Os três métodos produzem três estimativas distintas. A reconciliação é o processo pelo qual o avaliador, aplicando juízo profissional, integra essas três estimativas numa conclusão única — informada pela qualidade dos dados de cada método.</p>
     </div>
   </div>
 
-  <section class="cta">
-    <div class="cta-inner rev">
-      <span class="small-meta">— Para os primeiros vendedores</span>
-      <h2>Queres ser <em>dos primeiros</em><br>a vender connosco?</h2>
-      <p class="lead">Estamos a abrir a operação devagar. Os primeiros 20 vendedores entram com condições especiais — comissão floor mais baixa, prioridade total, e o nosso compromisso de tornar cada caso uma peça de portefólio. Deixa o teu email; explicamos como funciona quando estiver pronto.</p>
-      <form class="cta-form" data-form="vender" onsubmit="handleSubscribe(event)">
-        <input type="email" placeholder="O teu email" required name="email">
-        <button type="submit">Quero saber</button>
-      </form>
-      <p class="cta-foot">Resposta em 48h úteis. Sem comerciais, sem páginas falsas. O Sandro ou o Nuno escrevem-te directamente.</p>
-      <div class="cta-success" data-success="vender">Recebido. Falamos contigo nos próximos dias.</div>
+  <div class="reconcile">
+    <div class="reconcile-text fade-in">
+      <p>Quando os três métodos produzem estimativas próximas — tipicamente dentro de uma banda de ±5% em torno da mediana —, a convergência valida a estimativa final e permite comunicar elevada confiança no resultado.</p>
+      <p>Quando os métodos divergem, a divergência é diagnóstico. Comparativo significativamente acima do rendimento sugere mercado a precificar valorização futura. Rendimento de uso alternativo acima do comparativo sugere <strong>highest and best use diferente do uso actual</strong>. Custo abaixo do comparativo pode revelar comparáveis a inflacionar artificialmente o valor.</p>
+      <p>Em qualquer cenário de divergência material — superior a ±15% entre métodos —, o relatório inclui análise explícita da divergência, identificando a causa diagnosticada e o impacto no nível de confiança da estimativa final.</p>
     </div>
-  </section>
-</div>
 
-<!-- ════════════════════════════════════════════════════════════
-     VIEW · COMPRAR
-════════════════════════════════════════════════════════════ -->
-<div class="view" id="view-comprar">
-
-  <div class="page-hero">
-    <div class="crumb rev">
-      <a data-go="inicio">Início</a> &nbsp;/&nbsp; <strong>Comprar</strong> &nbsp;/&nbsp; Manifesto 02
+    <div class="confidence fade-in delay-1">
+      <h4 class="confidence-title">Bandas de incerteza</h4>
+      <p class="confidence-sub">Cada estimativa é comunicada com banda associada, em função da convergência dos métodos.</p>
+      <div class="confidence-band"><div class="confidence-band-head"><span class="confidence-level">Confiança alta</span><span class="confidence-range">±5%</span></div><p class="confidence-cond">Múltiplos comparáveis recentes, convergência dos três métodos, mercado líquido.</p></div>
+      <div class="confidence-band"><div class="confidence-band-head"><span class="confidence-level">Confiança média</span><span class="confidence-range">±10%</span></div><p class="confidence-cond">Comparáveis suficientes mas não ideais, alguma divergência metodológica, mercado em transição.</p></div>
+      <div class="confidence-band"><div class="confidence-band-head"><span class="confidence-level">Confiança baixa</span><span class="confidence-range">±15-20%</span></div><p class="confidence-cond">Comparáveis escassos, divergência material, mercado ilíquido ou activo singular.</p></div>
     </div>
-    <h1 class="rev d1">
-      Uma decisão de <em>centenas de milhares</em><br>
-      de euros não devia ser tomada<br>
-      com a informação de um <em>classificado</em>.
-    </h1>
-    <p class="lead rev d2">
-      Quem compra casa em Portugal navega entre portais que mostram tudo igual, mediadores que não respondem, e um mercado opaco onde o preço pedido raramente é o preço justo. Acreditamos que comprar bem é um acto técnico — e que se pode acompanhar quem compra com a mesma profundidade com que se acompanha quem vende.
-    </p>
   </div>
+</section>
 
-  <section>
-    <div class="method-grid">
-      <div class="col-intro rev">
-        <span class="small-meta">— Como acompanhamos</span>
-        <h2 class="section-title" style="font-size: 38px;">Quatro momentos. <em>O comprador</em> à frente.</h2>
-        <p class="body">A maioria das mediadoras vende ao comprador a casa que tem em carteira. Nós queremos virar isto: começar pelo comprador — o que precisa, o que pode, o que quer evitar — e só depois ir buscar a casa certa, na nossa carteira ou fora dela.</p>
-      </div>
-      <ol class="method-list">
-        <li class="rev">
-          <div>
-            <h4>Diagnóstico antes de visitar <em>seja o que for</em>.</h4>
-            <p>Antes de qualquer visita, sentamo-nos. Que zonas fazem sentido? Que tipologia é honesta para a tua família? Que orçamento é real, considerando o crédito que consegues obter? Onde é que vais arrepender-te se cortares? É a conversa que ninguém te tem.</p>
-            <span class="tag">Saída: Briefing de comprador + zonas de busca</span>
-          </div>
-        </li>
-        <li class="rev">
-          <div>
-            <h4>Crédito, antes de te apaixonares por uma casa.</h4>
-            <p>Trabalhamos com a Ana — a nossa intermediária de crédito de confiança — para teres uma pré-aprovação real antes de visitares. Quanto realmente podes comprar? Que prestação é sustentável? Que banco se adapta ao teu perfil? Compras melhor quando sabes ao certo o que podes.</p>
-            <span class="tag">Saída: Pré-aprovação de crédito + DSTI</span>
-          </div>
-        </li>
-        <li class="rev d1">
-          <div>
-            <h4>Curadoria das casas. Não <em>tour de portal</em>.</h4>
-            <p>Pesquisamos por ti — na nossa carteira, na carteira partilhada do mercado, e em vendas que ainda não foram para portais. Antes de ires ver, recebes um dossier por casa, com prós, contras, comparáveis, e a nossa opinião honesta. Visitamos contigo as que valem o tempo.</p>
-            <span class="tag">Saída: Shortlist comentada + dossier por casa</span>
-          </div>
-        </li>
-        <li class="rev d2">
-          <div>
-            <h4>Negociação, due diligence, escritura. <em>Pós-compra também.</em></h4>
-            <p>Negociamos do teu lado, com base em comparáveis e na real liquidez da casa no mercado. Coordenamos a due diligence (registos, ónus, licenças, condomínio). Acompanhamos a escritura. E continuamos depois — a primeira casa traz sempre dúvidas que aparecem nos primeiros seis meses.</p>
-            <span class="tag">Saída: Negociação técnica + acompanhamento pós-venda</span>
-          </div>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <div class="promises">
-    <div class="promises-inner">
-      <div class="rev" style="margin-bottom: 48px;">
-        <span class="small-meta">— Compromissos com o comprador</span>
-        <h2 class="section-title">Três posições que <em>nos definem</em>.</h2>
-      </div>
-      <div class="promise-grid">
-        <div class="promise-card rev">
-          <span class="small-meta">01 · Lealdade</span>
-          <h4>Trabalhamos para ti, não para a casa.</h4>
-          <p>Quando te acompanhamos numa compra, o nosso interesse é alinhado com o teu — não com o vendedor da casa que estás a ver. Não te empurramos para uma casa para fechar a comissão. Se nenhuma serve, é normal — esperamos.</p>
-        </div>
-        <div class="promise-card rev d1">
-          <span class="small-meta">02 · Verdade</span>
-          <h4>Dizemos o que está mal antes do CPCV.</h4>
-          <p>O que falta no documento. O que está mal feito na obra. Em quanto está acima do justo. Onde é que o vizinho do lado é um problema. Recusas valiosas custam comissões — fazemos na mesma.</p>
-        </div>
-        <div class="promise-card rev d2">
-          <span class="small-meta">03 · Continuidade</span>
-          <h4>Não desaparecemos depois da escritura.</h4>
-          <p>Os primeiros seis meses são onde aparecem as dúvidas reais — IMI, condomínio, obras, fiscais. Continuamos disponíveis. A relação não acaba na escritura — começa, no fundo, ali.</p>
-        </div>
-      </div>
+<section class="section sources-section" id="fontes">
+  <div class="section-header">
+    <div class="section-num">§ 04<em>Fontes de dados</em></div>
+    <div>
+      <h2 class="section-title fade-in">Nem todas as fontes são <em>equivalentes</em>.</h2>
+      <p class="section-intro fade-in delay-1">A qualidade de uma estimativa de valor é, antes de tudo, função da qualidade dos dados sobre os quais é construída. A Terrae estabelece uma hierarquia explícita das fontes admitidas, da mais fiável para a menos fiável.</p>
     </div>
   </div>
 
-  <div class="building">
-    <div class="building-grid">
-      <div class="rev">
-        <span class="building-tag">A construir em público</span>
-        <h2 class="section-title" style="font-size: 32px;">O que <em>vamos</em> ter para o comprador.</h2>
-        <p class="body">A maior parte do que prometemos ao comprador depende de infraestrutura — base de dados, integração com crédito, dossiers automáticos. Está em construção. Aqui está o estado real.</p>
-      </div>
-      <ul class="building-list rev">
-        <li><span class="label">Briefing de comprador estruturado (form + reunião)</span><span class="status live">Em produção</span></li>
-        <li><span class="label">Simulador de crédito real, com a Ana</span><span class="status next">Junho · 2026</span></li>
-        <li><span class="label">Dossier por casa, com comparáveis e nota crítica</span><span class="status next">Julho · 2026</span></li>
-        <li><span class="label">Carteira partilhada de casas off-market da rede Terrae</span><span class="status live">Em construção</span></li>
-        <li><span class="label">Acompanhamento pós-venda — primeiros seis meses</span><span class="status next">Q3 · 2026</span></li>
-      </ul>
+  <div class="sources-table">
+    <div class="source-row fade-in"><div class="source-tier">i</div><div class="source-type">Transacções reais oficiais</div><div class="source-examples">INE (dados fiscais da Autoridade Tributária) · Escrituras públicas registadas</div></div>
+    <div class="source-row fade-in"><div class="source-tier">ii</div><div class="source-type">Transacções reais profissionais</div><div class="source-examples">Confidencial Imobiliário (SIR) · Avaliações bancárias publicadas</div></div>
+    <div class="source-row fade-in"><div class="source-tier">iii</div><div class="source-type">Ofertas activas de mercado</div><div class="source-examples">Idealista, Casafari, Imovirtual — preços pedidos, com aplicação de desconto de negociação</div></div>
+    <div class="source-row fade-in"><div class="source-tier">iv</div><div class="source-type">Reportagem profissional</div><div class="source-examples">CBRE, Cushman &amp; Wakefield, JLL, Worx, Savills — análises de yields e dinâmicas</div></div>
+    <div class="source-row fade-in"><div class="source-tier">v</div><div class="source-type">Reportagem secundária</div><div class="source-examples">Imprensa imobiliária especializada · Rankings setoriais</div></div>
+    <div class="source-row fade-in"><div class="source-tier">vi</div><div class="source-type">Conhecimento de mercado</div><div class="source-examples">Conhecimento do consultor local · Contactos de mercado, com cepticismo profissional</div></div>
+  </div>
+
+  <p class="sources-note">A regra é que as estimativas de valor devem ser ancoradas, sempre que possível, em dados de Nível i ou ii. Dados de níveis inferiores são utilizados como complemento, contexto ou validação qualitativa — nunca como base directa de estimativa.</p>
+</section>
+
+<section class="section" id="relatorio">
+  <div class="section-header">
+    <div class="section-num">§ 05<em>Reporting</em></div>
+    <div>
+      <h2 class="section-title fade-in">O que cada relatório <em>contém</em>.</h2>
+      <p class="section-intro fade-in delay-1">Em conformidade com IVS 106, EVS 5 e RICS VPS 6, todo o relatório de avaliação Terrae é auto-suficiente: um leitor competente que receba apenas o relatório consegue compreender o método aplicado, as fontes utilizadas, os pressupostos assumidos e o raciocínio que sustenta a estimativa final.</p>
     </div>
   </div>
 
-  <section class="cta">
-    <div class="cta-inner rev">
-      <span class="small-meta">— Para os primeiros compradores</span>
-      <h2>Queres ser <em>acompanhado</em><br>quando começarmos?</h2>
-      <p class="lead">Estamos a abrir compradores a conta-gotas — não temos a equipa nem a carteira para responder a 200 ao mesmo tempo, e não vamos fingir que temos. Se queres ser dos primeiros 50, deixa o teu email. Quando abrirmos para ti, escrevemos.</p>
-      <form class="cta-form" data-form="comprar" onsubmit="handleSubscribe(event)">
-        <input type="email" placeholder="O teu email" required name="email">
-        <button type="submit">Quero ser acompanhado</button>
-      </form>
-      <p class="cta-foot">Quando abrirmos, marcamos um diagnóstico de 60 minutos sem custo. É a partir dessa conversa que percebemos se faz sentido continuar.</p>
-      <div class="cta-success" data-success="comprar">Anotado. Vamos contar contigo.</div>
-    </div>
-  </section>
-</div>
-
-<!-- ════════════════════════════════════════════════════════════
-     VIEW · INVESTIR
-════════════════════════════════════════════════════════════ -->
-<div class="view" id="view-investir">
-
-  <div class="page-hero">
-    <div class="crumb rev">
-      <a data-go="inicio">Início</a> &nbsp;/&nbsp; <strong>Investir</strong> &nbsp;/&nbsp; Manifesto 03
-    </div>
-    <h1 class="rev d1">
-      O investidor português está entre o<br>
-      <em>private banking</em> que não o entende e os<br>
-      <em>portais</em> que o tratam como retalho.
-    </h1>
-    <p class="lead rev d2">
-      Há um espaço a meio — disciplinado, técnico, transparente, alinhado com a operação que vende as casas. É o espaço que vamos ocupar com a Terrae Capital. Estruturas SPV específicas a cada projecto, business plans honestos, reporting trimestral, e um operador (Sandro) que tem capital próprio dentro da SPV.
-    </p>
+  <div class="report-structure">
+    <div class="report-item fade-in"><div class="report-item-num">01</div><h4>Identificação e finalidade</h4><p>Cliente, datas, avaliador responsável, identificação registral, finalidade da avaliação e base de valor aplicada.</p></div>
+    <div class="report-item fade-in"><div class="report-item-num">02</div><h4>Pressupostos e pressupostos especiais</h4><p>Lista exaustiva dos pressupostos assumidos, com fundamentação. Pressupostos especiais identificados com impacto quantificado.</p></div>
+    <div class="report-item fade-in"><div class="report-item-num">03</div><h4>Descrição do imóvel</h4><p>Localização, tipologia, áreas, estado de conservação, características relevantes para o valor, registo fotográfico.</p></div>
+    <div class="report-item fade-in"><div class="report-item-num">04</div><h4>Análise de mercado</h4><p>Caracterização da zona de mercado, dinâmicas de procura e oferta, evolução de preços, tempo médio de absorção.</p></div>
+    <div class="report-item fade-in"><div class="report-item-num">05</div><h4>Aplicação dos métodos</h4><p>Cada método aplicado tem secção própria, com identificação das fontes, ajustamentos e estimativa intermédia.</p></div>
+    <div class="report-item fade-in"><div class="report-item-num">06</div><h4>Reconciliação</h4><p>Ponderação aplicada e fundamentação. Em divergência material, análise explícita da causa diagnosticada.</p></div>
+    <div class="report-item fade-in"><div class="report-item-num">07</div><h4>Conclusão e banda de incerteza</h4><p>Estimativa de valor pontual e banda de incerteza, com identificação do nível de confiança aplicável.</p></div>
+    <div class="report-item fade-in"><div class="report-item-num">08</div><h4>Anexo de evidência</h4><p>Tabela de comparáveis utilizados, documentos relevantes, e referenciação metodológica completa.</p></div>
   </div>
+</section>
 
-  <section>
-    <div class="rev">
-      <span class="small-meta">— A tese</span>
-      <h2 class="section-title">Porque <em>agora</em>, porquê <em>connosco</em>.</h2>
-      <p class="body" style="margin-bottom: 0;">O imobiliário português entrou numa fase nova: dinheiro mais caro, comprador mais exigente, e uma janela específica em zonas que estão a ser redesenhadas pela demografia e pela mobilidade — Linha de Cascais, Margem Sul, eixo Lisboa-Setúbal. Há projectos onde a aritmética funciona, se feita com critério. É aí que entramos.</p>
-    </div>
-
-    <div class="thesis-grid">
-      <div class="thesis-card rev">
-        <div class="num">3<small>+</small></div>
-        <span class="small-meta">Janelas geográficas</span>
-        <h4>Onde a aritmética ainda fecha.</h4>
-        <p>Linha de Cascais, eixo Lisboa-Setúbal, e bolsas específicas no interior da AML. Não é teoria — é onde o operador (Sandro) tem cadeia de execução estabelecida.</p>
+<section class="transparency">
+  <div class="transparency-inner">
+    <div class="eyebrow">§ 06 · Transparência sobre o âmbito</div>
+    <h2 class="transparency-title">Adoptamos os standards. Não nos arrogamos a <em>certificação</em>.</h2>
+    <div class="transparency-grid">
+      <div class="transparency-col">
+        <h4>O que esta Norma é</h4>
+        <p>A adopção voluntária, pela Terrae, dos mesmos standards técnicos que regem a prática dos peritos certificados em Portugal e na União Europeia: <strong>European Valuation Standards 2025</strong>, <strong>International Valuation Standards 2025</strong>, e <strong>RICS Red Book 2025</strong>.</p>
+        <p style="margin-top: 16px;">Cada estimativa Terrae aplica os métodos consagrados, segue as regras de reconciliação, utiliza as categorias de fontes admitidas e produz um relatório com a estrutura exigida pelos standards.</p>
       </div>
-      <div class="thesis-card rev d1">
-        <div class="num">SPV</div>
-        <span class="small-meta">Estrutura por projecto</span>
-        <h4>Uma SPV específica, um Business Plan público.</h4>
-        <p>Cada projecto vive numa SPV de objecto exclusivo. Acordo parassocial declarado. Penalidades, cláusulas de saída e mecanismo anti-diluição definidos antes da entrada do investidor.</p>
-      </div>
-      <div class="thesis-card rev d2">
-        <div class="num">Q<small>·trimestral</small></div>
-        <span class="small-meta">Reporting</span>
-        <h4>Reporting técnico, não cosmético.</h4>
-        <p>Estado da obra com fotografia e cronograma. Execução orçamental real. Estado da comercialização (reservas, CPCVs, escrituras). Variações face ao plano. Sem narrativa — só dados.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="promises">
-    <div class="promises-inner">
-      <div class="rev" style="margin-bottom: 48px;">
-        <span class="small-meta">— O que distingue</span>
-        <h2 class="section-title">Três posições que <em>vamos sempre manter</em>.</h2>
-      </div>
-      <div class="promise-grid">
-        <div class="promise-card rev">
-          <span class="small-meta">01 · Alinhamento</span>
-          <h4>O Sandro investe capital próprio na SPV.</h4>
-          <p>O fundador entra com capital, proporcionalmente. Se for exigido aval pessoal junto de banco, é remunerado em separado por fee de avalista (1,5%/ano sobre o mutuado), divulgado ao investidor. Pele em jogo — não só fee de gestão.</p>
-        </div>
-        <div class="promise-card rev d1">
-          <span class="small-meta">02 · Disciplina</span>
-          <h4>Recusamos projectos onde a aritmética não fecha.</h4>
-          <p>Não fazemos volume — fazemos selecção. Antes de qualquer SPV, há um TIR mínimo, um cenário de stress test, e uma análise honesta de absorção. Se não passar, não avançamos.</p>
-        </div>
-        <div class="promise-card rev d2">
-          <span class="small-meta">03 · Verdade</span>
-          <h4>Rentabilidades passadas não garantem futuras.</h4>
-          <p>Comunicamos cenários — base, conservador, stress — não promessas. Cada Business Plan inclui as variáveis sensíveis (custo de obra, taxa de juro, ritmo de venda, preço médio), e como cada uma desloca o resultado.</p>
-        </div>
+      <div class="transparency-col">
+        <h4>O que esta Norma não é</h4>
+        <p>A actividade de <strong>Perito Avaliador de Imóveis</strong> ao serviço de entidades do sistema financeiro nacional é regulada pela Lei n.º 153/2015 e exige registo prévio na CMVM, qualificações técnicas formais e seguro de responsabilidade civil profissional.</p>
+        <p style="margin-top: 16px;">A Terrae, no momento desta publicação, <strong>não exerce essa actividade reservada</strong>, e as suas estimativas não substituem nem se equiparam juridicamente a uma avaliação produzida por PAI registado para os fins previstos pelo legislador.</p>
       </div>
     </div>
   </div>
+</section>
 
-  <div class="building">
-    <div class="building-grid">
-      <div class="rev">
-        <span class="building-tag">A construir em público</span>
-        <h2 class="section-title" style="font-size: 32px;">O que vai estar pronto<br>para os <em>primeiros investidores</em>.</h2>
-        <p class="body">Estamos a fechar o primeiro Business Plan completo (Jardins do Anjo, Quinta do Anjo — Palmela). É a primeira SPV em produção. A partir daí, a infraestrutura passa a ser replicável.</p>
-      </div>
-      <ul class="building-list rev">
-        <li><span class="label">Business Plan padrão Terrae Capital — 30 páginas, técnico</span><span class="status live">Em finalização</span></li>
-        <li><span class="label">SPV Jardins do Anjo (Palmela · 18 unidades)</span><span class="status next">Q2 · 2026</span></li>
-        <li><span class="label">Modelo financeiro com sensibilidade dinâmica</span><span class="status live">Em produção</span></li>
-        <li><span class="label">Acordo parassocial standard Terrae Capital</span><span class="status next">Junho · 2026</span></li>
-        <li><span class="label">Portal trimestral de reporting para investidores</span><span class="status next">Q4 · 2026</span></li>
-      </ul>
+<section class="cta">
+  <div class="cta-inner">
+    <div>
+      <h2 class="cta-title fade-in">A Norma completa, <em>em documento.</em></h2>
+      <p class="cta-desc fade-in delay-1">Esta página é a destilação institucional. O documento integral inclui o detalhe técnico de cada método, os critérios de homogeneização, os princípios deontológicos, o processo de avaliação em cinco fases, os standards de reporting e a tabela de aderência normativa que mapeia cada princípio Terrae à regra técnica correspondente em EVS, IVS e RICS Red Book.</p>
+    </div>
+    <div class="download-card fade-in delay-2">
+      <div class="download-card-badge">PDF · Versão 1.0</div>
+      <p class="download-meta">Documento Institucional · Maio 2026</p>
+      <h3 class="download-title">Norma Metodológica Terrae</h3>
+      <p class="download-sub">Avaliação de Imóveis para Fins de Comercialização</p>
+      <a href="/normas/Norma_Metodologica_Terrae_v1.pdf" class="download-button" download>Descarregar PDF<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></a>
+      <div class="download-stats"><div class="stat"><strong>33</strong>páginas</div><div class="stat"><strong>9</strong>secções</div><div class="stat"><strong>2</strong>anexos</div></div>
     </div>
   </div>
+</section>
 
-  <section class="cta">
-    <div class="cta-inner rev">
-      <span class="small-meta">— Acesso ao primeiro Business Plan</span>
-      <h2>Recebe o Business Plan<br>do <em>Jardins do Anjo</em> antes de público.</h2>
-      <p class="lead">Quando a SPV abrir capital, os primeiros a receber o Business Plan completo são os investidores qualificados desta lista. Sem letra pequena: deixa o teu email profissional, e quando o documento estiver pronto, enviamos com NDA. Conversa antes — investimento depois.</p>
-      <form class="cta-form" data-form="investir" onsubmit="handleSubscribe(event)">
-        <input type="email" placeholder="O teu email profissional" required name="email">
-        <button type="submit">Solicitar acesso</button>
-      </form>
-      <p class="cta-foot">Apenas para investidores qualificados nos termos do Regulamento (UE) 2017/1129 e do Código dos Valores Mobiliários. Em caso de dúvida sobre o estatuto, conversamos antes — sem compromisso.</p>
-      <div class="cta-success" data-success="investir">Recebido. Quando o BP estiver pronto, é dos primeiros a recebê-lo.</div>
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand"><span class="brand-mark" style="border-color: var(--paper);"></span>Terrae</div>
+      <p class="footer-tag">Consultoria e mediação imobiliária com método explícito, fontes documentadas e capacidade de auditoria.</p>
     </div>
-  </section>
-</div>
-
-<!-- ════════════════════════════════════════════════════════════
-     VIEW · CONSULTOR
-════════════════════════════════════════════════════════════ -->
-<div class="view" id="view-consultor">
-
-  <div class="page-hero">
-    <div class="crumb rev">
-      <a data-go="inicio">Início</a> &nbsp;/&nbsp; <strong>Consultor</strong> &nbsp;/&nbsp; Manifesto 04
+    <div>
+      <h5>Metodologia</h5>
+      <ul><li>Standards aplicados</li><li>Os três métodos</li><li>Fontes de dados</li><li>Estrutura do relatório</li><li>Norma completa (PDF)</li></ul>
     </div>
-    <h1 class="rev d1">
-      Aqui o consultor <em>não faz tudo</em>.<br>
-      Faz <em>só o que importa</em>.
-    </h1>
-    <p class="lead rev d2">
-      O modelo português pede ao consultor que seja prospector, marketeer, jurista, fotógrafo, administrativo — e ainda que feche. O resultado é tempo distribuído por tudo, qualidade comprometida em quase tudo, e um cliente que recebe um serviço médio numa das decisões mais importantes da vida. Estamos a construir o oposto: uma casa onde <em>cada parte da mediação</em> é feita por <em>quem a sabe fazer melhor</em> — e onde o consultor pode finalmente concentrar-se na única coisa que ninguém pode fazer por ele.
-    </p>
-  </div>
-
-  <!-- A TESE -->
-  <section>
-    <div class="rev">
-      <span class="small-meta">— A tese</span>
-      <h2 class="section-title">Serviço <em>premium</em> não se faz com um consultor <em>sobrecarregado</em>.</h2>
-      <p class="body" style="margin-bottom: 0;">A diferença entre uma mediação medíocre e uma mediação verdadeiramente excelente não está no esforço individual do consultor — está na <em>estrutura</em> que está por trás dele. Esta é a posição da Terrae. E é a resposta directa a um problema que o mercado português ainda não resolveu: falta de critério, falta de qualidade, falta de profundidade.</p>
-    </div>
-
-    <div class="model-stack rev d1">
-      <div class="model-side left">
-        <div class="label">O modelo dominante</div>
-        <div class="big" style="font-size: clamp(36px, 4.6vw, 60px); line-height: 1.1;"><em>Tudo</em> feito a meio.</div>
-        <div class="desc">Captação, marketing, jurídico, comunicação, fecho — pelas mãos da mesma pessoa. O resultado é previsível: tudo é feito a meio. Cada cliente recebe um serviço médio numa decisão central da sua vida. O mercado mantém-se medíocre — e parece normal que se mantenha.</div>
-      </div>
-      <div class="model-side right">
-        <div class="label">O modelo Terrae</div>
-        <div class="big" style="font-size: clamp(36px, 4.6vw, 60px); line-height: 1.1;"><em>Cada parte</em> feita por inteiro.</div>
-        <div class="desc">Departamentos dedicados a cada frente da mediação. O consultor faz só uma coisa — acompanha o cliente. E fá-la com a profundidade que nenhum outro modelo permite. Aqui o serviço premium é estrutural, não retórico.</div>
-      </div>
-    </div>
-
-    <p class="body rev d2" style="margin-top: 36px; max-width: 720px;">Não somos uma rede onde o consultor "tem mais autonomia". Somos uma casa onde o consultor <em>tem mais retaguarda</em>. É a partir dessa retaguarda que se eleva o trabalho — e, com ele, a qualidade do mercado em que operamos.</p>
-  </section>
-
-  <!-- A ESTRUTURA -->
-  <section>
-    <div class="rev">
-      <span class="small-meta">— A estrutura</span>
-      <h2 class="section-title">Seis frentes. Uma só finalidade: <em>libertar</em> o consultor para fazer o que importa.</h2>
-      <p class="body">Cada coisa que tira tempo à relação com o cliente é feita por uma equipa especializada. Não como apoio operacional — como departamento autónomo, com responsabilidade própria, com gente dedicada a esse trabalho a tempo inteiro. É a única forma honesta de prestar serviço premium num sector que se habituou a vender o oposto.</p>
-    </div>
-
-    <ul class="system-list">
-      <li class="rev">
-        <div class="pillar">01 · Captação</div>
-        <div class="what">
-          <h4>Departamento de geração e qualificação.</h4>
-          <p>Equipa dedicada à construção de pipeline qualificada — performance marketing, conteúdo editorial, prospecção segmentada, gestão da base de dados. O consultor recebe leads trabalhadas e prontas para conversa, não pistas frias para perseguir.</p>
-        </div>
-        <div class="effort">Departamento</div>
-      </li>
-      <li class="rev">
-        <div class="pillar">02 · Comunicação</div>
-        <div class="what">
-          <h4>Departamento de marketing e produção.</h4>
-          <p>Fotografia, vídeo, dossier técnico, página individual por casa, campanhas pagas, presença editorial. Cada casa é trabalhada como peça de portefólio — independentemente do valor da comissão envolvida.</p>
-        </div>
-        <div class="effort">Departamento</div>
-      </li>
-      <li class="rev d1">
-        <div class="pillar">03 · Jurídico</div>
-        <div class="what">
-          <h4>Departamento jurídico e documental.</h4>
-          <p>Cadernetas, certidões, licenças, ficha técnica, certificado energético, condomínio, due diligence, CPCV, escritura, IMT, IMI, mais-valias. Coordenação técnica integral, com prazos cumpridos e responsabilidade própria.</p>
-        </div>
-        <div class="effort">Departamento</div>
-      </li>
-      <li class="rev d2">
-        <div class="pillar">04 · Sistemas</div>
-        <div class="what">
-          <h4>Departamento de sistemas e operações.</h4>
-          <p>CRM, automações, dashboards de pipeline, reporting ao cliente, infraestrutura digital. Tecnologia desenhada para servir o consultor — não para lhe acrescentar burocracia.</p>
-        </div>
-        <div class="effort">Departamento</div>
-      </li>
-      <li class="rev d2">
-        <div class="pillar">05 · Formação</div>
-        <div class="what">
-          <h4>Programa de formação contínua.</h4>
-          <p>Actualização técnica permanente em fiscalidade, direito imobiliário, urbanismo, avaliação, financiamento, comunicação. O consultor não aprende no terreno por tentativa e erro — chega já com bases sólidas e mantém-se na fronteira do conhecimento técnico do sector.</p>
-        </div>
-        <div class="effort">Incluído</div>
-      </li>
-      <li class="rev d3">
-        <div class="pillar">06 · Remuneração coletiva</div>
-        <div class="what">
-          <h4>Toda a casa ganha pelo que cada um faz.</h4>
-          <p>Uma parte das comissões da loja é distribuída por toda a equipa — consultores e estrutura de apoio. Lógica transversal a toda a Terrae: o que cada um produz beneficia todos. Inverte a competição pelo mesmo cliente em colaboração pela mesma casa.</p>
-        </div>
-        <div class="effort">Estrutural</div>
-      </li>
-    </ul>
-  </section>
-
-  <div class="promises">
-    <div class="promises-inner">
-      <div class="rev" style="margin-bottom: 48px;">
-        <span class="small-meta">— A nossa parte do contrato</span>
-        <h2 class="section-title">Em troca, esperamos <em>três coisas</em>.</h2>
-      </div>
-      <div class="promise-grid">
-        <div class="promise-card rev">
-          <span class="small-meta">01 · Excelência</span>
-          <h4>Cada cliente, tratado como peça de portefólio.</h4>
-          <p>Cada angariação é um billboard da Terrae. Cada visita, cada email, cada conversa — ao standard da casa, não ao standard do mercado. Não há serviço premium sem rigor diário.</p>
-        </div>
-        <div class="promise-card rev d1">
-          <span class="small-meta">02 · Profundidade</span>
-          <h4>Poucos clientes, acompanhados em profundidade.</h4>
-          <p>O foco não é volume — é qualidade. Avaliamos a profundidade do trabalho, não o número de transacções. Quem se desvia da forma como a casa entende este ofício, não permanece nela.</p>
-        </div>
-        <div class="promise-card rev d2">
-          <span class="small-meta">03 · Cultura</span>
-          <h4>Defendes a casa, não só a tua produção.</h4>
-          <p>Partilhas o que sabes. Levas leads ao colega quando faz sentido. Defendes a marca em público. A remuneração coletiva só faz sentido se a cultura coletiva for real.</p>
-        </div>
-      </div>
+    <div>
+      <h5>Referências</h5>
+      <ul><li>TEGoVA — EVS 2025</li><li>IVSC — IVS 2025</li><li>RICS — Red Book 2025</li><li>Lei n.º 153/2015</li><li>Reg. CMVM 7/2023</li></ul>
     </div>
   </div>
-
-  <div class="building">
-    <div class="building-grid">
-      <div class="rev">
-        <span class="building-tag">A construir em público</span>
-        <h2 class="section-title" style="font-size: 32px;">A estrutura <em>já existe</em><br>nos pontos críticos.</h2>
-        <p class="body">Antes de abrir vagas em escala, estamos a validar a estrutura com um grupo restrito de consultores fundadores. Aqui está o estado real, departamento a departamento.</p>
-      </div>
-      <ul class="building-list rev">
-        <li><span class="label">Departamento de sistemas e operações</span><span class="status live">A operar</span></li>
-        <li><span class="label">Departamento de marketing e produção</span><span class="status live">A operar</span></li>
-        <li><span class="label">Departamento jurídico e documental</span><span class="status live">Em produção</span></li>
-        <li><span class="label">Programa de formação contínua</span><span class="status live">Em produção</span></li>
-        <li><span class="label">Departamento de captação e qualificação em escala</span><span class="status next">Q2-Q3 · 2026</span></li>
-        <li><span class="label">Programa fundador — primeiros 5 consultores</span><span class="status next">Junho · 2026</span></li>
-      </ul>
-    </div>
-  </div>
-
-  <section class="cta">
-    <div class="cta-inner rev">
-      <span class="small-meta">— Programa fundador</span>
-      <h2>Os primeiros cinco<br>são os <em>fundadores da casa</em>.</h2>
-      <p class="lead">Os cinco primeiros consultores não vêm executar uma máquina pronta. Vêm ajudar-nos a afinar o que estamos a construir — voz nas decisões operacionais, lugar permanente, e a possibilidade rara de moldar a estrutura desde dentro. Se queres entrar pela qualidade do trabalho — e não pela percentagem da comissão — escreve.</p>
-      <form class="cta-form" data-form="consultor" onsubmit="handleSubscribe(event)">
-        <input type="email" placeholder="O teu email" required name="email">
-        <button type="submit">Quero conversar</button>
-      </form>
-      <p class="cta-foot">Não é uma candidatura. É uma conversa. O Sandro ou o Nuno ligam-te, e percebemos juntos se faz sentido. Não trabalhamos com pessoas que ainda não conhecemos.</p>
-      <div class="cta-success" data-success="consultor">Recebido. Vamos ligar nos próximos dias.</div>
-    </div>
-  </section>
-</div>
-
-</main>
-
-<!-- ═══════════════════ FOOTER ═══════════════════ -->
-<footer>
-  <div class="foot-inner">
-    <div class="foot-brand">
-      <span class="wordmark">Terrae</span>
-      <p>Imobiliário com critério. Mediação, investimento e consultoria — em Lisboa, Setúbal e Oeiras. Estamos a construir uma casa diferente. Devagar, mas a sério.</p>
-      <span class="stamp">Pré-lançamento · v0.1 · 2026</span>
-    </div>
-    <div class="foot-col">
-      <h5>Manifestos</h5>
-      <a data-go="inicio">A casa</a>
-      <a data-go="vender">Vender</a>
-      <a data-go="comprar">Comprar</a>
-      <a data-go="investir">Investir</a>
-      <a data-go="consultor">Consultor</a>
-    </div>
-    <div class="foot-col">
-      <h5>Contacto</h5>
-      <a>geral@terrae.pt</a>
-      <a>Linda-a-Velha</a>
-      <a>Lisboa · Portugal</a>
-    </div>
-  </div>
-  <div class="foot-bottom">
-    <div>© 2026 Terrae · Em construção · AMI 27242</div>
-  </div>
+  <div class="footer-bottom"><span>© 2026 Terrae · Todos os direitos reservados</span><span>Norma v1.0 · Maio 2026</span></div>
 </footer>
 
 <script>
-  // ═══════════════════ ROUTING ═══════════════════
-  const views = ['inicio', 'vender', 'comprar', 'investir', 'consultor'];
-  const navLinks = document.querySelectorAll('[data-route]');
-  const goLinks = document.querySelectorAll('[data-go]');
-
-  function setView(name) {
-    if (!views.includes(name)) name = 'inicio';
-    views.forEach(v => {
-      const el = document.getElementById('view-' + v);
-      if (el) el.classList.toggle('active', v === name);
-    });
-    navLinks.forEach(l => l.classList.toggle('active', l.dataset.route === name));
-    document.querySelectorAll('.mob-menu a').forEach(l => l.classList.toggle('active', l.dataset.route === name));
-    window.scrollTo({ top: 0, behavior: 'instant' });
-    // re-trigger reveals on the new view
-    setTimeout(() => observeReveals(), 50);
-  }
-
-  function navigate(name) {
-    history.pushState({ view: name }, '', '#' + name);
-    setView(name);
-    // close mobile menu
-    document.getElementById('burger').classList.remove('open');
-    document.getElementById('mobMenu').classList.remove('show');
-    setTimeout(() => { document.getElementById('mobMenu').style.display = 'none'; }, 300);
-    document.body.style.overflow = '';
-  }
-
-  // wire up nav clicks
-  document.querySelectorAll('[data-route]').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      navigate(a.dataset.route);
-    });
+const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -60px 0px' };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
   });
-
-  document.querySelectorAll('[data-go]').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      navigate(a.dataset.go);
-    });
-  });
-
-  // wordmark to home
-  document.querySelector('.wordmark').addEventListener('click', e => {
-    e.preventDefault();
-    navigate('inicio');
-  });
-
-  // initial route
-  const initial = window.location.hash.replace('#', '') || 'inicio';
-  setView(initial);
-
-  window.addEventListener('popstate', () => {
-    const name = window.location.hash.replace('#', '') || 'inicio';
-    setView(name);
-  });
-
-  // ═══════════════════ NAV SCROLL ═══════════════════
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 30) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
-  });
-
-  // ═══════════════════ MOBILE MENU ═══════════════════
-  const burger = document.getElementById('burger');
-  const mobMenu = document.getElementById('mobMenu');
-  burger.addEventListener('click', () => {
-    const open = !burger.classList.contains('open');
-    burger.classList.toggle('open', open);
-    mobMenu.style.display = open ? 'flex' : 'none';
-    requestAnimationFrame(() => mobMenu.classList.toggle('show', open));
-    document.body.style.overflow = open ? 'hidden' : '';
-  });
-
-  // ═══════════════════ REVEAL ON SCROLL ═══════════════════
-  let observer;
-  function observeReveals() {
-    if (observer) observer.disconnect();
-    observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('in');
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-
-    // reset all reveal states inside the active view first
-    document.querySelectorAll('.view.active .rev').forEach(el => {
-      // For elements above the fold on initial load, mark them as "in" right away
-      const r = el.getBoundingClientRect();
-      if (r.top < window.innerHeight - 40) {
-        el.classList.add('in');
-      } else {
-        el.classList.remove('in');
-        observer.observe(el);
-      }
-    });
-  }
-  observeReveals();
-
-  // ═══════════════════ SUBSCRIBE FORM ═══════════════════
-  function handleSubscribe(e) {
-    e.preventDefault();
-    const form = e.target;
-    const which = form.dataset.form;
-    const email = form.querySelector('input[name=email]').value;
-    // TODO: replace with real endpoint (Mailchimp / ConvertKit / Cloudflare Worker)
-    console.log('subscribe', which, email);
-    form.style.display = 'none';
-    const succ = document.querySelector(`[data-success="${which}"]`);
-    if (succ) succ.classList.add('show');
-  }
+}, observerOptions);
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
-
 </body>
 </html>
